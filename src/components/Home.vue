@@ -1,14 +1,7 @@
 <template>
-    <div>
-        <div>
-            <Nav />
-        </div>
-
-        <div style="height: 500px;width:200px;border: 1px solid red" @click="onClickHomeBody">
-
-        </div>
+    <div @click="clickOther($event)" style="height: 100vh">
+    <Nav />
     </div>
-
 </template>
 
 <script>
@@ -19,12 +12,16 @@
         components: {
             Nav
         },
-        methods:{
-            onClickHomeBody(){
-                console.log(24234234)
-                hanlucen=false
+        methods: {
+            clickOther(e) {
+                if (e.target.id !== 'menu-nav' && e.target.id !== 'menu-account') {
+                    this.$store.dispatch('setIsNavMenuActived', false)
+                    this.$store.dispatch('setIsAccountMenuActived', false)
+                }
+
             }
-        }
+        },
+
     }
 </script>
 

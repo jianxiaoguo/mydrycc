@@ -1,5 +1,3 @@
-import { Locale } from 'vant'
-
 import { ENUM_LANG } from '../constants/common'
 
 import { createI18n } from 'vue-i18n'
@@ -22,18 +20,6 @@ export const i18n = createI18n({
 
 // 切换语言
 export const setLang = (lang) => {
-  // 设置组件国际化
-  switch (lang) {
-    case ENUM_LANG.enUS:
-      Locale.use('en-US', customEnUS)
-      break
-    case ENUM_LANG.zhCN:
-      Locale.use('zh-CN', customZhCN)
-      break
-    default:
-      Locale.use('zh-CN', customZhCN)
-  }
-
   // 当前语言
   i18n.global.locale.value = lang
   console.log(lang, 'vant组件设置成功')

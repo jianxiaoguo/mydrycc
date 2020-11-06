@@ -11,10 +11,10 @@
 
         <div class="glostick__user">
             <a role="button" class="glostick__menu-icon" @click="openOrCloseNavMenu">
-                <div class="icon-navigator-toggle"></div>
+                <div class="icon-navigator-toggle" id="menu-nav"></div>
             </a>
 
-            <ul id="glostick__menu--navigator" class="glostick__menu glostick__menu--navigator" :class="{'glostick__menu--open': isNavMenuActived}">
+            <ul id="glostick__menu--navigator" class="glostick__menu glostick__menu--navigator" :class="{'glostick__menu--open': $store.state.isNavMenuActived}">
                 <li role="listitem" class="glostick__menu__listitem">
                     <a class="glostick__menu__item glostick__menu__item--dashboard" href="/">Dashboard</a>
                 </li>
@@ -37,15 +37,15 @@
             </ul>
 
 
-            <a role="button" class="glostick__menu-icon glostick__menu-icon--account" @click="openOrCloseAccountMenu">
+            <a class="glostick__menu-icon glostick__menu-icon--account" @click="openOrCloseAccountMenu">
                 <div class="glostick__user__avatar--container">
-                    <img class="glostick__user__avatar" src="https://gravatar.com/avatar/02a485fa5edb11e2b5ca38e18622eacd?s=96&amp;d=https://www.herokucdn.com/images/ninja-avatar-96x96.png" alt="hanlucen@zhumengyuan.com">
+                    <img class="glostick__user__avatar" src="https://gravatar.com/avatar/02a485fa5edb11e2b5ca38e18622eacd?s=96&amp;d=https://www.herokucdn.com/images/ninja-avatar-96x96.png" id="menu-account">
                 </div>
                 <div class="glostick__user__notification "></div>
             </a>
 
-            <ul id="glostick__menu--account" class="glostick__menu glostick__menu--account" :class="{'glostick__menu--open': isAccountMenuActived}">
-                <li role="listitem" class="glostick__menu__listitem">
+            <ul id="glostick__menu--account" class="glostick__menu glostick__menu--account" :class="{'glostick__menu--open': $store.state.isAccountMenuActived}">
+                <li class="glostick__menu__listitem">
                     <a class="glostick__menu__item glostick__menu__item--account-details" href="/account">
                         <div class="glostick__user__avatar--container">
                             <img class="glostick__account-details__avatar" src="https://gravatar.com/avatar/02a485fa5edb11e2b5ca38e18622eacd?s=96&amp;d=https://www.herokucdn.com/images/ninja-avatar-96x96.png" >
@@ -58,18 +58,18 @@
                         </div>
                     </a>
                 </li>
-                <li role="listitem" class="glostick__menu__listitem">
+                <li class="glostick__menu__listitem">
                     <a class="glostick__menu__item glostick__menu__item--settings" href="/account">Account settings</a>
                 </li>
 
-                <li role="listitem" class="glostick__menu__listitem">
+                <li class="glostick__menu__listitem">
                     <a class="glostick__menu__item glostick__menu__item--notifications" href="/notifications">
                         Notifications
 
                     </a>
                 </li>
 
-                <li role="listitem" class="glostick__menu__listitem">
+                <li class="glostick__menu__listitem">
                     <a class="glostick__menu__item glostick__menu__item--signout" href="https://dashboard.heroku.com/logout">Sign out</a>
                 </li>
 
@@ -80,7 +80,7 @@
 
         <div class="quick-jump" style="display: block;">
             <div class="quick-jump__filter__wrap">
-                <span class="quick-jump__filter__wrap--tt" style="position: relative; display: inline-block;"><input class="quick-jump__filter form-control gray" type="text" aria-label="Jump to Favorites, Apps, Pipelines, Spaces..." placeholder="Jump to Favorites, Apps, Pipelines, Spaces..." autocomplete="off" spellcheck="false" dir="auto" style="position: relative; vertical-align: top;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: salesforce-sans, &quot;Helvetica Neue&quot;, helvetica, arial, sans-serif; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><div class="quick-jump__results" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"><div class="quick-jump__list list-group list-group-0"></div></div></span>
+                <span class="quick-jump__filter__wrap--tt" style="position: relative; display: inline-block;"><input class="quick-jump__filter form-control gray" type="text"  placeholder="Jump to Favorites, Apps, Pipelines, Spaces..." style="position: relative; vertical-align: top;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: salesforce-sans, &quot;Helvetica Neue&quot;, helvetica, arial, sans-serif; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: 0px; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre><div class="quick-jump__results" style="position: absolute; top: 100%; left: 0px; z-index: 100; display: none;"><div class="quick-jump__list list-group list-group-0"></div></div></span>
             </div>
         </div>
     </nav>
@@ -91,49 +91,30 @@
 <script>
     export default {
         name: "Nav",
-        data() {
-            return {
-                isModalBgActived: false,
-                isNavMenuActived: false,
-                isAccountActived: false
-            }
-        },
         methods: {
             openOrCloseNavMenu() {
-                if (this.isModalBgActived && this.isNavMenuActived) {
-                    this.isModalBgActived = false
-                    this.isNavMenuActived = false
-                    this.isAccountMenuActived = false
+                if (! this.$store.state.isNavMenuActived) {
+                    this.$store.dispatch('setIsAccountMenuActived', false)
+                    this.$store.dispatch('setIsNavMenuActived', true)
                 } else {
-                    this.isModalBgActived = true
-                    this.isNavMenuActived = true
-                    this.isAccountMenuActived = false
+                    this.$store.dispatch('setIsNavMenuActived', false)
                 }
             },
             openOrCloseAccountMenu() {
-                hanlucen=true;
-                if (this.isModalBgActived && this.isAccountMenuActived) {
-                    this.isModalBgActived = false
-                    this.isNavMenuActived = false
-                    this.isAccountMenuActived = false
+                if (! this.$store.state.isAccountMenuActived) {
+                    this.$store.dispatch('setIsNavMenuActived', false)
+                    this.$store.dispatch('setIsAccountMenuActived', true)
                 } else {
-                    this.isModalBgActived = true
-                    this.isNavMenuActived = false
-                    this.isAccountMenuActived = true
+                    this.$store.dispatch('setIsAccountMenuActived', false)
                 }
-            },
-            closeAllMenu() {
-                this.isModalBgActived = false
-                this.isNavMenuActived = false
-                this.isAccountMenuActived = false
             }
         }
     }
 </script>
 
 <style scoped>
-    @import "../assets/vendor.css";
-    @import "../assets/bashboard.css";
+    /*@import "../assets/vendor.css";*/
+    /*@import "../assets/bashboard.css";*/
     .glostick {
         box-sizing: border-box;
         background: white;
