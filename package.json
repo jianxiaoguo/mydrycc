@@ -1,0 +1,18 @@
+{
+  "name": "mydrycc",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "vue": "^3.0.2",
+    "vue-i18n": "^9.0.0-alpha.16",
+    "vue-router": "^4.0.0-rc.1",
+    "vant": "^3.0.0-alpha.4"
+  },
+  "devDependencies": {
+    "vite": "^1.0.0-rc.8",
+    "@vue/compiler-sfc": "^3.0.2"
+  }
+}
