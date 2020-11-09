@@ -4,7 +4,7 @@
 
 <script>
     export default {
-        name: "Nav2"
+        name: "AppList"
     }
 </script>
 
