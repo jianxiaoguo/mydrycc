@@ -1,10 +1,14 @@
-import { ENUM_LANG } from '../constants/common'
-
 import { createI18n } from 'vue-i18n'
 
 
 import customEnUS from './en_US'
 import customZhCN from './zh_CN'
+
+const ENUM_LANG = {
+  enUS: 'en_US',
+  zhCN: 'zh_CN'
+}
+
 
 export const i18n = createI18n({
   locale: ENUM_LANG.zhCN, // 设置默认语言
