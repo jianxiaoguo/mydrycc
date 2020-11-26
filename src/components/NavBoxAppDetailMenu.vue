@@ -24,14 +24,14 @@
                                 View logs
                         </a>
                     </li>
-                    <li>
-                        <a href="/apps/drycc-charts/webhooks"  class="hk-dropdown-item ember-view">
-                            <svg style="height: 16px; width: 16px;"  class="icon malibu-icon">
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#webhooks-16"></use>
-                            </svg>
-                                View webhooks
-                        </a>
-                    </li>
+<!--                    <li>-->
+<!--                        <a href="/apps/drycc-charts/webhooks"  class="hk-dropdown-item ember-view">-->
+<!--                            <svg style="height: 16px; width: 16px;"  class="icon malibu-icon">-->
+<!--                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#webhooks-16"></use>-->
+<!--                            </svg>-->
+<!--                                View webhooks-->
+<!--                        </a>-->
+<!--                    </li>-->
                     <li class="hk-dropdown-divider"></li>
                     <li>
                         <a href="" class="hk-dropdown-item">
@@ -41,14 +41,14 @@
                             Run consol
                         </a>
                     </li>
-                    <li>
-                        <a href="" class="hk-dropdown-item" >
-                            <svg style="height: 16px; width: 16px;"  class="icon malibu-icon" >
-                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#check-16"></use>
-                            </svg>
-                            Production check
-                        </a>
-                    </li>
+<!--                    <li>-->
+<!--                        <a href="" class="hk-dropdown-item" >-->
+<!--                            <svg style="height: 16px; width: 16px;"  class="icon malibu-icon" >-->
+<!--                                <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#check-16"></use>-->
+<!--                            </svg>-->
+<!--                            Production check-->
+<!--                        </a>-->
+<!--                    </li>-->
                     <li class="hk-dropdown-divider"></li>
                     <li>
                         <a href="" class="hk-dropdown-item">

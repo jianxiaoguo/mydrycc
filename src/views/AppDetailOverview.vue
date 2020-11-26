@@ -11,7 +11,18 @@
         </nav-box>
         <div class="main-content">
             <main-nav :is-overview-active="true" :app-detail="appDetail"/>
-            <ve-line :data="chartData"></ve-line>
+            <div id="overview-page">
+                <div class="overview-content">
+                    <div class="limit-width">
+                        <overview-metrics />
+                    </div>
+                </div>
+                <div class="overview-activity">
+                    <div class="app-overview-stream">
+                        right
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -24,17 +35,20 @@
     import ClusterSelect from "../components/ClusterSelectAppDetail.vue";
     import NavBoxAppDetailMenu from "../components/NavBoxAppDetailMenu.vue"
     import MainNav from "../components/MainNav.vue";
+    import OverviewMetrics from "../components/OverviewMetrics.vue";
     import { getAppDetail } from "../services/app";
 
     export default {
-        name: "AppDetail",
+        name: "AppDetailOverview",
         components: {
             'nav-bar': NavBar,
             'nav-box': NavBox,
             'cluster-select-v2': ClusterSelect,
             'nav-box-app-detail-menu': NavBoxAppDetailMenu,
-            'main-nav': MainNav
+            'main-nav': MainNav,
+            'overview-metrics': OverviewMetrics
         },
+
         setup() {
             const router = useRouter()
             const params = router.currentRoute.value.params

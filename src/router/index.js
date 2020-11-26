@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Login from "../views/Login.vue";
 import AppList from "../views/AppList.vue";
 import NewApp from "../views/NewApp.vue";
-import AppDetail from "../views/AppDetail.vue";
+import AppDetailOverview from "../views/AppDetailOverview.vue";
 import AppDetailAccess from "../views/AppDetailAccess.vue";
 import AppDetailActivity from "../views/AppDetailActivity.vue";
 import AppDetailDeploy from "../views/AppDetailDeploy.vue";
@@ -32,8 +32,8 @@ const routes = [
     },
     {
         path: '/apps/:id',
-        name: 'AppDetail',
-        component: AppDetail
+        name: 'AppDetailOverview',
+        component: AppDetailOverview
     },
     {
         path: '/apps/:id/resources',

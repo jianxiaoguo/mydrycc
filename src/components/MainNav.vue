@@ -156,5 +156,7 @@
 </script>
 
 <style scoped>
-
+    a:hover {
+        cursor: pointer;
+    }
 </style>

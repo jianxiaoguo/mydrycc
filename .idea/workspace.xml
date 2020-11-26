@@ -2,43 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b756bf60-0a00-4019-941f-2b64219ea4c5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/ClusterSelect.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ClusterSelectAppDetail.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/NavBar.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/NavBox.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/NavBoxAppDetailMenu.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/NavMenu.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/OneApp.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/UserMenu.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/page.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/app.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/cluster.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/axios.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/AppDetail.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/AppDetailAccess.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/AppDetailActivity.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/AppDetailDeploy.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/AppDetailMetrics.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/AppDetailResources.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/AppDetailSettings.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/AppList.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/NewApp.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/OverviewAddons.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/OverviewCollaboratorActivity.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/OverviewFormation.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/OverviewLatestActivity.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/OverviewMetrics.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/metric.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AppList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MainNav.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Box.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Home.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Nav.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SubNav.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/constants/common.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/lang/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/lang/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/bashboard.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/bashboard.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MainNav.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MainNav.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NavBoxAppDetailMenu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavBoxAppDetailMenu.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/AppDetail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AppDetailOverview.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,8 +30,8 @@
       <list>
         <option value="CSS File" />
         <option value="TypeScript File" />
-        <option value="JavaScript File" />
         <option value="Vue Single File Component" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -66,7 +45,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RecentsManager">
@@ -113,7 +92,8 @@
       <workItem from="1605497029624" duration="13795000" />
       <workItem from="1605582779729" duration="5218000" />
       <workItem from="1606095665791" duration="17498000" />
-      <workItem from="1606178417060" duration="7974000" />
+      <workItem from="1606178417060" duration="43285000" />
+      <workItem from="1606353079364" duration="7744000" />
     </task>
     <servers />
   </component>
