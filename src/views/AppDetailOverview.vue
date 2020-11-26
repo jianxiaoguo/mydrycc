@@ -14,7 +14,8 @@
             <div id="overview-page">
                 <div class="overview-content">
                     <div class="limit-width">
-                        <overview-metrics />
+                        <overview-metrics :app-detail="appDetail"/>
+                        <overview-addons :app-detail="appDetail"/>
                     </div>
                 </div>
                 <div class="overview-activity">
@@ -36,6 +37,7 @@
     import NavBoxAppDetailMenu from "../components/NavBoxAppDetailMenu.vue"
     import MainNav from "../components/MainNav.vue";
     import OverviewMetrics from "../components/OverviewMetrics.vue";
+    import OverviewAddons from "../components/OverviewAddons.vue";
     import { getAppDetail } from "../services/app";
 
     export default {
@@ -46,7 +48,8 @@
             'cluster-select-v2': ClusterSelect,
             'nav-box-app-detail-menu': NavBoxAppDetailMenu,
             'main-nav': MainNav,
-            'overview-metrics': OverviewMetrics
+            'overview-metrics': OverviewMetrics,
+            'overview-addons': OverviewAddons
         },
 
         setup() {
@@ -70,7 +73,6 @@
                     baseImage: data.base_image
                 }
             })
-
             return {
                 ...toRefs(state)
             }

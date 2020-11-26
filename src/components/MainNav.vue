@@ -109,7 +109,7 @@
                 type: Boolean,
                 default: false
             },
-            appDetail: Object
+            appDetail: [Object, Function]
         },
         setup(props) {
             const router = useRouter()

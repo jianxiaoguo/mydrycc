@@ -51,9 +51,9 @@
     export default {
         name: "ClusterSelect",
         props: {
-            appDetail: Object
+            appDetail: [Object, Function]
         },
-        setup(props) {
+        setup() {
             const store = useStore()
             const state = reactive({
                 isMenuActived: false,
