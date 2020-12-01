@@ -16,6 +16,7 @@
                     <div class="limit-width">
                         <overview-metrics :app-detail="appDetail"/>
                         <overview-addons :app-detail="appDetail"/>
+                        <overview-formation :app-detail="appDetail"/>
                     </div>
                 </div>
                 <div class="overview-activity">
@@ -38,6 +39,7 @@
     import MainNav from "../components/MainNav.vue";
     import OverviewMetrics from "../components/OverviewMetrics.vue";
     import OverviewAddons from "../components/OverviewAddons.vue";
+    import OverviewFormation from "../components/OverviewFormation.vue";
     import { getAppDetail } from "../services/app";
 
     export default {
@@ -49,7 +51,8 @@
             'nav-box-app-detail-menu': NavBoxAppDetailMenu,
             'main-nav': MainNav,
             'overview-metrics': OverviewMetrics,
-            'overview-addons': OverviewAddons
+            'overview-addons': OverviewAddons,
+            'overview-formation': OverviewFormation
         },
 
         setup() {

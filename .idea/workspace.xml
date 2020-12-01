@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b756bf60-0a00-4019-941f-2b64219ea4c5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/services/addons.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/process.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ClusterSelectAppDetail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ClusterSelectAppDetail.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MainNav.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MainNav.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/OverviewAddons.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OverviewAddons.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/OverviewMetrics.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OverviewMetrics.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/OverviewFormation.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OverviewFormation.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/AppDetailOverview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AppDetailOverview.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -85,7 +83,8 @@
       <workItem from="1606095665791" duration="17498000" />
       <workItem from="1606178417060" duration="43285000" />
       <workItem from="1606353079364" duration="15461000" />
-      <workItem from="1606375243472" duration="3954000" />
+      <workItem from="1606375243472" duration="6713000" />
+      <workItem from="1606800264498" duration="2594000" />
     </task>
     <servers />
   </component>

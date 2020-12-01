@@ -7,7 +7,7 @@
             </div>
             <div class="flex-auto"></div>
 
-            <a href="/apps/drycc-charts/resources" class="flex items-center hk-link no-underline f6 mv1 mv0-ns ember-view">
+            <a @click="goToResources" class="flex items-center hk-link no-underline f6 mv1 mv0-ns ember-view">
                 <span class="underline">Configure Add-ons</span>
                 <svg xmlns="http://www.w3.org/2000/svg" class="ml--3 nudge-down--1" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#006deb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8l4 4-4 4M8 12h7"/></svg>
 
@@ -16,16 +16,16 @@
 
         <ul class="addons-grid list pl0 flex mb5 bg-lightest-silver shadow-outer-1 br1 overflow-hidden" v-if="addons.length > 0">
             <li class="addon ph3 pv2 flex b--silver bg-white" v-for="addon in addons">
-                <a href="https://addons-sso.heroku.com/apps/23b7857c-887f-481c-911d-38c8b1c0d3a2/addons/3de3e8ba-5bba-4c87-8839-691c47ab8b22" class="mt1" target="_blank" rel="noopener noreferrer">
+                <a href="" class="mt1" target="_blank" rel="noopener noreferrer">
                     <div class="relative">
                         <img width="32" height="32" src="https://addons.heroku.com/addons/heroku-postgresql/icons/catalog.png" class="addon-icon ember-view">
                     </div>
                 </a>
                 <p class="ma0 pl2 pv--2">
-                    <div id="ember408" class="ember-view">
+                    <div class="ember-view">
                         <a target="_blank" rel="noopener noreferrer" class="hk-link purple no-underline ">
                             {{addon.kind}}
-                            <svg style="height: 16px; width: 16px;" id="malibu-icon-svg-ember410" class="icon malibu-icon malibu-fill-gradient-purple nudge-left--2 nudge-up--1" data-test-icon-name="open-16" aria-labelledby="malibu-icon-ember410" data-test-target="malibu-icon" aria-hidden="false" role="img">
+                            <svg style="height: 16px; width: 16px;" class="icon malibu-icon malibu-fill-gradient-purple nudge-left--2 nudge-up--1" >
 <!--                                <title id="malibu-icon-ember410">(opens in a new tab)</title>-->
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#open-16"></use>
                             </svg>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="f5 gray lh-copy ember-view">
                     You can add add-ons to this app and they will show here.
-                    <a href="https://devcenter.heroku.com/articles/managing-add-ons" class="hk-link" target="_blank">Learn more</a>
+                    <a href="https://www.drycc.cc/applications/managing-app-resources" class="hk-link" target="_blank">Learn more</a>
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-    import { useRoute, useRouter } from 'vue-router'
+    import { useRouter } from 'vue-router'
     import { reactive, toRefs, onMounted} from 'vue'
     import { getAppAddons} from "../services/addons";
 
@@ -101,5 +101,7 @@
 </script>
 
 <style scoped>
-
+    a:hover {
+        cursor: pointer;
+    }
 </style>
