@@ -17,11 +17,12 @@
                         <overview-metrics :app-detail="appDetail"/>
                         <overview-addons :app-detail="appDetail"/>
                         <overview-formation :app-detail="appDetail"/>
+                        <overview-collaborator-activity :app-detail="appDetail" />
                     </div>
                 </div>
                 <div class="overview-activity">
                     <div class="app-overview-stream">
-                        right
+                        <overview-latest-activity :app-detail="appDetail" />
                     </div>
                 </div>
             </div>
@@ -40,6 +41,8 @@
     import OverviewMetrics from "../components/OverviewMetrics.vue";
     import OverviewAddons from "../components/OverviewAddons.vue";
     import OverviewFormation from "../components/OverviewFormation.vue";
+    import OverviewCollaboratorActivity from "../components/OverviewCollaboratorActivity.vue";
+    import OverviewLatestActivity from "../components/OverviewLatestActivity.vue";
     import { getAppDetail } from "../services/app";
 
     export default {
@@ -52,7 +55,9 @@
             'main-nav': MainNav,
             'overview-metrics': OverviewMetrics,
             'overview-addons': OverviewAddons,
-            'overview-formation': OverviewFormation
+            'overview-formation': OverviewFormation,
+            'overview-collaborator-activity': OverviewCollaboratorActivity,
+            'overview-latest-activity': OverviewLatestActivity
         },
 
         setup() {
