@@ -2,14 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b756bf60-0a00-4019-941f-2b64219ea4c5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/ActivityRollBack.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/activity.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/AccessCollaboratorEdit.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ResourcesAddons.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ResourcesDyno.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/access.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/OverviewCollaboratorActivity.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OverviewCollaboratorActivity.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/OverviewLatestActivity.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OverviewLatestActivity.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/AppDetailActivity.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AppDetailActivity.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/AppDetailOverview.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AppDetailOverview.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/AppDetailAccess.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AppDetailAccess.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/AppDetailResources.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AppDetailResources.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,7 +33,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../normandy-payment-h5" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
@@ -88,7 +87,8 @@
       <workItem from="1606353079364" duration="15461000" />
       <workItem from="1606375243472" duration="6713000" />
       <workItem from="1606800264498" duration="29718000" />
-      <workItem from="1607579539267" duration="1081000" />
+      <workItem from="1607579539267" duration="14503000" />
+      <workItem from="1607916216950" duration="8854000" />
     </task>
     <servers />
   </component>

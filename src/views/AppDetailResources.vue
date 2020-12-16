@@ -11,7 +11,8 @@
         </nav-box>
         <div class="main-content">
             <main-nav :is-resources-active="true" :app-detail="appDetail"/>
-            AppDetailResources
+            <resources-dyno :app-detail="appDetail"/>
+            <resources-addons :app-detail="appDetail"/>
         </div>
     </div>
 </template>
@@ -25,6 +26,8 @@
     import NavBoxAppDetailMenu from "../components/NavBoxAppDetailMenu.vue"
     import MainNav from "../components/MainNav.vue";
     import { getAppDetail } from "../services/app";
+    import ResourcesDyno from "../components/ResourcesDyno.vue";
+    import ResourcesAddons from "../components/ResourcesAddons.vue";
 
     export default {
         name: "AppDetailResources",
@@ -33,7 +36,9 @@
             'nav-box': NavBox,
             'cluster-select-v2': ClusterSelect,
             'nav-box-app-detail-menu': NavBoxAppDetailMenu,
-            'main-nav': MainNav
+            'main-nav': MainNav,
+            'resources-dyno': ResourcesDyno,
+            'resources-addons': ResourcesAddons
         },
         setup() {
             const router = useRouter()
