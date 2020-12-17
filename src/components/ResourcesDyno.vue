@@ -1,6 +1,20 @@
 <template>
     <div class="ember-view">
-        <div class="formation-section limit-width">
+
+        <div class="formation-section limit-width" v-if="processes.length<1">
+            <div class="group-header u-padding-Bxxs"><h5> Dynos </h5></div>
+            <div class="ember-view">
+                <div class="mb5 hk-well ember-view">
+                    <div class="f3 dark-gray lh-title mv1 ember-view"> This app has no process types yet </div>
+                    <div class="f5 gray lh-copy ember-view">
+                        Add a Procfile to your app in order to define its process types.
+                        <a href="https://devcenter.heroku.com/articles/procfile" class="hk-link" target="_blank">Learn more</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="formation-section limit-width" v-if="processes.length>0">
             <div class="group-header u-padding-Bxxs">
                 <h5>
                     <span class="dyno-tier-name">Hobby dynos</span>

@@ -41,6 +41,11 @@ const routes = [
         component: AppDetailResources
     },
     {
+        path: '/apps/:id/deploy/:deployType',
+        name: 'AppDetailDeployDetail',
+        component: AppDetailDeploy
+    },
+    {
         path: '/apps/:id/deploy',
         name: 'AppDetailDeploy',
         component: AppDetailDeploy

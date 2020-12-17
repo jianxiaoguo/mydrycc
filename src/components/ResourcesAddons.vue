@@ -15,8 +15,17 @@
             </div>
         </div>
 
-        <div class="mb2 bg-white br1 shadow-outer-1 hk-hide-bb-last-row addons-table-container" role="list" v-for="addon in addons">
-            <div class="bb b--silver ph2 pv1 flex items-center " role="listitem">
+        <div class="mv3 ember-view" v-if="addons.length<1">
+            <div class="hk-well ember-view">
+                <div class="f3 dark-gray lh-title mv1 ember-view"> There are no add-ons for this app </div>
+                <div class="f5 gray lh-copy ember-view"> You can add add-ons to this app and they will show here.
+                    <a href="https://devcenter.heroku.com/articles/managing-add-ons" class="hk-link" target="_blank">Learn more</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb2 bg-white br1 shadow-outer-1 hk-hide-bb-last-row addons-table-container" role="list" v-if="addons.length>0">
+            <div class="bb b--silver ph2 pv1 flex items-center " role="listitem" v-for="addon in addons">
                 <div class="pa1">
                     <img role="presentation" width="28" height="28" src="https://addons.heroku.com/addons/heroku-postgresql/icons/catalog.png" id="ember532" class="dib br1 mr1 flex-shrink-0 self-start addon-icon ember-view">
                 </div>
