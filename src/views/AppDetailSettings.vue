@@ -11,7 +11,15 @@
         </nav-box>
         <div class="main-content">
             <main-nav :is-settings-active="true" :app-detail="appDetail"/>
-            AppDetailSetting
+            <ul class="list-group list-group-lg">
+                <setting-app-info :app-detail="appDetail"/>
+                <setting-config-vars />
+                <setting-buildpacks />
+                <setting-domains />
+                <setting-transfer-ownership />
+                <setting-maintenance-mode />
+                <setting-delete-app />
+            </ul>
         </div>
     </div>
 </template>
@@ -24,6 +32,13 @@
     import ClusterSelect from "../components/ClusterSelectAppDetail.vue";
     import NavBoxAppDetailMenu from "../components/NavBoxAppDetailMenu.vue"
     import MainNav from "../components/MainNav.vue";
+    import SettingAppInfo from "../components/SettingAppInfo.vue";
+    import SettingBuildpacks from "../components/SettingBuildpacks.vue";
+    import SettingConfigVars from "../components/SettingConfigVars.vue";
+    import SettingDeleteApp from "../components/SettingDeleteApp.vue";
+    import SettingDomains from "../components/SettingDomains.vue";
+    import SettingMaintenanceMode from "../components/SettingMaintenanceMode.vue";
+    import SettingTransferOwnership from "../components/SettingTransferOwnership.vue";
     import { getAppDetail } from "../services/app";
 
     export default {
@@ -33,7 +48,14 @@
             'nav-box': NavBox,
             'cluster-select-v2': ClusterSelect,
             'nav-box-app-detail-menu': NavBoxAppDetailMenu,
-            'main-nav': MainNav
+            'main-nav': MainNav,
+            'setting-app-info': SettingAppInfo,
+            'setting-config-vars': SettingConfigVars,
+            'setting-buildpacks': SettingBuildpacks,
+            'setting-domains': SettingDomains,
+            'setting-maintenance-mode': SettingMaintenanceMode,
+            'setting-transfer-ownership': SettingTransferOwnership,
+            'setting-delete-app': SettingDeleteApp
         },
         setup() {
             const router = useRouter()

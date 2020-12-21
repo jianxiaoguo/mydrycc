@@ -2,16 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b756bf60-0a00-4019-941f-2b64219ea4c5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/DeployDryccGit.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/DeployDryccImage.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SettingAppInfo.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SettingBuildpacks.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SettingConfigVars.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SettingDeleteApp.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SettingDomains.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SettingMaintenanceMode.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/SettingTransferOwnership.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ResourcesAddons.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ResourcesAddons.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ResourcesDyno.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ResourcesDyno.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/addons.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/addons.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/process.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/process.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/AppDetailDeploy.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AppDetailDeploy.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/AppDetailResources.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AppDetailResources.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/AppDetailSettings.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AppDetailSettings.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +93,9 @@
       <workItem from="1607916216950" duration="8854000" />
       <workItem from="1608098072510" duration="2622000" />
       <workItem from="1608102553775" duration="964000" />
-      <workItem from="1608165974555" duration="8970000" />
+      <workItem from="1608165974555" duration="13468000" />
+      <workItem from="1608274265554" duration="3144000" />
+      <workItem from="1608516885379" duration="8446000" />
     </task>
     <servers />
   </component>
