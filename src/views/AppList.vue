@@ -31,8 +31,8 @@
                 <div class="apps-list-item flex flex-column flex-auto b--light-silver bg-white pv2 ph4 bb hover-bg-near-white ember-view" v-for="item in apps">
                     <one-app v-bind="item"/>
                 </div>
-                <div class="limit-width bg-white pv2">
-                    <pagination/>
+                <div class="limit-width bg-white mt4">
+                    <pagination :cPage="cPage" :tPage="tPage" :hasNext="hasNextPage" @updatePage="updatePage"/>
                 </div>
                 <!--此标签和page互斥-->
                 <div class="bg-white pv3 bt justify-center flex flex ember-view"></div>
@@ -64,10 +64,26 @@
             const router = useRouter()
             const state = reactive({
                 apps: [],
+                cPage: 1,
+                tPage: 2,
+                hasNextPage: true
             })
 
             const goToNewApp = () => {
                 router.push({ path: '/new-app'})
+            }
+
+            const updatePage = (n) => {
+
+                console.log(n)
+                state.cPage = n
+                state.tPage = Math.min(30, n+1)
+                if (state.tPage>=30){
+                    state.hasNextPage = false
+                }
+                else{
+                    state.hasNextPage = true
+                }
             }
 
             onMounted(async () => {
@@ -90,7 +106,8 @@
 
             return {
                 ...toRefs(state),
-                goToNewApp
+                goToNewApp,
+                updatePage
             }
         },
     }

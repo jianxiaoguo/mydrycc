@@ -132,7 +132,6 @@
 </template>
 
 <script>
-    import { useRouter } from 'vue-router'
     import { reactive, toRefs, onMounted , computed} from 'vue'
 
     export default {
@@ -145,7 +144,6 @@
             changeMonth: Function
         },
         setup(props, context) {
-            const router = useRouter()
             const state = reactive({
                 showPicker: false,
                 cy: props.cYear,
