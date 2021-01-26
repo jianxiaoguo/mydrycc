@@ -23,8 +23,8 @@
                     </a>
                 </h5>
             </div>
-            <div class="purple-box formations-list">
-                <ul class="list-group formation-list" v-for="pro in processes">
+            <div class="purple-box formations-list" v-for="pro in processes">
+                <ul class="list-group formation-list">
                     <li class="list-group-item formations-list-item use-toggle ember-view">
                         <div class="process">
                             <div class="process-details">
@@ -128,6 +128,8 @@
                         'disabled': true
                     }
                 })
+
+                console.log(state.processes)
             })
 
             return {

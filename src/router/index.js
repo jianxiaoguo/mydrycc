@@ -9,6 +9,10 @@ import AppDetailDeploy from "../views/AppDetailDeploy.vue";
 import AppDetailMetrics from "../views/AppDetailMetrics.vue";
 import AppDetailResources from "../views/AppDetailResources.vue";
 import AppDetailSettings from "../views/AppDetailSettings.vue";
+import AccountSetting from "../views/AccountSetting.vue";
+import AccountFunding from "../views/AccountFunding.vue";
+import ExpenseBill from "../views/ExpenseBill.vue";
+import ExpenseBillDetail from "../views/ExpenseBillDetail.vue";
 
 const routes = [
     {
@@ -56,6 +60,11 @@ const routes = [
         component: AppDetailMetrics
     },
     {
+        path: '/apps/:id/metrics/processes/:process_id',
+        name: 'AppDetailMetricsDetail',
+        component: AppDetailMetrics
+    },
+    {
         path: '/apps/:id/activity',
         name: 'AppDetailActivity',
         component: AppDetailActivity
@@ -69,6 +78,26 @@ const routes = [
         path: '/apps/:id/settings',
         name: 'AppDetailSettings',
         component: AppDetailSettings
+    },
+    {
+        path: '/account',
+        name: 'AccountSetting',
+        component: AccountSetting
+    },
+    {
+        path: '/account/funding',
+        name: 'AccountFunding',
+        component: AccountFunding
+    },
+    {
+        path: '/expense-bills',
+        name: 'ExpenseBill',
+        component: ExpenseBill
+    },
+    {
+        path: '/expense-bills/details',
+        name: 'ExpenseBillDetail',
+        component: ExpenseBillDetail
     },
 ]
 

@@ -20,7 +20,8 @@
             <div class="formation-tier">
                 <p>This app is using <b>Free</b> dynos</p>
             </div>
-            <div class="display-formation-list hk-hide-bb-last-row ember-view" v-for="process in processes">
+            <template v-for="process in processes">
+            <div class="display-formation-list hk-hide-bb-last-row ember-view" >
                 <div class="flex pa3 items-center bb b--light-silver">
                     <div class="mr3 flex-auto">
                         <div class="flex flex-row w-90">
@@ -34,6 +35,7 @@
                     </span>
                 </div>
             </div>
+            </template>
         </div>
 
         <div class="mb5 ember-view" v-if="processes.length === 0">

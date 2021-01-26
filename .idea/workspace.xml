@@ -2,15 +2,38 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b756bf60-0a00-4019-941f-2b64219ea4c5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/SettingAppInfo.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SettingBuildpacks.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SettingConfigVars.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SettingDeleteApp.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SettingDomains.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SettingMaintenanceMode.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/SettingTransferOwnership.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/AccountSettingClose.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/AccountSettingProfile.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ExpenseBIllProductCost.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ExpenseBillCostTrend.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ExpenseBillProductCostDistribution.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ExpenseBillTotalCost.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MetricCpu.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MetricDetail.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MetricEvent.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MetricMemory.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MetricResponseTime.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MetricThroughput.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/MonthPicker.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Pagination.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/cost.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/funding.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/array.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/AccountFunding.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/AccountSetting.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/ExpenseBill.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/ExpenseBillDetail.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/AppDetailSettings.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AppDetailSettings.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/OverviewCollaboratorActivity.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OverviewCollaboratorActivity.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/OverviewFormation.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OverviewFormation.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ResourcesDyno.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ResourcesDyno.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/UserMenu.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/UserMenu.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/page.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/process.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/process.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/AppDetailDeploy.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AppDetailDeploy.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/AppDetailMetrics.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AppDetailMetrics.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/AppList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AppList.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,7 +58,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../normandy-payment-h5" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/views" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
@@ -43,11 +66,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/views" />
       <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$/src/assets/css" />
       <recent name="$PROJECT_DIR$/src/assets/img" />
-      <recent name="$PROJECT_DIR$/src/store" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/views" />
@@ -95,7 +118,19 @@
       <workItem from="1608102553775" duration="964000" />
       <workItem from="1608165974555" duration="13468000" />
       <workItem from="1608274265554" duration="3144000" />
-      <workItem from="1608516885379" duration="8446000" />
+      <workItem from="1608516885379" duration="12785000" />
+      <workItem from="1608598250134" duration="31085000" />
+      <workItem from="1608771749588" duration="20482000" />
+      <workItem from="1609123153354" duration="5763000" />
+      <workItem from="1609202616306" duration="1198000" />
+      <workItem from="1609229975936" duration="711000" />
+      <workItem from="1609289537873" duration="4168000" />
+      <workItem from="1610068001347" duration="599000" />
+      <workItem from="1610517713930" duration="2549000" />
+      <workItem from="1610953359874" duration="62934000" />
+      <workItem from="1611537560590" duration="10232000" />
+      <workItem from="1611558585091" duration="4829000" />
+      <workItem from="1611623845097" duration="448000" />
     </task>
     <servers />
   </component>

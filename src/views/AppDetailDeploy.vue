@@ -82,7 +82,6 @@
                 depolyType: params.deployType,
             })
 
-            console.log(state.depolyType)
             const goToDryccGit = () => {
                 router.push({ path: `/apps/${params.id}/deploy/drycc-git` })
                 state.depolyType = 'drycc-git'

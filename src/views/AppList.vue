@@ -27,13 +27,15 @@
             </div>
 
 
-            <div class="bg-lightest-silver app-list hk-hide-bb-last-row">
+            <div class="app-list hk-hide-bb-last-row">
                 <div class="apps-list-item flex flex-column flex-auto b--light-silver bg-white pv2 ph4 bb hover-bg-near-white ember-view" v-for="item in apps">
                     <one-app v-bind="item"/>
                 </div>
-                <!--此标签和page互斥-->
-                <div class="bg-white pv3 bt justify-center flex flex ember-view">
+                <div class="limit-width bg-white pv2">
+                    <pagination/>
                 </div>
+                <!--此标签和page互斥-->
+                <div class="bg-white pv3 bt justify-center flex flex ember-view"></div>
             </div>
         </div>
     </div>
@@ -44,6 +46,7 @@
     import NavBox from "../components/NavBox.vue";
     import ClusterSelect from "../components/ClusterSelect.vue";
     import OneApp from "../components/OneApp.vue";
+    import Pagination from "../components/Pagination.vue";
     import { reactive, toRefs, onMounted , computed} from 'vue'
     import { getAPPList } from "../services/app";
     import { useRoute, useRouter } from 'vue-router'
@@ -54,7 +57,8 @@
             'nav-bar': NavBar,
             'nav-box': NavBox,
             'cluster-select': ClusterSelect,
-            'one-app': OneApp
+            'one-app': OneApp,
+            'pagination': Pagination
         },
         setup() {
             const router = useRouter()

@@ -25,10 +25,11 @@
         </li>
 
         <li class="glostick__menu__listitem">
-            <a class="glostick__menu__item glostick__menu__item--notifications" href="/notifications">
-                Notifications
+            <a class="glostick__menu__item glostick__menu__item--docs" href="/expense-bills">Expense bills</a>
+        </li>
 
-            </a>
+        <li class="glostick__menu__listitem">
+            <a class="glostick__menu__item glostick__menu__item--notifications" href="/notifications">Notifications</a>
         </li>
 
         <li class="glostick__menu__listitem">
