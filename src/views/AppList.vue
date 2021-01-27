@@ -35,7 +35,7 @@
                     <pagination :cPage="cPage" :tPage="tPage" :hasNext="hasNextPage" @updatePage="updatePage"/>
                 </div>
                 <!--此标签和page互斥-->
-                <div class="bg-white pv3 bt justify-center flex flex ember-view"></div>
+                <div class="bg-white pv3 bt justify-center flex ember-view"></div>
             </div>
         </div>
     </div>

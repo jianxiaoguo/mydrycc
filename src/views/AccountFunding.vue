@@ -26,6 +26,17 @@
             </nav>
 
             <div class="collaborator-list limit-width ember-view">
+                <div class="w-100 flex limit-width mb5">
+                    <month-picker :cYear="cYear" :cMonth="cMonth" :sYear="sYear" :sMonth="sMonth" @changeMonth="changeMonth"/>
+                    <div class="ml6">
+                        <span class="f3 purple b">Trade type:</span>
+                        <select class="hk-select b--purple ml2 purple">
+                            <option class="purple">-----------</option>
+                            <option class="purple">income</option>
+                            <option class="purple">expense</option>
+                        </select>
+                    </div>
+                </div>
                 <table class="w-100 mb5">
                     <tr class="w-100 f5">
                         <th class="pl1 pr1 pv2 bb b--light-gray b">
@@ -73,6 +84,10 @@
                         </tr>
                     </template>
                 </table>
+                <div class="limit-width bg-white mt4">
+                    <pagination :cPage="cPage" :tPage="tPage" :hasNext="hasNextPage" @updatePage="updatePage"/>
+                </div>
+
             </div>
 
         </div>
@@ -85,18 +100,51 @@
     import { useRouter } from 'vue-router'
     import { reactive, toRefs, onMounted , computed} from 'vue'
     import { getAccountFundingList} from "../services/funding";
+    import Pagination from "../components/Pagination.vue";
+    import MonthPicker from "../components/MonthPicker.vue";
+
 
     export default {
         name: "AccountFunding",
         components: {
             'nav-bar': NavBar,
             'nav-box': NavBox,
+            'pagination': Pagination,
+            'month-picker': MonthPicker
         },
         setup(props) {
             const router = useRouter()
+            const date = new Date()
             const state = reactive({
-                fundingList: []
+                fundingList: [],
+                cPage: 1,
+                tPage: 2,
+                hasNextPage: true,
+                cYear: date.getFullYear(),
+                cMonth: date.getMonth() + 1,
+                sYear: date.getFullYear(),
+                sMonth: date.getMonth() + 1
             })
+
+            const changeMonth = (y, m) => {
+                state.sYear = y
+                state.sMonth = m
+                console.log(state.sYear, state.sMonth)
+            }
+
+
+            const updatePage = (n) => {
+
+                console.log(n)
+                state.cPage = n
+                state.tPage = Math.min(30, n+1)
+                if (state.tPage>=30){
+                    state.hasNextPage = false
+                }
+                else{
+                    state.hasNextPage = true
+                }
+            }
 
             const goToAccountSetting = () => {
                 router.push({ path: `/account` })
@@ -130,7 +178,9 @@
             return {
                 ...toRefs(state),
                 goToAccountSetting,
-                goToAccountFunding
+                goToAccountFunding,
+                updatePage,
+                changeMonth
             }
 
         }

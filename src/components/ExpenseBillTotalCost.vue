@@ -27,22 +27,43 @@
             </template>
 
         </table>
+        <div class="limit-width bg-white mt4">
+            <pagination :cPage="cPage" :tPage="tPage" :hasNext="hasNextPage" @updatePage="updatePage"/>
+        </div>
     </div>
 </template>
 
 <script>
     import { getAppCostList } from "../services/cost";
-    import { useRouter } from 'vue-router'
+    import Pagination from "./Pagination.vue";
     import { reactive, toRefs, onMounted} from 'vue'
 
     export default {
         name: "ExpenseBillTotalCost",
+        components: {
+            'pagination': Pagination
+        },
         setup() {
             const state = reactive({
                 costList: [],
                 total_cost: 0,
+                cPage: 1,
+                tPage: 2,
+                hasNextPage: true
             })
 
+            const updatePage = (n) => {
+
+                console.log(n)
+                state.cPage = n
+                state.tPage = Math.min(30, n+1)
+                if (state.tPage>=30){
+                    state.hasNextPage = false
+                }
+                else{
+                    state.hasNextPage = true
+                }
+            }
 
             onMounted(async () => {
                 const data =  await getAppCostList()
@@ -65,6 +86,7 @@
 
             return {
                 ...toRefs(state),
+                updatePage
 
             }
         }
