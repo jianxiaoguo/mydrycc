@@ -30,7 +30,7 @@
                     <month-picker :cYear="cYear" :cMonth="cMonth" :sYear="sYear" :sMonth="sMonth" @changeMonth="changeMonth"/>
                     <div class="ml6 flex">
                         <div class="ma1 f3 w4 purple b">Product:</div>
-                        <select class="hk-select b--purple purple">
+                        <select class="hk-select ml2 b--purple purple">
                             <option class="purple">-----------</option>
                             <option class="purple">Cpu</option>
                             <option class="purple">Memory</option>

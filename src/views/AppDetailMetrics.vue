@@ -10,31 +10,23 @@
             </template>
         </nav-box>
         <div class="main-content">
-            <main-nav :is-metrics-active="true" :app-detail="appDetail"/>
+            <main-nav @click="openShowProcessTypes" :is-metrics-active="true" :app-detail="appDetail"/>
             <div class="limit-width">
                 <div class="flex flex-column metrics__charts-container">
-                    <div class="ember-view" v-for="(lineProcesses, index1) in showProcesses">
-                        <div style="margin-top: 10px" class="metrics__process-switcher flex flex-grow-1 ember-view">
-                            <div class="btn-group ember-view" v-for="(pr, index2) in lineProcesses">
-                                <button :class="{'is-only-process': !pr.isActive}" class="drop-down__toggle btn btn-default metrics__process-switcher__btn " style="margin-right: 10px">
-                                    <div class="metrics__process-switcher__item flex ember-view">
-                                        <a @click="goToOtherProcess(index1, index2, pr)" class="metrics__process-switcher__item-link ember-view">
-                                            <div>
-                                                <span class="metrics__process-switcher__item-header" title="web">{{pr.name}}</span>
-                                                <span class="metrics__process-switcher__item-content">
-                                                    <div class="ember-view">
-                                                        <svg width="15" height="17" viewBox="0 0 15 17" xmlns="http://www.w3.org/2000/svg" class="dyno-icon"><title>dyno-hobby</title><g fill="none" fill-rule="evenodd"><path d="M8.39.19l5.72 2.952c.487.251.89.907.89 1.459v6.866c0 .548-.398 1.203-.89 1.455l-5.72 2.93c-.487.25-1.288.253-1.78 0l-5.72-2.93C.403 12.673 0 12.02 0 11.467V4.6c0-.548.398-1.205.89-1.459L6.61.189c.487-.25 1.288-.253 1.78 0z" fill="#F1EEF5"></path><path d="M8.39.19l5.72 2.952c.487.251.89.907.89 1.459v6.866c0 .548-.398 1.203-.89 1.455l-5.72 2.93c-.487.25-1.288.253-1.78 0l-5.72-2.93C.403 12.673 0 12.02 0 11.467V4.6c0-.548.398-1.205.89-1.459L6.61.189c.487-.25 1.288-.253 1.78 0zm-.459.888c-.202-.104-.661-.104-.862 0L1.349 4.03C1.19 4.112 1 4.426 1 4.6v6.866c0 .174.191.486.346.565l5.72 2.93c.203.105.666.104.868 0l5.72-2.93c.156-.08.346-.39.346-.565V4.6c0-.175-.192-.49-.348-.57l-5.72-2.953z" fill="#C1B1D3"></path><path fill="#A185C0" d="M5 11h1.548V8.576h1.904V11H10V5H8.452v2.23H6.548V5H5z"></path></g></svg>
-                                                    </div>
-                                                    <span class="metrics__process-switcher__item-content-quantity">
-                                                            1
-                                                            dyno
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </button>
-                            </div>
+                    <div id="process-picker" class="relative dib mb2">
+                        <button @click="openShowProcessTypes" class="hk-button--secondary pr1">
+                            {{currentType.name}}
+                            <span class="ml4">
+                                <svg t="1611910986651" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1157" width="20" height="20"><path d="M721.794214 384.116381l-60.943176 60.943176-211.189225-211.189225L510.604989 172.927155z" fill="#444444" p-id="1158"></path><path d="M299.316831 383.987914l60.943176 60.943177 211.189226-211.189225L510.506056 172.798689z" fill="#444444" p-id="1159"></path><path d="M301.900488 639.593587l60.943177-60.943177 211.189225 211.189226L513.089714 850.782812z" fill="#444444" p-id="1160"></path><path d="M724.391342 639.729931l-60.943176-60.943177-211.189226 211.189226L513.202117 850.919156z" fill="#444444" p-id="1161"></path></svg>
+                            </span>
+                        </button>
+                        <div v-if="showProcessTypes">
+                            <ul class="hk-dropdown z-max">
+                                <template  v-for="(pt, index) in processTypes">
+                                <li><a @click="goToOtherProcessType(pt)" class="hk-dropdown-item tc" tabindex="0">{{pt.name}}</a></li>
+                                <li v-if="index!==processTypes.length-1" class="hk-dropdown-divider"></li>
+                                </template>
+                            </ul>
                         </div>
                     </div>
 
@@ -46,7 +38,7 @@
                             <div class="ember-view">
                                 <div class="metrics__main__charts metrics__chart-sorting is-vertical">
                                     <metric-memory />
-                                    <metric-response-time />
+                                    <metric-network />
                                 </div>
                             </div>
                         </div>
@@ -58,7 +50,7 @@
 </template>
 
 <script>
-    import { useRoute, useRouter } from 'vue-router'
+    import { useRouter } from 'vue-router'
     import { reactive, toRefs, onMounted , computed} from 'vue'
     import NavBar from "../components/NavBar.vue";
     import NavBox from "../components/NavBox.vue";
@@ -66,10 +58,9 @@
     import NavBoxAppDetailMenu from "../components/NavBoxAppDetailMenu.vue"
     import MainNav from "../components/MainNav.vue";
     import MetricMemory from "../components/MetricMemory.vue";
-    import MetricResponseTime from "../components/MetricResponseTime.vue";
+    import MetricNetwork from "../components/MetricNetwork.vue";
     import { getAppDetail } from "../services/app";
-    import { groupArray } from "../utils/array"
-    import { getAppProcesses } from "../services/process";
+    import { getAppProcessTypes } from "../services/process";
 
     export default {
         name: "AppDetailMetrics",
@@ -80,16 +71,16 @@
             'nav-box-app-detail-menu': NavBoxAppDetailMenu,
             'main-nav': MainNav,
             'metric-memory': MetricMemory,
-            'metric-response-time': MetricResponseTime
+            'metric-network': MetricNetwork
         },
         setup() {
             const router = useRouter()
             const params = router.currentRoute.value.params
             const state = reactive({
                 appDetail: Object,
-                processes: [],
-                process: null,
-                showProcesses: [],
+                processTypes: [],
+                showProcessTypes: false,
+                currentType: null
             })
 
             const  data = getAppDetail(params.id)
@@ -104,65 +95,63 @@
                 baseImage: data.base_image
             }
 
-            const processData =  getAppProcesses()
+            const processData =  getAppProcessTypes()
 
-            state.processes = processData.map(item => {
-                if (item.id === params.process_id)  {
-                    return {
-                        'id': item.id,
-                        'name': item.name,
-                        'cmd': item.cmd,
-                        'status': item.status,
-                        'isActive': true
-                    }
-                } else {
-                    return {
-                        'id': item.id,
-                        'name': item.name,
-                        'cmd': item.cmd,
-                        'status': item.status,
-                        'isActive': false
-                    }
+            state.processTypes = processData.map(item => {
+                return {
+                    'name': item.name,
                 }
-
             })
 
-            if (state.processes.length > 0) {
-                if (!params.process_id) {
-                    router.push({ path: `/apps/${params.id}/metrics/processes/${state.processes[0].id}` })
+            if (state.processTypes.length > 0) {
+                if (!params.processType) {
+                    state.currentType = state.processTypes[0]
+                    router.push({ path: `/apps/${params.id}/metrics/processes/${state.currentType.name}` })
+                } else {
+                    const l = state.processTypes.filter(item =>{
+                        if(item.name.includes(params.processType)){
+                            return item
+                        }
+                    })
+                    console.log(l)
+                    if (l.length > 0) {
+                        state.currentType = l[0]
+                    } else {
+                        state.currentType = state.processTypes[0]
+                    }
                 }
-                state.showProcesses = groupArray(state.processes, 7)
-                state.showProcesses[0][0].isActive = true
             }
 
-            const goToOtherProcess = (index1, index2, pr) => {
+            const goToOtherProcessType = (pt) => {
+                router.push({ path: `/apps/${params.id}/metrics/processes/${pt.name}` })
+                state.currentType = pt
+                state.showProcessTypes = false
+            }
 
-                let ps = state.processes.map(item => {
-                    if (item.id === pr.id)  {
-                        return {
-                            'id': item.id,
-                            'name': item.name,
-                            'cmd': item.cmd,
-                            'status': item.status,
-                            'isActive': true
-                        }
-                    } else {
-                        return {
-                            'id': item.id,
-                            'name': item.name,
-                            'cmd': item.cmd,
-                            'status': item.status,
-                            'isActive': false
-                        }
+            onMounted( async () => {
+                document.addEventListener('click', function (e) {
+                    const d = document.getElementById('process-picker')
+                    // 下面这句代码是获取 点击的区域是否包含你的菜单，如果包含，说明点击的是菜单以外，不包含则为菜单以内
+                    if (!d.contains(e.target)) {
+                        state.showProcessTypes = false
                     }
                 })
-                router.push({ path: `/apps/${params.id}/metrics/processes/${pr.id}` })
-                state.showProcesses = groupArray(ps, 7)
+                document.addEventListener('click', function (e) {
+                    // state.showProcessTypes = true
+                    // console.log(state.showProcessTypes)
+                })
+            })
+
+            const openShowProcessTypes = () => {
+                state.showProcessTypes = !state.showProcessTypes
+                console.log(state.showProcessTypes)
             }
+
 
             return {
                 ...toRefs(state),
-                goToOtherProcess
+                goToOtherProcessType,
+                openShowProcessTypes
             }
         },
     }
@@ -171,5 +160,8 @@
 <style scoped>
     a:hover {
         cursor: pointer;
+    }
+    .hide-el {
+        display: none;
     }
 </style>

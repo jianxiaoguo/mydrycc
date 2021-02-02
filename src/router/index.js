@@ -60,7 +60,7 @@ const routes = [
         component: AppDetailMetrics
     },
     {
-        path: '/apps/:id/metrics/processes/:process_id',
+        path: '/apps/:id/metrics/processes/:processType',
         name: 'AppDetailMetricsDetail',
         component: AppDetailMetrics
     },

@@ -30,7 +30,9 @@
                 <month-picker :cYear="cYear" :cMonth="cMonth" :sYear="sYear" :sMonth="sMonth" @changeMonth="changeMonth"/>
                 <div class="ml6">
                     <span class="f3 purple b">App:</span>
-                    <select class="hk-select b--purple ml2 purple"><option class="purple">Lorem ipsum</option><option class="purple">Dolor ist</option></select>
+                    <select class="hk-select b--purple ml2 purple">
+                        <option class="purple">Lorem ipsum</option>
+                        <option class="purple">Dolor ist sda ssqawa aasaqgvaaa 66y1</option></select>
                 </div>
             </div>
             <div class="w-100 ma2 limit-width flex" style="height: 400px">

@@ -19,3 +19,11 @@ export function getAppProcesses() {
     ]
 
 }
+
+export function getAppProcessTypes() {
+    return [
+        {'name': 'web'}, {'name': 'celery'}, {'name': 'cbeat'}, {'name': 'cron'}, {'name': 'sync1'}, {'name': 'sync2'}
+    ]
+
+}
+
