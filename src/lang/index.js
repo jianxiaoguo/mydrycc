@@ -25,13 +25,15 @@ export const i18n = createI18n({
 // 切换语言
 export const setLang = (lang) => {
   // 当前语言
-  i18n.global.locale.value = lang
+  // i18n.global.locale.value = lang
+  i18n.global.locale = lang
   console.log(lang, 'vant组件设置成功')
 }
 
 // 获取当前语言
 export const getLang = () => {
-  return i18n && i18n.global.locale.value
+  // return i18n && i18n.global.locale.value
+  return i18n && i18n.global.locale
 }
 
 // 获取UA语言类型

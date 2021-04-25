@@ -39,6 +39,7 @@
                                 <div class="metrics__main__charts metrics__chart-sorting is-vertical">
                                     <metric-memory />
                                     <metric-network />
+                                    <metric-cpu />
                                 </div>
                             </div>
                         </div>
@@ -59,6 +60,7 @@
     import MainNav from "../components/MainNav.vue";
     import MetricMemory from "../components/MetricMemory.vue";
     import MetricNetwork from "../components/MetricNetwork.vue";
+    import MetricCpu from "../components/MetricCpu.vue";
     import { getAppDetail } from "../services/app";
     import { getAppProcessTypes } from "../services/process";
 
@@ -71,7 +73,8 @@
             'nav-box-app-detail-menu': NavBoxAppDetailMenu,
             'main-nav': MainNav,
             'metric-memory': MetricMemory,
-            'metric-network': MetricNetwork
+            'metric-network': MetricNetwork,
+            'metric-cpu': MetricCpu
         },
         setup() {
             const router = useRouter()

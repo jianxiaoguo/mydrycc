@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Login from "../views/Login.vue";
 import AppList from "../views/AppList.vue";
 import NewApp from "../views/NewApp.vue";
 import AppDetailOverview from "../views/AppDetailOverview.vue";
@@ -13,16 +12,12 @@ import AccountSetting from "../views/AccountSetting.vue";
 import AccountFunding from "../views/AccountFunding.vue";
 import ExpenseBill from "../views/ExpenseBill.vue";
 import ExpenseBillDetail from "../views/ExpenseBillDetail.vue";
+// import WebTerminal from "../views/WebTerminal.vue"
 
 const routes = [
     {
         path: '/',
         redirect: '/apps',
-    },
-    {
-        path: '/login',
-        name: 'Login',
-        component: Login
     },
     {
         path: '/apps',
@@ -98,7 +93,7 @@ const routes = [
         path: '/expense-bills/details',
         name: 'ExpenseBillDetail',
         component: ExpenseBillDetail
-    },
+    }
 ]
 
 const router = createRouter({
