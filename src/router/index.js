@@ -12,7 +12,7 @@ import AccountSetting from "../views/AccountSetting.vue";
 import AccountFunding from "../views/AccountFunding.vue";
 import ExpenseBill from "../views/ExpenseBill.vue";
 import ExpenseBillDetail from "../views/ExpenseBillDetail.vue";
-// import WebTerminal from "../views/WebTerminal.vue"
+
 
 const routes = [
     {
