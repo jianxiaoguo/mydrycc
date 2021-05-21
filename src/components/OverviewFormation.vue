@@ -56,7 +56,8 @@
 <script>
     import { useRouter } from 'vue-router'
     import { reactive, toRefs, onMounted} from 'vue'
-    import { getAppProcesses } from "../services/process";
+    import { getAppProcesses, dealAppProcesses } from "../services/process";
+    import {useStore} from "vuex";
 
     export default {
         name: "OverviewFormation",
@@ -65,7 +66,7 @@
         },
         setup(props) {
             const router = useRouter()
-
+            const store = useStore()
             const state = reactive({
                 processes: []
             })
@@ -75,15 +76,11 @@
             }
 
             onMounted(async () => {
-                const data =  await getAppProcesses()
-
-                state.processes = data.map(item => {
-                    return {
-                        'name': item.name,
-                        'cmd': item.cmd,
-                        'status': item.status
-                    }
-                })
+                // var currentCluster = store.getters.getCurrentCluster
+                var currentCluster = localStorage.getItem('currentCluster')
+                var data =  await getAppProcesses(JSON.parse(currentCluster).name, "py3django3")
+                console.log("vue getAppProcesses data: ", data);
+                state.processes = dealAppProcesses(data)
             })
 
             return {

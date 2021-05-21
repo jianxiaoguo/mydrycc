@@ -13,7 +13,7 @@
 
         <div class="panel-content">
             <p>
-<span id="ember123" class="confirmable-action ember-view">  <button class="hk-button--danger delete-app" data-ember-action="" data-ember-action-124="124">
+<span id="ember123" class="confirmable-action ember-view">  <button @click="deleteAppBTN" class="hk-button--danger delete-app" data-ember-action="" data-ember-action-124="124">
     Delete app...
   </button>
 
@@ -25,8 +25,26 @@
 </template>
 
 <script>
+    import { useRouter } from "vue-router";
+    import { deleteApp } from "../services/app";
+    // import { Toast } from 'vant'
+
     export default {
-        name: "SettingDeleteApp"
+        name: "SettingDeleteApp",
+        setup() {
+            const router = useRouter()
+            const params = router.currentRoute.value.params
+            const deleteAppBTN = () => {
+              var currentCluster = localStorage.getItem('currentCluster')
+              const data = deleteApp(JSON.parse(currentCluster).name, params.id)
+              // if (data) {
+              //   Toast("DELETE OK")
+              // }
+            }
+            return {
+              deleteAppBTN
+            }
+        },
     }
 </script>
 

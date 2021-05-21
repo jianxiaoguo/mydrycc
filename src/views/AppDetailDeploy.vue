@@ -60,7 +60,7 @@
     import MainNav from "../components/MainNav.vue";
     import DeployDryccGit from "../components/DeployDryccGit.vue";
     import DeployDryccImage from "../components/DeployDryccImage.vue";
-    import { getAppDetail } from "../services/app";
+    import { getAppDetail, dealAppDetail } from "../services/app";
 
     export default {
         name: "AppDetailDeploy",
@@ -97,18 +97,9 @@
             }
 
             onMounted(async () => {
-
-                const  data = await getAppDetail(params.id)
-                if (!data) {
-                    state.appDetail = null
-                    return
-                }
-                state.appDetail = {
-                    id: data.id,
-                    name: data.name,
-                    lang: data.lang,
-                    baseImage: data.base_image
-                }
+                var currentCluster = localStorage.getItem('currentCluster')
+                const data = await getAppDetail(JSON.parse(currentCluster).name, params.id)
+                state.appDetail = data.data ? dealAppDetail(data) : null
             })
 
             return {

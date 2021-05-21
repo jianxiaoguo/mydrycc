@@ -1,4 +1,7 @@
+import axios from "../utils/axios";
+
 export function getExpenseBillList() {
+    return axios.get(`/fundings/`)
     return [
         {'username': 'hanlucen', 'period': '2021-01', 'cost': 11021, 'app': {'app_id': '1', 'name': 'zmy1'}, 'product': {'name': 'cpu', 'detail': 'xxxx'}, 'start': 1611590400, 'end': 1611676800},
         {'username': 'hanlucen', 'period': '2021-01', 'cost': 1024, 'app': {'app_id': '1', 'name': 'zmy2'}, 'product': {'name': 'cpu', 'detail': 'xxxx'}, 'start': 1611590400, 'end': 1611676800},

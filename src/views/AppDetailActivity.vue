@@ -37,7 +37,8 @@
                             <span>{{activity.content}}</span>
                         </div>
                         <div class="f5 gray">
-                            <span :title="activity.createdTime.format('yyyy.MM.dd hh:mm:ss')" class="timeago ember-view">{{activity.createdTime.format("yyyy-MM-dd at hh:mm")}}</span>
+<!--                            <span :title="activity.createdTime.format('yyyy.MM.dd hh:mm:ss')" class="timeago ember-view">{{activity.createdTime.format("yyyy-MM-dd at hh:mm")}}</span>-->
+                            <span :title="activity.createdTime" class="timeago ember-view">{{activity.createdTime}}</span>
                             ·
                             {{activity.v}}
 
@@ -65,8 +66,8 @@
     import NavBoxAppDetailMenu from "../components/NavBoxAppDetailMenu.vue"
     import MainNav from "../components/MainNav.vue";
     import ActivityRollBack from "../components/ActivityRollBack.vue";
-    import { getAppDetail } from "../services/app";
-    import {getAppActivities} from "../services/activity";
+    import { getAppDetail, dealAppDetail } from "../services/app";
+    import { getAppActivities, dealAppActivities } from "../services/activity";
 
     export default {
         name: "AppDetailActivity",
@@ -89,34 +90,12 @@
             })
 
             onMounted(async () => {
+              var currentCluster = localStorage.getItem('currentCluster')
+              const data = await getAppDetail(JSON.parse(currentCluster).name, params.id)
+              state.appDetail = data.data ? dealAppDetail(data) : null
+              const activityData = await getAppActivities(JSON.parse(currentCluster).name, params.id)
 
-                const  data = await getAppDetail(params.id)
-                if (!data) {
-                    state.appDetail = null
-                    return
-                }
-                state.appDetail = {
-                    id: data.id,
-                    name: data.name,
-                    lang: data.lang,
-                    baseImage: data.base_image
-                }
-
-                const activityData = getAppActivities()
-
-                if (!activityData) {
-                    state.activities = []
-                    return
-                }
-
-                state.activities = activityData.map(item => {
-                    return {
-                        'username': item.username,
-                        'content': item.content,
-                        'createdTime': new Date(parseInt(item.created_time * 1000)),
-                        'v': item.v
-                    }
-                })
+              state.activities = activityData.data ? dealAppActivities(activityData) : null
             })
 
             provide(

@@ -22,9 +22,9 @@
                         <th class="pl1 pr1 pv2 bb b--light-gray b" colspan="2">
                             Collaborators
                         </th>
-                        <th class="pv2 pr1 bb b--light-gray b">
-                            Role
-                        </th>
+<!--                        <th class="pv2 pr1 bb b&#45;&#45;light-gray b">-->
+<!--                            Role-->
+<!--                        </th>-->
                         <th class="pv2 bb b--light-gray b tr" style="width:138px;">
                             <button class="hk-button--secondary" @click="showEdit(null)">Add collaborator</button>
                         </th>
@@ -37,7 +37,7 @@
                                 </span>
                             </td>
                             <td class="w-40 bb b--light-silver pv2 pr1">{{access.username}}</td>
-                            <td class="bb b--light-silver pv2 pr1">{{access.role}}</td>
+<!--                            <td class="bb b&#45;&#45;light-silver pv2 pr1">{{access.role}}</td>-->
 
                             <td class="bb b--light-silver tc ph2">
                                 <button @click="showEdit(access)" v-if="access.role!=='owner'" class="bg-transparent hk-focus-ring--blue:focus cursor-hand br1 ba0 b--none pa--1 mr3" title="Edit" type="button">
@@ -63,8 +63,8 @@
     import NavBoxAppDetailMenu from "../components/NavBoxAppDetailMenu.vue"
     import MainNav from "../components/MainNav.vue";
     import AccessCollaboratorEdit from "../components/AccessCollaboratorEdit.vue";
-    import { getAppDetail } from "../services/app";
-    import { getAppAccesses } from "../services/access"
+    import { getAppDetail, dealAppDetail } from "../services/app";
+    import { getAppAccesses, dealAppAccesses } from "../services/access"
 
     export default {
         name: "AppDetailAccess",
@@ -99,30 +99,14 @@
             }
 
             onMounted(async () => {
-
-                const  data = await getAppDetail(params.id)
-                if (!data) {
-                    state.appDetail = null
-                    return
-                }
-                state.appDetail = {
-                    id: data.id,
-                    name: data.name,
-                    lang: data.lang,
-                    baseImage: data.base_image
-                }
-
-                const accessData = await getAppAccesses()
-                if (accessData) {
-                    state.accesses = accessData.map(item => {
-                        return {
-                            'username': item.username,
-                            'role': item.role
-                        }
-                    })
-                }
-
-
+                console.log("getAppDetail params")
+                console.log(params)
+                console.log(params.id)
+                var currentCluster = localStorage.getItem('currentCluster')
+                const data = await getAppDetail(JSON.parse(currentCluster).name, params.id)
+                state.appDetail = data.data ? dealAppDetail(data) : null
+                const accessData = await getAppAccesses(JSON.parse(currentCluster).name, params.id)
+                state.accesses = accessData ? dealAppAccesses(accessData) : null
             })
 
             return {

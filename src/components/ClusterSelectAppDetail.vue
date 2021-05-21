@@ -37,7 +37,7 @@
             </div>
         </span>
         <span class="ml1">
-            {{appDetail.name}}
+            {{ appDetail.name }}
         </span>
     </span>
 
@@ -45,7 +45,7 @@
 
 <script>
     import { reactive, toRefs, onMounted , computed} from 'vue'
-    import { getClusters } from "../services/cluster";
+    import { getClusters, dealClusterData } from "../services/cluster";
     import { useStore } from 'vuex'
 
     export default {
@@ -73,24 +73,13 @@
             onMounted(async () => {
 
                 const  data = await getClusters()
-                if (!data) {
-                    state.clusters = []
-                    return
-                }
-                if (state.currentCluster) {
+                state.clusters = data ? dealClusterData(data) : []
+                if (state.currentCluster && state.currentCluster != "undefined") {
                     store.dispatch('changeCurrentCluster', JSON.parse(state.currentCluster))
                 } else {
-                    store.dispatch('changeCurrentCluster', data[0])
-                    localStorage.setItem('currentCluster', JSON.stringify(data[0]))
+                    store.dispatch('changeCurrentCluster', dealClusterData(data)[0])
+                    localStorage.setItem('currentCluster', JSON.stringify(dealClusterData(data)[0]))
                 }
-
-                state.clusters = data.map(item => {
-                    return {
-                        clusterId: item.cluster_id,
-                        name: item.name,
-                        code: item.code
-                    }
-                })
             })
 
             return {

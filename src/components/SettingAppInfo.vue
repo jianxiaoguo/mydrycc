@@ -31,7 +31,7 @@
                         <div class="w-100 flex mb2 items-center">
                             <div class="w-20 hk-label mv1">App Name</div>
                             <div class="w-80 flex items-center">
-                                {{appDetail.name}}
+                                {{ appDetail.name }}
                             </div>
                         </div>
 

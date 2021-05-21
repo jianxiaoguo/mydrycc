@@ -90,7 +90,9 @@
 
 <script>
     import { useRouter } from 'vue-router'
-    import { reactive, toRefs, onMounted} from 'vue'
+    import { reactive, toRefs, onMounted } from 'vue'
+    import { getAppProcesses, dealAppProcesses } from "../services/process";
+    import { getAppAddons, dealAppAddons} from "../services/addons";
 
     export default {
         name: "SettingConfigVars",
@@ -99,7 +101,7 @@
         },
         setup(props) {
             const router = useRouter()
-
+            const params = router.currentRoute.value.params
             const state = reactive({
                 showConfigVars: false,
                 configVar: null,
@@ -121,26 +123,12 @@
 
 
             onMounted(async () => {
-                const addonsData =  await getAppAddons()
+                var currentCluster = localStorage.getItem('currentCluster')
+                const data =  await getAppAddons(JSON.parse(currentCluster).name, params.id)
 
-                state.addons = addonsData.map(item => {
-                    return {
-                        'name': item.name,
-                        'plan': item.plan,
-                        'kind': item.kind
-                    }
-                })
-
-                const processData =  await getAppProcesses()
-
-                state.processes = processData.map(item => {
-                    return {
-                        'name': item.name,
-                        'cmd': item.cmd,
-                        'status': item.status,
-                        'disabled': true
-                    }
-                })
+                state.addons = dealAppAddons(data)
+                const processData =  await getAppProcesses("drycc-a", "py3django3")
+                state.processes = dealAppProcesses(processData)
             })
 
             return {

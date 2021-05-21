@@ -27,7 +27,8 @@
                     <span>{{activity.content}}</span>
                 </div>
                 <div class="f5 gray">
-                    <span :title="activity.createdTime.format('yyyy.MM.dd hh:mm:ss')" class="timeago ember-view">{{activity.createdTime.format("yyyy-MM-dd at hh:mm")}}</span>
+<!--                    <span :title="activity.createdTime.format('yyyy.MM.dd hh:mm:ss')" class="timeago ember-view">{{activity.createdTime.format("yyyy-MM-dd at hh:mm")}}</span>-->
+                    <span :title="activity.createdTime" class="timeago ember-view">{{activity.createdTime}}</span>
                     ·
                     {{activity.v}}
                 </div>
@@ -39,7 +40,7 @@
 </template>
 
 <script>
-    import {getAppActivities } from '../services/activity'
+    import { getAppActivities, dealAppActivities } from '../services/activity'
     import { useRouter } from 'vue-router'
     import { reactive, toRefs, onMounted} from 'vue'
 
@@ -50,7 +51,7 @@
         },
         setup(props) {
             const router = useRouter()
-
+            const params = router.currentRoute.value.params
             const state = reactive({
                 activities: []
             })
@@ -60,16 +61,10 @@
             }
 
             onMounted(async () => {
-                const data =  await getAppActivities()
+                var currentCluster = localStorage.getItem('currentCluster')
+                const data =  await getAppActivities(JSON.parse(currentCluster).name, params.id)
 
-                state.activities = data.map(item => {
-                    return {
-                        'username': item.username,
-                        'content': item.content,
-                        'createdTime': new Date(parseInt(item.created_time * 1000)),
-                        'v': item.v
-                    }
-                })
+                state.activities = data.data ? dealAppActivities(data) : []
             })
 
             return {

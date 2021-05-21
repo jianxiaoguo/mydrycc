@@ -72,7 +72,7 @@
     import NavBar from "../components/NavBar.vue";
     import NavBox from "../components/NavBox.vue";
     import { reactive, toRefs, onMounted , computed} from 'vue'
-    import { getClusters } from "../services/cluster";
+    import { getClusters, dealClusterData } from "../services/cluster";
 
     export default {
         name: "AppList",
@@ -91,23 +91,13 @@
             const createNewApp = () => {
                 console.log(state.selectedClusterId)
                 console.log(state.appName)
+
             }
 
             onMounted(async () => {
 
                 const  data = await getClusters()
-                if (!data) {
-                    state.clusters = []
-                    return
-                }
-
-                state.clusters = data.map(item => {
-                    return {
-                        clusterId: item.cluster_id,
-                        name: item.name,
-                        code: item.code
-                    }
-                })
+                state.clusters = data ? dealClusterData(data) : []
                 state.selectedClusterId = state.clusters[0].clusterId
             })
 

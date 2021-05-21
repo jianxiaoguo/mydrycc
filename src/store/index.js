@@ -14,5 +14,11 @@ export default createStore({
     changeCurrentCluster (context, current) {
         context.commit('changeCurrentCluster', current)
     },
+
+  },
+  getters: {
+    getCurrentCluster : state => {
+      return state.currentCluster
+    }
   }
 })

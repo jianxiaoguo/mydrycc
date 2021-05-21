@@ -52,8 +52,8 @@
         props: {
             id: String,
             name: String,
-            lang: String,
-            baseImage: String
+            // lang: String,
+            // baseImage: String
         },
         setup() {
             const router = useRouter()

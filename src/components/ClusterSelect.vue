@@ -50,19 +50,13 @@
                 const data = await getClusters()
                 console.log(data)
                 console.log(dealClusterData(data))
-                if (!data) {
-                    state.clusters = []
-                    return
-                }
+                state.clusters = data ? dealClusterData(data) : []
                 if (state.currentCluster) {
                     store.dispatch('changeCurrentCluster', JSON.parse(state.currentCluster))
                 } else {
-                    store.dispatch('changeCurrentCluster', data[0])
-                    localStorage.setItem('currentCluster', JSON.stringify(data[0]))
+                    store.dispatch('changeCurrentCluster', dealClusterData(data)[0])
+                    localStorage.setItem('currentCluster', JSON.stringify(dealClusterData(data)[0]))
                 }
-
-                state.clusters = dealClusterData(data)
-
             })
             return {
                 ...toRefs(state),

@@ -48,7 +48,7 @@
     import OneApp from "../components/OneApp.vue";
     import Pagination from "../components/Pagination.vue";
     import { reactive, toRefs, onMounted , computed} from 'vue'
-    import { getAPPList } from "../services/app";
+    import { getAPPList, dealAPPList } from "../services/app";
     import { useRoute, useRouter } from 'vue-router'
 
     export default {
@@ -87,21 +87,10 @@
             }
 
             onMounted(async () => {
-
-                const  data = await getAPPList({})
-                if (!data) {
-                    state.apps = []
-                    return
-                }
-
-                state.apps = data.map(item => {
-                    return {
-                        id: item.id,
-                        name: item.name,
-                        lang: item.lang,
-                        baseImage: item.base_image
-                    }
-                })
+                var currentCluster = localStorage.getItem('currentCluster')
+                const data = await getAPPList(JSON.parse(currentCluster).name)
+                console.log("vue getAPPList data: ", data)
+                state.apps = data.data && data.data.results ? dealAPPList(data) : []
             })
 
             return {

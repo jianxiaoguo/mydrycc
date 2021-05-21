@@ -79,7 +79,7 @@
 
     import { useRouter } from 'vue-router'
     import { reactive, toRefs, onMounted} from 'vue'
-    import { getAppAddons} from "../services/addons";
+    import { getAppAddons,dealAppAddons } from "../services/addons";
 
     export default {
         name: "ResourcesAddons",
@@ -88,7 +88,7 @@
         },
         setup(props) {
             const router = useRouter()
-
+            const params = router.currentRoute.value.params
             const state = reactive({
                 addons: []
             })
@@ -98,15 +98,10 @@
             }
 
             onMounted(async () => {
-                const data =  await getAppAddons()
+                var currentCluster = localStorage.getItem('currentCluster')
+                const data =  await getAppAddons(JSON.parse(currentCluster).name, params.id)
 
-                state.addons = data.map(item => {
-                    return {
-                        'name': item.name,
-                        'plan': item.plan,
-                        'kind': item.kind
-                    }
-                })
+                state.addons = dealAppAddons(data)
             })
 
             return {

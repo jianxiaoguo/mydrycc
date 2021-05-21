@@ -44,7 +44,7 @@
 </template>
 
 <script>
-    import {getCollaboratorActivities } from '../services/activity'
+    import {getCollaboratorActivities, dealCollaboratorActivities } from '../services/activity'
     import { useRouter } from 'vue-router'
     import { reactive, toRefs, onMounted} from 'vue'
 
@@ -55,7 +55,7 @@
         },
         setup(props) {
             const router = useRouter()
-
+            const params = router.currentRoute.value.params
             const state = reactive({
                 activities: []
             })
@@ -65,14 +65,10 @@
             }
 
             onMounted(async () => {
-                const data =  await getCollaboratorActivities()
+                var currentCluster = localStorage.getItem('currentCluster')
+                const data =  await getCollaboratorActivities(JSON.parse(currentCluster).name, params.id)
 
-                state.activities = data.map(item => {
-                    return {
-                        'username': item.username,
-                        'count': item.count,
-                    }
-                })
+                state.activities = dealCollaboratorActivities(data)
             })
 
 

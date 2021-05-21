@@ -61,8 +61,8 @@
     import MetricMemory from "../components/MetricMemory.vue";
     import MetricNetwork from "../components/MetricNetwork.vue";
     import MetricCpu from "../components/MetricCpu.vue";
-    import { getAppDetail } from "../services/app";
-    import { getAppProcessTypes } from "../services/process";
+    import { getAppDetail, dealAppDetail } from "../services/app";
+    // import { getAppProcessTypes } from "../services/process";
 
     export default {
         name: "AppDetailMetrics",
@@ -85,26 +85,13 @@
                 showProcessTypes: false,
                 currentType: null
             })
+            var currentCluster = localStorage.getItem('currentCluster')
+            const data = getAppDetail(JSON.parse(currentCluster).name, params.id)
+            state.appDetail = data.data ? dealAppDetail(data) : null
 
-            const  data = getAppDetail(params.id)
-            if (!data) {
-                state.appDetail = null
-                return
-            }
-            state.appDetail = {
-                id: data.id,
-                name: data.name,
-                lang: data.lang,
-                baseImage: data.base_image
-            }
+            // const processData =  getAppProcessTypes(JSON.parse(currentCluster).name, params.id)
 
-            const processData =  getAppProcessTypes()
-
-            state.processTypes = processData.map(item => {
-                return {
-                    'name': item.name,
-                }
-            })
+            state.processTypes = dealProcessTypes(data)
 
             if (state.processTypes.length > 0) {
                 if (!params.processType) {

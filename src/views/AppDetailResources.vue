@@ -29,7 +29,7 @@
     import ClusterSelect from "../components/ClusterSelectAppDetail.vue";
     import NavBoxAppDetailMenu from "../components/NavBoxAppDetailMenu.vue"
     import MainNav from "../components/MainNav.vue";
-    import { getAppDetail } from "../services/app";
+    import { getAppDetail, dealAppDetail } from "../services/app";
     import ResourcesDyno from "../components/ResourcesDyno.vue";
     import ResourcesAddons from "../components/ResourcesAddons.vue";
 
@@ -48,22 +48,13 @@
             const router = useRouter()
             const params = router.currentRoute.value.params
             const state = reactive({
-                appDetail: Object,
+                appDetail: Object
             })
 
             onMounted(async () => {
-
-                const  data = await getAppDetail(params.id)
-                if (!data) {
-                    state.appDetail = null
-                    return
-                }
-                state.appDetail = {
-                    id: data.id,
-                    name: data.name,
-                    lang: data.lang,
-                    baseImage: data.base_image
-                }
+                var currentCluster = localStorage.getItem('currentCluster')
+                const data = await getAppDetail(JSON.parse(currentCluster).name, params.id)
+                state.appDetail = data.data ? dealAppDetail(data) : null
             })
 
             return {
