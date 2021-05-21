@@ -23,7 +23,7 @@
 
 <script>
     import { reactive, toRefs, onMounted , computed} from 'vue'
-    import { getClusters } from "../services/cluster";
+    import { getClusters, dealClusterData } from "../services/cluster";
     import { useStore } from 'vuex'
 
     export default {
@@ -47,7 +47,9 @@
 
             onMounted(async () => {
 
-                const  data = await getClusters()
+                const data = await getClusters()
+                console.log(data)
+                console.log(dealClusterData(data))
                 if (!data) {
                     state.clusters = []
                     return
@@ -59,15 +61,9 @@
                     localStorage.setItem('currentCluster', JSON.stringify(data[0]))
                 }
 
-                state.clusters = data.map(item => {
-                    return {
-                        clusterId: item.cluster_id,
-                        name: item.name,
-                        code: item.code
-                    }
-                })
-            })
+                state.clusters = dealClusterData(data)
 
+            })
             return {
                 ...toRefs(state),
                 openOrCloseMenu,
