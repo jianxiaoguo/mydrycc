@@ -16,13 +16,15 @@
             <tr class="ember-view">
                 <td class="bb b--light-silver pv2 pl1 gray b">Total Cost</td>
                 <td class="bb b--light-silver pv2 pl1 gray b">2021-01</td>
-                <td class="bb b--light-silver pv2 pl1 gray b">{{total_cost/100.0}}</td>
+<!--                <td class="bb b&#45;&#45;light-silver pv2 pl1 gray b">{{total_cost/100.0}}</td>-->
+                <td class="bb b--light-silver pv2 pl1 gray b">{{total_cost}}</td>
             </tr>
             <template v-for="cost in costList">
                 <tr class="ember-view">
                     <td class="bb b--light-silver pv2 pl1 gray">{{cost.appName}}</td>
                     <td class="bb b--light-silver pv2 pl1 gray">{{cost.period}}</td>
-                    <td class="bb b--light-silver pv2 pl1 gray">{{cost.cost/100.0}}</td>
+<!--                    <td class="bb b&#45;&#45;light-silver pv2 pl1 gray">{{cost.cost/100.0}}</td>-->
+                    <td class="bb b--light-silver pv2 pl1 gray">{{cost.cost}}</td>
                 </tr>
             </template>
 
@@ -34,7 +36,7 @@
 </template>
 
 <script>
-    import { getAppCostList } from "../services/cost";
+import { dealAppCostList, getAppCostList } from "../services/cost";
     import Pagination from "./Pagination.vue";
     import { reactive, toRefs, onMounted} from 'vue'
 
@@ -68,13 +70,7 @@
             onMounted(async () => {
                 const data =  await getAppCostList()
 
-                state.costList = data.map(item => {
-                    return {
-                        'appName': item.app.name,
-                        'period': item.period,
-                        'cost': item.cost
-                    }
-                })
+                state.costList = data ? dealAppCostList(data) : []
 
                 for (let index in state.costList) {
                     index = parseInt(index)

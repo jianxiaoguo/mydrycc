@@ -30,10 +30,10 @@
                     <month-picker :cYear="cYear" :cMonth="cMonth" :sYear="sYear" :sMonth="sMonth" @changeMonth="changeMonth"/>
                     <div class="ml6">
                         <span class="f3 purple b">Trade type:</span>
-                        <select class="hk-select b--purple ml2 purple">
-                            <option class="purple">-----------</option>
-                            <option class="purple">income</option>
-                            <option class="purple">expense</option>
+                        <select v-model="selected" class="hk-select b--purple ml2 purple" @change="selectChanged">
+                            <option value=0 class="purple">-----------</option>
+                            <option value=1 class="purple">expense</option>
+                            <option value=2 class="purple">income</option>
                         </select>
                     </div>
                 </div>
@@ -70,7 +70,8 @@
 <!--                            </td>-->
 <!--                            <td class="w-40 bb b&#45;&#45;light-silver pv2 pr1">{{fund.trade}}</td>-->
                             <td class="bb b--light-silver pv2 pr1 gray">{{funding.tradeNo}}</td>
-                            <td class="bb b--light-silver pv2 pr1 gray">{{funding.tradeTime.format('yyyy-MM-dd hh:mm:ss')}}</td>
+<!--                            <td class="bb b&#45;&#45;light-silver pv2 pr1 gray">{{funding.tradeTime.format('yyyy-MM-dd hh:mm:ss')}}</td>-->
+                            <td class="bb b--light-silver pv2 pr1 gray">{{funding.tradeTime}}</td>
                             <td class="bb b--light-silver pv2 pr1 gray"
                                 :class="{'green': funding.tradeType==='income', 'light-orange': funding.tradeType==='expend'}" >{{funding.tradeType}}</td>
                             <td class="bb b--light-silver pv2 pr1 gray">{{funding.billNo}}</td>
@@ -99,9 +100,10 @@
     import NavBox from "../components/NavBox.vue";
     import { useRouter } from 'vue-router'
     import { reactive, toRefs, onMounted , computed} from 'vue'
-    import { getAccountFundingList} from "../services/funding";
+    import {dealAccountFundingList, getAccountFundingList} from "../services/funding";
     import Pagination from "../components/Pagination.vue";
     import MonthPicker from "../components/MonthPicker.vue";
+    import {dealExpenseBillList, getExpenseBillList} from "../services/expense-bills";
 
 
     export default {
@@ -117,6 +119,7 @@
             const date = new Date()
             const state = reactive({
                 fundingList: [],
+                selected: 0,
                 cPage: 1,
                 tPage: 2,
                 hasNextPage: true,
@@ -153,26 +156,15 @@
             const goToAccountFunding = () => {
                 router.push({ path: `/account/funding` })
             }
-
+            const selectChanged = (selected) => {
+                const trade_type = selected.target.value;
+                getAccountFundingList(trade_type).then(data=>{
+                  state.fundingList = data ? dealAccountFundingList(data) : []
+                })
+            }
             onMounted(async () => {
-
                 const data = await getAccountFundingList()
-                if (data) {
-                    state.fundingList = data.map(item => {
-                        return {
-                            'tradeNo': item.trade_no,
-                            'tradeTime': new Date(item.trade_time*1000),
-                            'tradeType': item.trade_type,
-                            'billNo': item.bill_no,
-                            'tradeNote': item.trade_note,
-                            'tradeAmount': item.trade_amount,
-                            'balance': item.balance
-                        }
-
-                    })
-                }
-
-
+                state.fundingList = data ? dealAccountFundingList(data) : []
             })
 
             return {
@@ -180,7 +172,8 @@
                 goToAccountSetting,
                 goToAccountFunding,
                 updatePage,
-                changeMonth
+                changeMonth,
+                selectChanged
             }
 
         }

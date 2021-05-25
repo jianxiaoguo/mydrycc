@@ -9,7 +9,7 @@ export function getClusters() {
 export function dealClusterData(obj) {
     return obj.data.results.map(item => {
         return {
-            clusterId: item.uuid,
+            // clusterId: item.uuid,
             name: item.name,
             code: item.name,
             ingress: item.ingress

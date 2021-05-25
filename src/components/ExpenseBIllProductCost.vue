@@ -21,7 +21,8 @@
                     <td class="bb b--light-silver pv2 pl1 gray">{{cost.period}}</td>
                     <td class="bb b--light-silver pv2 pl1 gray">{{cost.productName}}</td>
                     <td class="bb b--light-silver pv2 pl1 gray">{{cost.productDetail}}</td>
-                    <td class="bb b--light-silver pv2 pl1 gray">{{cost.cost/100.0}}</td>
+<!--                    <td class="bb b&#45;&#45;light-silver pv2 pl1 gray">{{cost.cost/100.0}}</td>-->
+                    <td class="bb b--light-silver pv2 pl1 gray">{{cost.cost}}</td>
                 </tr>
             </template>
         </table>
@@ -29,7 +30,7 @@
 </template>
 
 <script>
-    import { getProductCostList } from "../services/cost";
+import { dealProductCostList, getProductCostList } from "../services/cost";
     import { reactive, toRefs, onMounted} from 'vue'
 
     export default {
@@ -42,14 +43,7 @@
             onMounted(async () => {
                 const data =  await getProductCostList()
 
-                state.costList = data.map(item => {
-                    return {
-                        'productName': item.product.name,
-                        'productDetail': item.product.detail,
-                        'period': item.period,
-                        'cost': item.cost
-                    }
-                })
+                state.costList = data ? dealProductCostList(data) : []
 
             })
 
