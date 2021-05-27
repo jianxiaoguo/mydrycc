@@ -42,8 +42,8 @@
                             ·
                             {{activity.v}}
 
-                            <span class="confirmable-action ember-view" v-if="index > 0">·
-                                <a @click="openRollBack(index)" href="#" class="hk-link rollback">
+                            <span class="confirmable-action ember-view" v-if="activity.v > 1">·
+                                <a @click="openRollBack(activity.v)" href="#" class="hk-link rollback">
                                     Roll back to here
                                 </a>
                             </span>
@@ -67,7 +67,8 @@
     import MainNav from "../components/MainNav.vue";
     import ActivityRollBack from "../components/ActivityRollBack.vue";
     import { getAppDetail, dealAppDetail } from "../services/app";
-    import { getAppActivities, dealAppActivities } from "../services/activity";
+    import { getAppActivities, dealAppActivities, postAppActivitieRollback } from "../services/activity";
+    import { Toast } from 'vant'
 
     export default {
         name: "AppDetailActivity",
@@ -107,10 +108,15 @@
                 state.isShowRollBack = false
             }
 
-            const openRollBack = (index) => {
-                console.log(index)
-                state.rollBackIndex = index
+            const openRollBack = (v) => {
+                state.rollBackVersion = v
                 state.isShowRollBack = true
+                var currentCluster = localStorage.getItem('currentCluster')
+                postAppActivitieRollback(JSON.parse(currentCluster).name, params.id, v).then(data=>{
+                if (data.resultCode == 201){
+                    Toast("OK")
+                }
+              })
             }
 
 

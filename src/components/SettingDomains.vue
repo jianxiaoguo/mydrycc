@@ -19,7 +19,7 @@
                         <!---->
                     </div>
 
-                    <button id="ember127" class="async-button nowrap default async-button default hk-button--primary ember-view" type="submit">    Add domain
+                    <button id="ember127" class="async-button nowrap default async-button default hk-button--primary ember-view" type="submit" @click="addDomain">    Add domain
                     </button>
                 </div>
 

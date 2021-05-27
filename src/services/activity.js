@@ -47,3 +47,8 @@ export function dealAppActivities(obj) {
         }
     })
 }
+
+
+export function postAppActivitieRollback(clusterName, appId, version) {
+    return axios.post(`/clusters/${clusterName}/apps/${appId}/releases/rollback/`, {'version': version})
+}

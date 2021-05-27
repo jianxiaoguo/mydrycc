@@ -16,3 +16,11 @@ export function dealAppAccesses(obj) {
         }
     })
 }
+
+export function addAppAccesses(clusterName, appId, username) {
+    return axios.post(`/clusters/${clusterName}/apps/${appId}/perms/`, {username: username})
+}
+
+export function deleteAppAccesses(clusterName, appId, username) {
+    return axios.delete(`/clusters/${clusterName}/apps/${appId}/perms/${username}/`)
+}

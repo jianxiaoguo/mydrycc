@@ -51,7 +51,7 @@
 <!--                            </span>-->
                             <select tabindex="0" v-model="selectedClusterId" class="hk-select pl6 w-100 x-select ember-view" @change="">
 
-                                <option class="x-option ember-view" v-for="item in clusters" :value='item.clusterId'>{{item.name}}</option>
+                                <option class="x-option ember-view" v-for="item in clusters" :value='item.name'>{{item.name}}</option>
 
                             </select>
                         </div>
@@ -59,7 +59,7 @@
 
                     <div class="mv4 bb b--light-silver"></div>
 
-                    <button class="async-button default hk-button--primary create-app-button ember-view" type="submit">    Create app
+                    <button class="async-button default hk-button--primary create-app-button ember-view" @click="createNewApp" type="submit">    Create app
                     </button>
 
                 </div>
@@ -72,7 +72,9 @@
     import NavBar from "../components/NavBar.vue";
     import NavBox from "../components/NavBox.vue";
     import { reactive, toRefs, onMounted , computed} from 'vue'
-    import { getClusters, dealClusterData } from "../services/cluster";
+    import {getClusters, dealClusterData} from "../services/cluster";
+    import { createApp } from "../services/app"
+    import { Toast } from 'vant'
 
     export default {
         name: "AppList",
@@ -91,14 +93,18 @@
             const createNewApp = () => {
                 console.log(state.selectedClusterId)
                 console.log(state.appName)
-
+                createApp(state.selectedClusterId, state.appName).then(data=>{
+                    if (data.resultCode == 200) {
+                        Toast('OK')
+                    }
+                })
             }
 
             onMounted(async () => {
 
                 const  data = await getClusters()
                 state.clusters = data ? dealClusterData(data) : []
-                state.selectedClusterId = state.clusters[0].clusterId
+                state.selectedClusterId = state.clusters[0].name
             })
 
             return {

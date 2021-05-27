@@ -25,13 +25,13 @@
                                         <div class="form-group">
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <label class="f5 b gray mb2" for="e-mail-address">Email address</label>
+                                                    <label class="f5 b gray mb2" for="e-mail-address">Username</label>
                                                     <div class="cp-validating-gravatar-input form-group ember-view">
                                                         <div class="flex flex-auto">
                                                             <span style="width:30px; height:30px" class="gravatar-icon br-100 ember-view" >
                                                                 <img src="https://gravatar.com/avatar/5e543256c480ac577d30f76f9120eb74?s=96&amp;d=https://dashboard.heroku.com%2Fimages%2Fstatic%2Fninja-avatar-48x48.png">
                                                             </span>
-                                                            <input :disabled="editAccess" placeholder="user@domain.com" class="hk-input flex-auto pl6 ember-text-field ember-view" type="text" :value="username">
+                                                            <input :disabled="editAccess" placeholder="user" class="hk-input flex-auto pl6 ember-text-field ember-view" required type="text" v-model="username">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -40,7 +40,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <button v-if="editAccess" @click="canelEdit" class="w-100 async-button default hk-button--danger ember-view" type="submit">Delete Collaborator</button>
+                            <button v-if="editAccess" @click="deletePerm" class="w-100 async-button default hk-button--danger ember-view" type="submit">Delete Collaborator</button>
                         </div>
                         <div class="slide-panel-shadow-cover-bottom z-5"></div>
                     </div>
@@ -48,7 +48,7 @@
                 <div class="mh4 ember-view"></div>
                 <div class="hk-slide-panel-footer relative shadow-outer-1 flex justify-center items-center z-2 pa4 ember-view">
                     <button @click="canelEdit" class="async-button w-50 mr2 default hk-button--secondary ember-view" type="button">Cancel</button>
-                    <button @click="canelEdit" class="async-button w-50 default hk-button--primary ember-view" type="submit">Save changes</button>
+                    <button @click="addPerm" class="async-button w-50 default hk-button--primary ember-view" type="submit">Save changes</button>
                 </div>
             </div>
         </div>
@@ -57,6 +57,9 @@
 
 <script>
     import { reactive, toRefs } from 'vue'
+    import { addAppAccesses, deleteAppAccesses } from "../services/access";
+    import { useRouter } from "vue-router";
+    import { Toast } from "vant";
 
     export default {
         name: "AccessCollaboratorEdit",
@@ -65,10 +68,13 @@
             editAccess: [Object, Function]
         },
         setup(props, context) {
-
+            const router = useRouter()
+            const params = router.currentRoute.value.params
             const state = reactive({
-                username: null
+                username: null,
+                // newUser: null
             })
+            var currentCluster = localStorage.getItem('currentCluster')
 
             if (props.editAccess) {
                 state.username = props.editAccess.username
@@ -77,10 +83,26 @@
             const canelEdit = () => {
                 context.emit('closeEdit')
             }
-
+            const addPerm = () => {
+                addAppAccesses(JSON.parse(currentCluster).name, params.id, state.username).then(data=>{
+                    if (data.resultCode == 201) {
+                        Toast("OK")
+                    }
+                })
+            }
+            const deletePerm = () => {
+                debugger
+                deleteAppAccesses(JSON.parse(currentCluster).name, params.id, state.username).then(data=>{
+                    if (data.resultCode == 204) {
+                        Toast("OK")
+                    }
+                })
+            }
             return {
                 ...toRefs(state),
-                canelEdit
+                canelEdit,
+                addPerm,
+                deletePerm
             }
         }
     }

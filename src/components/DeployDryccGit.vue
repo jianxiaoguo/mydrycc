@@ -1,38 +1,43 @@
 <template>
-    <li id="deploy-heroku-git" class="deploy-heroku-git list-group-item ember-view">
+    <li id="deploy-drycc-git" class="deploy-drycc-git list-group-item ember-view">
         <div class="panel-section ">
             <div class="section-description">
                 <div class="section-title f3 purple" role="heading" aria-level="3">
-                    Deploy using Heroku Git
+                    Deploy using Drycc Git
                     <!---->    </div>
 
                 <div class="mt2 f5 lh-copy dark-gray">
-                    Use git in the command line or a GUI tool to deploy this app.
+                    Use git in the command line or a Drycc cli tool to deploy this app.<br><a href="https://www.drycc.cc/applications/using-buildpacks/" class="hk-link">Learn more</a>
                 </div>
 
                 <!---->  </div>
 
             <div class="panel-content">
-                <h4>Install the Heroku CLI</h4>
-                <p>Download and install the <a href="https://devcenter.heroku.com/articles/heroku-command-line" class="hk-link">Heroku CLI</a>.</p>
+                <h4>Install the Drycc CLI</h4>
+                <p>Download and install the <a href="https://www.drycc.cc/users/cli/" class="hk-link">Drycc CLI</a>.</p>
 
-                <p>If you haven't already, log in to your Heroku account and follow the prompts to create a new SSH public key.</p>
+                <p>If you haven already, log in to your Drycc account.</p>
 
-                <pre>$ heroku login</pre>
+                <pre>$ drycc login drycc.production.com</pre>
 
-                <h4>Create a new Git repository</h4>
-                <p>Initialize a git repository in a new or existing directory</p>
+                <h4>Create an Application</h4>
+                <p>Use drycc create to create an application on the controller.</p>
+                <pre>$ drycc create example-dockerfile-http</pre>
 
-                <pre>$ cd my-project/
-$ git init
-$ heroku git:remote -a drycc-charts</pre>
+                <h4>Generate an SSH Key</h4>
+                <p>If you do not already have an SSH key or would like to create a new key for Drycc Workflow, generate a new key using.</p>
+                <pre>$ ssh-keygen -f ~/.ssh/id_drycc -t rsa</pre>
 
-                <h4>Deploy your application</h4>
-                <p>Commit your code to the repository and deploy it to Heroku using Git.</p>
+                <h4>Add SSH Key</h4>
+                <p>For application deploys via git push, Drycc Workflow identifies users via SSH keys. SSH keys are pushed to the platform and must be unique to each user.</p>
+                <pre>$ drycc keys:add ~/.ssh/id_drycc.pub</pre>
+
+                <h4>Push to Deploy</h4>
+                <p>Commit your code to the repository and deploy it to Drycc using Git.</p>
 
                 <pre>$ git add .
 $ git commit -am "make it better"
-$ git push heroku master</pre>
+$ git push drycc master</pre>
 
                 <div id="ember7725" class="mt3 hk-message hk-message--info ember-view" role="alert"><!-- hk-messages are for hard coded copy only and uses {{{three brackets}}} so that we can include links in the title and or message -->
 
@@ -53,10 +58,6 @@ $ git push heroku master</pre>
                 </div>
 
                 <hr>
-                <h4>Existing Git repository</h4>
-                <p>For existing repositories, simply add the <code>heroku</code> remote</p>
-                <pre>$ heroku git:remote -a drycc-charts</pre>
-
             </div>
         </div>
     </li>

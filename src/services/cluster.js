@@ -4,6 +4,9 @@ import axios from '../utils/axios'
 export function getClusters() {
     return axios.get('/clusters')
 }
+export function getCsrf() {
+    return axios.get('/auth/csrf/')
+}
 
 
 export function dealClusterData(obj) {

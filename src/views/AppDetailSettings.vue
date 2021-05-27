@@ -37,7 +37,7 @@
     import SettingConfigVars from "../components/SettingConfigVars.vue";
     import SettingDeleteApp from "../components/SettingDeleteApp.vue";
     import SettingDomains from "../components/SettingDomains.vue";
-    import SettingMaintenanceMode from "../components/SettingMaintenanceMode.vue";
+    // import SettingMaintenanceMode from "../components/SettingMaintenanceMode.vue";
     import SettingTransferOwnership from "../components/SettingTransferOwnership.vue";
     import { getAppDetail, dealAppDetail } from "../services/app";
 
@@ -53,7 +53,7 @@
             'setting-config-vars': SettingConfigVars,
             'setting-buildpacks': SettingBuildpacks,
             'setting-domains': SettingDomains,
-            'setting-maintenance-mode': SettingMaintenanceMode,
+            // 'setting-maintenance-mode': SettingMaintenanceMode,
             'setting-transfer-ownership': SettingTransferOwnership,
             'setting-delete-app': SettingDeleteApp
         },

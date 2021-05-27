@@ -44,5 +44,5 @@ export function deleteApp(clusterName, appId) {
 }
 
 export function createApp(clusterName, appId) {
-    return axios.post(`/clusters/${clusterName}/apps/`, {"id": appId})
+    return axios.post(`/clusters/${clusterName}/apps/`, {id: appId})
 }

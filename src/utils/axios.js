@@ -7,6 +7,16 @@ axios.defaults.baseURL = process.env.NODE_ENV == 'development' ? '//d.uucin.com'
 axios.defaults.withCredentials = true
 axios.defaults.headers.post['Content-Type'] = 'application/json'
 
+axios.interceptors.request.use(
+    (config)=>{
+        let token = localStorage.getItem('csrftoken')
+        if(token){
+            config.headers['X-CSRFToken'] = token;
+        }
+        return config
+    }
+)
+
 // 响应拦截器
 axios.interceptors.response.use(
     response => {

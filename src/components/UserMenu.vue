@@ -13,10 +13,10 @@
                     <img class="glostick__account-details__avatar" src="https://gravatar.com/avatar/02a485fa5edb11e2b5ca38e18622eacd?s=96&amp;d=https://www.herokucdn.com/images/ninja-avatar-96x96.png" >
                 </div>
                 <div class="glostick__account-details__name">
-                    han lucen
+                  {{user.username}}
                 </div>
                 <div class="glostick__account-details__email">
-                    hanlucen@zhumengyuan.com
+                  {{user.email}}
                 </div>
             </a>
         </li>
@@ -33,14 +33,17 @@
         </li>
 
         <li class="glostick__menu__listitem">
-            <a class="glostick__menu__item glostick__menu__item--signout" href="https://dashboard.heroku.com/logout">Sign out</a>
+            <a class="glostick__menu__item glostick__menu__item--signout" @click="logout">Sign out</a>
         </li>
 
     </ul>
 </template>
 
 <script>
-    export default {
+import {onMounted, reactive, toRefs} from "vue";
+import {dealUser, getUser, postLogout} from "../services/user";
+
+export default {
         name: "UserMenu",
         data() {
             return {
@@ -50,6 +53,30 @@
         methods: {
             openOrCloseMenu() {
                 this.isMenuActived = !this.isMenuActived;
+            }
+        },
+        setup() {
+            const state = reactive({
+                user :{
+                    username: null,
+                    email: null,
+                }
+            })
+            const logout = () => {
+                postLogout().then(data=>{
+                    if (data.resultCode == 200) {
+                        router.push({ path: '/'})
+                    }
+                })
+            }
+            onMounted(async () => {
+                const data = await getUser()
+                state.user = dealUser(data)
+            })
+
+            return {
+                ...toRefs(state),
+                logout
             }
         },
         mounted() {
