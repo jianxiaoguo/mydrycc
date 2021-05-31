@@ -1,0 +1,111 @@
+<template>
+    <div id="hk-slide-panels">
+        <div class="hk-slide-panel-overlay is-visible ember-view">
+            <div class="hk-slide-panel-container shadow-outer-2 flex flex-column fixed bg-white overflow-y-hidden ma2 br2 from-right standard" >
+                <div class="bg-gradient-silver hk-slide-panel-header relative flex justify-center tc items-center relative bb b--light-silver bg-white z-2 ember-view">
+                    <div class="ml4 flex-auto f3 dark-gray truncate lh-copy" >
+                        {{!editAccess? 'New Domain':'Edit domain'}}
+                    </div>
+<!--                    <div v-if="editAccess"  class="ml4 flex-auto f3 dark-gray truncate lh-copy" >-->
+<!--                        Edit collaborator-->
+<!--                    </div>-->
+
+                    <button @click="canelEdit" class="flex bg-transparent bn mr2 mt0 pa1 pointer" type="button">
+                        <svg style="height: 16px; width: 16px;" class="icon malibu-icon fill-gray" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1158" width="200" height="200"><path d="M574.55 522.35L904.4 192.5c16.65-16.65 16.65-44.1 0-60.75l-1.8-1.8c-16.65-16.65-44.1-16.65-60.75 0L512 460.25l-329.85-330.3c-16.65-16.65-44.1-16.65-60.75 0l-1.8 1.8c-17.1 16.65-17.1 44.1 0 60.75l329.85 329.85L119.6 852.2c-16.65 16.65-16.65 44.1 0 60.75l1.8 1.8c16.65 16.65 44.1 16.65 60.75 0L512 584.9l329.85 329.85c16.65 16.65 44.1 16.65 60.75 0l1.8-1.8c16.65-16.65 16.65-44.1 0-60.75L574.55 522.35z" p-id="1159"></path></svg>
+                    </button>
+                </div>
+
+                <div class="hk-slide-panel-content relative overflow-y-auto flex flex-column z-1 ember-view">
+                    <div class="flex flex-column h-100">
+                        <div class="slide-panel-shadow-cover-top z-5"></div>
+                        <div class="slide-panel-content flex-grow-1 flex-shrink-0 pa4">
+                            <div class="pb3">
+                                <div class="ember-view">
+                                    <div class="collaborator-edit">
+                                        <div class="form-group">
+                                            <div class="row">
+                                                <div class="col-sm-12">
+                                                    <label class="f5 b gray mb2">Domain name</label>
+                                                    <div class="cp-validating-gravatar-input form-group ember-view">
+                                                        <div class="flex flex-auto">
+                                                            <span style="width:30px; height:30px" class="gravatar-icon br-100 ember-view" >
+                                                                <img src="https://gravatar.com/avatar/5e543256c480ac577d30f76f9120eb74?s=96&amp;d=https://dashboard.heroku.com%2Fimages%2Fstatic%2Fninja-avatar-48x48.png">
+                                                            </span>
+                                                            <input :disabled="editAccess" placeholder="yourdomain.com" class="hk-input flex-auto pl6 ember-text-field ember-view" required type="text" v-model="domain">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+<!--                            <button v-if="editAccess" @click="deleteAppDomain" class="w-100 async-button default hk-button&#45;&#45;danger ember-view" type="submit">Delete Domain</button>-->
+                        </div>
+                        <div class="slide-panel-shadow-cover-bottom z-5"></div>
+                    </div>
+                </div>
+                <div class="mh4 ember-view"></div>
+                <div class="hk-slide-panel-footer relative shadow-outer-1 flex justify-center items-center z-2 pa4 ember-view">
+                    <button @click="canelEdit" class="async-button w-50 mr2 default hk-button--secondary ember-view" type="button">Cancel</button>
+                    <button @click="addAppDomain" class="async-button w-50 default hk-button--primary ember-view" type="submit">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    import { reactive, toRefs } from 'vue'
+    import { addAppDomains, deleteAppDomains } from "../services/domain";
+    import { useRouter } from "vue-router";
+    import { Toast } from "vant";
+
+    export default {
+        name: "SettingDomainAdd",
+        props: {
+            appDetail: [Object, Function],
+            editAccess: [Object, Function]
+        },
+        setup(props, context) {
+            const router = useRouter()
+            const params = router.currentRoute.value.params
+            const state = reactive({
+                domain: null,
+            })
+            var currentCluster = localStorage.getItem('currentCluster')
+
+            // if (props.editAccess) {
+            //     state.username = props.editAccess.username
+            // }
+
+            const canelEdit = () => {
+                context.emit('closeEdit')
+            }
+            const addAppDomain = () => {
+                addAppDomains(JSON.parse(currentCluster).name, params.id, state.domain).then(data=>{
+                    if (data.resultCode == 201) {
+                        Toast("OK")
+                    }
+                })
+            }
+            const deleteAppDomain = () => {
+                deleteAppDomains(JSON.parse(currentCluster).name, params.id, state.domain).then(data=>{
+                    if (data.resultCode == 204) {
+                        Toast("OK")
+                    }
+                })
+            }
+            return {
+                ...toRefs(state),
+                canelEdit,
+                addAppDomain,
+                deleteAppDomain
+            }
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>

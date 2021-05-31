@@ -46,3 +46,7 @@ export function deleteApp(clusterName, appId) {
 export function createApp(clusterName, appId) {
     return axios.post(`/clusters/${clusterName}/apps/`, {id: appId})
 }
+
+export function updateApp(clusterName, owner) {
+    return axios.post(`/clusters/${clusterName}/apps/${appId}`, {owner: owner})
+}

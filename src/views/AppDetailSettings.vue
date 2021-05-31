@@ -14,7 +14,7 @@
             <ul class="list-group list-group-lg">
                 <setting-app-info :app-detail="appDetail"/>
                 <setting-config-vars />
-                <setting-buildpacks />
+<!--                <setting-buildpacks />-->
                 <setting-domains />
                 <setting-transfer-ownership />
                 <setting-maintenance-mode />
@@ -33,7 +33,7 @@
     import NavBoxAppDetailMenu from "../components/NavBoxAppDetailMenu.vue"
     import MainNav from "../components/MainNav.vue";
     import SettingAppInfo from "../components/SettingAppInfo.vue";
-    import SettingBuildpacks from "../components/SettingBuildpacks.vue";
+    // import SettingBuildpacks from "../components/SettingBuildpacks.vue";
     import SettingConfigVars from "../components/SettingConfigVars.vue";
     import SettingDeleteApp from "../components/SettingDeleteApp.vue";
     import SettingDomains from "../components/SettingDomains.vue";
@@ -51,7 +51,7 @@
             'main-nav': MainNav,
             'setting-app-info': SettingAppInfo,
             'setting-config-vars': SettingConfigVars,
-            'setting-buildpacks': SettingBuildpacks,
+            // 'setting-buildpacks': SettingBuildpacks,
             'setting-domains': SettingDomains,
             // 'setting-maintenance-mode': SettingMaintenanceMode,
             'setting-transfer-ownership': SettingTransferOwnership,

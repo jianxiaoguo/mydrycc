@@ -31,11 +31,11 @@
                     </tr>
                     <template v-for="access in accesses">
                         <tr class="collaborator-item ember-view">
-                            <td class="bb b--light-silver pa2 dtc w--28">
-                                <span style="width: 28px; height: 28px" class="gravatar-icon br-100 ember-view">
-                                    <img src="https://gravatar.com/avatar/02a485fa5edb11e2b5ca38e18622eacd?s=96&amp;d=https://dashboard.heroku.com%2Fimages%2Fstatic%2Fninja-avatar-48x48.png" alt="hanlucen@zhumengyuan.com">
-                                </span>
-                            </td>
+<!--                            <td class="bb b&#45;&#45;light-silver pa2 dtc w&#45;&#45;28">-->
+<!--                                <span style="width: 28px; height: 28px" class="gravatar-icon br-100 ember-view">-->
+<!--                                    <img src="https://gravatar.com/avatar/02a485fa5edb11e2b5ca38e18622eacd?s=96&amp;d=https://dashboard.heroku.com%2Fimages%2Fstatic%2Fninja-avatar-48x48.png" alt="hanlucen@zhumengyuan.com">-->
+<!--                                </span>-->
+<!--                            </td>-->
                             <td class="w-40 bb b--light-silver pv2 pr1">{{access.username}}</td>
 <!--                            <td class="bb b&#45;&#45;light-silver pv2 pr1">{{access.role}}</td>-->
 

@@ -1,4 +1,10 @@
 <template>
+    <nav-bar />
+    <setting-domain-add v-if="isShowEdit"
+                              :editAccess="editAccess"
+                              :domainDetail="domainDetail"
+                              @closeEdit="closeEdit"
+    />
     <li id="ember103" class="list-group-item ember-view"><div class="panel-section ">
         <div class="section-description">
             <div class="section-title f3 purple" role="heading" aria-level="3">
@@ -6,7 +12,8 @@
                 <!---->    </div>
 
             <div class="mt2 f5 lh-copy dark-gray">
-                You can add custom domains to any Heroku app, then visit <a href="https://devcenter.heroku.com/articles/custom-domains" class="hk-link" target="blank">Configuring DNS</a> to setup your DNS target.
+                You can add custom domains to any Drycc app.
+<!--              then visit <a href="https://devcenter.heroku.com/articles/custom-domains" class="hk-link" target="blank">Configuring DNS</a> to setup your DNS target.-->
             </div>
 
             <!---->  </div>
@@ -14,12 +21,16 @@
         <div class="panel-content">
             <div id="ember104" class="domains-list ember-view">
                 <div class="flex items-center pv2 br--top br1 bb b--silver mb1">
+
+
                     <div class="flex-auto gray">
-                        Your app can be found at <a href="https://test-zmy.herokuapp.com/" target="_blank" class="hk-link">https://test-zmy.herokuapp.com/</a>
-                        <!---->
+                        Your app can be found at
+                        <template v-for="domain in domains">
+                            <a :href="domain" target="_blank" class="hk-link">{{ domain.domain }}/</a>
+                        </template>
                     </div>
 
-                    <button id="ember127" class="async-button nowrap default async-button default hk-button--primary ember-view" type="submit" @click="addDomain">    Add domain
+                    <button id="ember127" class="async-button nowrap default async-button default hk-button--primary ember-view" type="submit" @click="showEdit()">    Add domain
                     </button>
                 </div>
 
@@ -56,8 +67,55 @@
 </template>
 
 <script>
+    import SettingDomainAdd from "../components/SettingDomainAdd.vue";
+    import NavBar from "../components/NavBar.vue";
+    import {useRouter} from "vue-router";
+    import {onMounted, reactive, toRefs} from "vue";
+    // import {dealAppDetail, getAppDetail} from "../services/app";
+    import { getAppDomains, dealAppDomains } from "../services/domain"
+
     export default {
-        name: "SettingDomains"
+        name: "SettingDomains",
+        components: {
+            'nav-bar': NavBar,
+            'setting-domain-add': SettingDomainAdd
+        },
+        setup() {
+            const router = useRouter()
+            const params = router.currentRoute.value.params
+            const state = reactive({
+                // appDetail: Object,
+                domains: [],
+                isShowEdit: false,
+                editAccess: null
+            })
+
+            const showEdit = () => {
+                // if (access) {
+                //     state.editAccess = access
+                // }
+                state.isShowEdit = true
+            }
+
+            const closeEdit = () => {
+                state.editAccess = null
+                state.isShowEdit = false
+            }
+
+            onMounted(async () => {
+                var currentCluster = localStorage.getItem('currentCluster')
+                // const data = await getAppDetail(JSON.parse(currentCluster).name, params.id)
+                // state.appDetail = data.data ? dealAppDetail(data) : null
+                const domains = await getAppDomains(JSON.parse(currentCluster).name, params.id)
+                state.domains = domains ? dealAppDomains(domains) : null
+            })
+
+            return {
+                ...toRefs(state),
+                showEdit,
+                closeEdit
+            }
+        },
     }
 </script>
 
