@@ -47,6 +47,7 @@ export function createApp(clusterName, appId) {
     return axios.post(`/clusters/${clusterName}/apps/`, {id: appId})
 }
 
-export function updateApp(clusterName, owner) {
+export function updateApp(clusterName, appId, owner) {
+    // Transfer Ownership
     return axios.post(`/clusters/${clusterName}/apps/${appId}`, {owner: owner})
 }
