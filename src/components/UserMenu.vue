@@ -64,7 +64,7 @@ export default {
             })
             const logout = () => {
                 postLogout().then(data=>{
-                    if (data.resultCode == 200) {
+                    if (data.status == 200) {
                         router.push({ path: '/'})
                     }
                 })

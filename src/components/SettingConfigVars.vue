@@ -22,7 +22,7 @@
                         <div class="mb5 hk-well ember-view" v-if="configVar">
                             <div class="f3 dark-gray lh-title mv1 ember-view">There are no config vars for this app yet</div>
                             <div class="f5 gray lh-copy ember-view">
-                                <a href="https://devcenter.heroku.com/articles/config-vars" class="hk-link" target="_blank">
+                                <a href="https://www.drycc.cc/applications/managing-app-configuration/" class="hk-link" target="_blank">
                                     Learn about config vars
                                 </a> in the Dev Center.
                             </div>
@@ -30,32 +30,27 @@
                         <form>
                             <table class="table editable-list purple-list config-vars-list-table">
                                 <tbody>
+                                <template v-for="(dealtConfig, index) in dealtConfigs">
                                 <tr class="config-var-item ember-view">
                                     <td>
-                                        <input readonly class="config-var-key monospace ember-text-field form-control ember-view" type="text" value="123">
+                                        <input readonly class="config-var-key monospace ember-text-field form-control ember-view" type="text" :value="dealtConfig.name">
                                     </td>
-
                                     <td>
-                                        <textarea wrap="off" rows="1" resize="false" readonly class="config-var-value monospace ember-text-area form-control ember-view">asdasdas
-                                        </textarea>
+                                        <textarea wrap="off" :id="index" rows="1" resize="false" v-bind:readonly="dealtConfig.isReadOnly" class="config-var-value monospace ember-text-area form-control ember-view">{{dealtConfig.value}}</textarea>
                                     </td>
 
                                     <td class="action-cell ember-view">
-                                        <button class="bg-transparent hk-focus-ring--blue:focus cursor-hand br1 ba0 b--none pa--1 pr3" title="Edit" type="button" >
+                                        <button @click="couldEdit(dealtConfig)" class="bg-transparent hk-focus-ring--blue:focus cursor-hand br1 ba0 b--none pa--1 pr3" title="Edit" type="button" >
                                             <span class="clip">Edit</span>
                                             <svg style="height: 20px; width: 20px;" class="icon malibu-icon malibu-fill-gradient-purple" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="16" height="16"><path d="M862.72 306.346667l60.16-60.16c20.053333-20.053333 20.053333-52.48 0-72.533334l-72.533333-72.533333c-20.053333-20.053333-52.48-20.053333-72.533334 0l-60.16 60.16 145.066667 145.066667zM669.44 209.493333L158.293333 720.64l-72.106666 217.173333 217.173333-72.106666L814.506667 354.56z" fill="#79589F" ></path></svg>
-
                                         </button>
-
-                                        <button class="bg-transparent hk-focus-ring--blue:focus cursor-hand br1 ba0 b--none pa--1 mr2" title="Delete" type="button" >
+                                        <button @click="deleteConfig(index)" class="bg-transparent hk-focus-ring--blue:focus cursor-hand br1 ba0 b--none pa--1 mr2" title="Delete" type="button" >
                                             <span class="clip">Delete</span>
                                             <svg style="height: 16px; width: 16px;" class="icon malibu-icon fill-gray hover-fill-red" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="200" height="200"><path d="M574.55 522.35L904.4 192.5c16.65-16.65 16.65-44.1 0-60.75l-1.8-1.8c-16.65-16.65-44.1-16.65-60.75 0L512 460.25l-329.85-330.3c-16.65-16.65-44.1-16.65-60.75 0l-1.8 1.8c-17.1 16.65-17.1 44.1 0 60.75l329.85 329.85L119.6 852.2c-16.65 16.65-16.65 44.1 0 60.75l1.8 1.8c16.65 16.65 44.1 16.65 60.75 0L512 584.9l329.85 329.85c16.65 16.65 44.1 16.65 60.75 0l1.8-1.8c16.65-16.65 16.65-44.1 0-60.75L574.55 522.35z" ></path></svg>
-
                                         </button>
-
                                     </td>
                                 </tr>
-
+                                </template>
 
                                 <tr class="config-var-new">
                                     <td>
@@ -66,20 +61,23 @@
 
                                     <td>
                                         <div class="ember-view">
-                                            <textarea wrap="off" rows="1" resize="false" placeholder="VALUE" class="config-var-value monospace form-control   ember-text-area ember-view">
+                                            <textarea placeholder="VALUE" v-model="newValue" wrap="off" rows="1" resize="false" class="config-var-value monospace form-control   ember-text-area ember-view">
                                             </textarea>
                                         </div>
                                     </td>
 
                                     <td class="config-var-add">
-                                        <button :disabled="!newKey"
+                                        <button @click="addConfig" :disabled="!newKey"
                                                 :class="{'hk-button--disabled-primary': !newKey, 'hk-button--primary': newKey}"
-                                                class="async-button default ember-view" type="submit">    Add
+                                                class="async-button default ember-view" type="button">    Add
                                         </button>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
+                            <button :class="{'hk-button--disabled-primary':!isCommit}" id="ember117" :disabled="!isCommit"
+                                    class="async-button default hk-button--success ember-view" type="submit " @click="updateCondigs"> Save
+                            </button>
                         </form>
                     </div>
                 </div>
@@ -91,8 +89,8 @@
 <script>
     import { useRouter } from 'vue-router'
     import { reactive, toRefs, onMounted } from 'vue'
-    import { getAppProcesses, dealAppProcesses } from "../services/process";
-    import { getAppAddons, dealAppAddons} from "../services/addons";
+    import { getAppConfig, dealAppConfig, postAppConfigs } from "../services/config";
+    import {Toast} from "vant";
 
     export default {
         name: "SettingConfigVars",
@@ -104,37 +102,86 @@
             const params = router.currentRoute.value.params
             const state = reactive({
                 showConfigVars: false,
+                configs: [],
+                dealtConfigs: [],
+                isCommit: false,
                 configVar: null,
                 newKey: null,
-                newValue: null
+                newValue: null,
             })
 
             const showDetail = () => {
-                state.showConfigVars = true
+                var currentCluster = localStorage.getItem('currentCluster')
+                getAppConfig(JSON.parse(currentCluster).name, params.id).then(res=>{
+                    if (res.status == 200) {
+                        state.dealtConfigs = dealAppConfig(res)
+                        state.configs = res.data.values
+                        state.showConfigVars = true
+                    }
+                })
+            }
+
+            const couldEdit = (config) => {
+                config.isReadOnly = false
+                state.isCommit = true
+            }
+
+            const deleteConfig = (index) => {
+                state.dealtConfigs.splice(index,1)
+                state.isCommit = true
+            }
+
+            const addConfig = () => {
+                var hasKey = false
+                state.dealtConfigs.forEach(item=> {
+                    if (item.name == state.newKey) {
+                       hasKey = true
+                    }
+                })
+                if (!hasKey){
+                    state.dealtConfigs.push({
+                      'name': state.newKey,
+                      'value': state.newValue,
+                      'isReadOnly': true
+                    })
+                } else {
+                    Toast.fail("This key already exists.")
+                }
+                console.log("addConfig ", state.dealtConfigs)
+                state.newKey = null
+                state.newValue = null
+                state.isCommit = true
             }
 
             const closeDetail = () => {
                 state.showConfigVars = false
             }
 
-            const editProcess = (pro) => {
-                pro.disabled = false
-            }
-
-
-            onMounted(async () => {
+            const updateCondigs = () => {
+                var newConfigs = {}
+                state.dealtConfigs.forEach(item=> {
+                    newConfigs[item.name] = item.value
+                })
                 var currentCluster = localStorage.getItem('currentCluster')
-                const data =  await getAppAddons(JSON.parse(currentCluster).name, params.id)
-
-                state.addons = dealAppAddons(data)
-                const processData =  await getAppProcesses("drycc-a", "py3django3")
-                state.processes = dealAppProcesses(processData)
+                postAppConfigs(JSON.parse(currentCluster).name, params.id, newConfigs).then(data=>{
+                    if (data.status == 200) {
+                        Toast("OK")
+                    } else if (data.status == 409){
+                        Toast(data.data)
+                    }
+                })
+            }
+            onMounted(async () => {
             })
 
             return {
                 ...toRefs(state),
                 showDetail,
-                closeDetail
+                closeDetail,
+                updateCondigs,
+                couldEdit,
+                deleteConfig,
+                addConfig
             }
         }
     }

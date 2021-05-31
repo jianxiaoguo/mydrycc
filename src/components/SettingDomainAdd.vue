@@ -4,7 +4,7 @@
             <div class="hk-slide-panel-container shadow-outer-2 flex flex-column fixed bg-white overflow-y-hidden ma2 br2 from-right standard" >
                 <div class="bg-gradient-silver hk-slide-panel-header relative flex justify-center tc items-center relative bb b--light-silver bg-white z-2 ember-view">
                     <div class="ml4 flex-auto f3 dark-gray truncate lh-copy" >
-                        {{!editAccess? 'New Domain':'Edit domain'}}
+                        Edit domain
                     </div>
 <!--                    <div v-if="editAccess"  class="ml4 flex-auto f3 dark-gray truncate lh-copy" >-->
 <!--                        Edit collaborator-->
@@ -84,14 +84,14 @@
             }
             const addAppDomain = () => {
                 addAppDomains(JSON.parse(currentCluster).name, params.id, state.domain).then(data=>{
-                    if (data.resultCode == 201) {
+                    if (data.status == 201) {
                         Toast("OK")
                     }
                 })
             }
             const deleteAppDomain = () => {
                 deleteAppDomains(JSON.parse(currentCluster).name, params.id, state.domain).then(data=>{
-                    if (data.resultCode == 204) {
+                    if (data.status == 204) {
                         Toast("OK")
                     }
                 })

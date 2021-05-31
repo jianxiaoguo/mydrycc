@@ -94,7 +94,7 @@
                 console.log(state.selectedClusterId)
                 console.log(state.appName)
                 createApp(state.selectedClusterId, state.appName).then(data=>{
-                    if (data.resultCode == 200) {
+                    if (data.status == 200) {
                         Toast('OK')
                     }
                 })

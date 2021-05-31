@@ -112,9 +112,8 @@
                 const data =  await getAppAddons(JSON.parse(currentCluster).name, params.id)
 
                 state.addons = dealAppAddons(data)
-                const processData =  await getAppProcesses("drycc-a", "py3django3")
+                const processData =  await getAppProcesses(JSON.parse(currentCluster).name, params.id)
                 state.processes = dealAppProcesses(processData)
-                console.log(state.processes)
             })
 
             return {

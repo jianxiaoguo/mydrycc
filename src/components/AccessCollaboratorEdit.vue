@@ -85,15 +85,14 @@
             }
             const addPerm = () => {
                 addAppAccesses(JSON.parse(currentCluster).name, params.id, state.username).then(data=>{
-                    if (data.resultCode == 201) {
+                    if (data.status == 201) {
                         Toast("OK")
                     }
                 })
             }
             const deletePerm = () => {
-                debugger
                 deleteAppAccesses(JSON.parse(currentCluster).name, params.id, state.username).then(data=>{
-                    if (data.resultCode == 204) {
+                    if (data.status == 204) {
                         Toast("OK")
                     }
                 })

@@ -63,11 +63,11 @@ export default {
         const transferOwnership = () => {
             var currentCluster = localStorage.getItem('currentCluster')
             updateApp(JSON.parse(currentCluster).name, params.id, state.username).then(data => {
-              if (data.resultCode == 200) {
-                Toast("OK")
-              } else {
-                Toast(data.data)
-              }
+                if (data.status == 200) {
+                  Toast("OK")
+                } else {
+                  Toast(data.data)
+                }
             })
         }
         return {

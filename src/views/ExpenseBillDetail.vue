@@ -148,7 +148,7 @@
             const selectChanged = (selected) => {
                 const resource_type = selected.target.value;
                 getExpenseBillList(resource_type).then(data=>{
-                    state.bills = data ? dealExpenseBillList(data) : []
+                    state.bills = data && data.status == 200 ? dealExpenseBillList(data) : []
                 })
 
             }

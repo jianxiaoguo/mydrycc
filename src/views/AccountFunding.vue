@@ -159,7 +159,7 @@
             const selectChanged = (selected) => {
                 const trade_type = selected.target.value;
                 getAccountFundingList(trade_type).then(data=>{
-                  state.fundingList = data ? dealAccountFundingList(data) : []
+                    state.fundingList = data && data.status == 200 ? dealAccountFundingList(data) : []
                 })
             }
             onMounted(async () => {
