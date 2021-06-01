@@ -40,7 +40,11 @@ export function getAppProcesses(clusterName, appId) {
 export function dealAppProcesses(obj) {
     var appProcesses = []
     for (var key in obj.data.procfile_structure) {
-        appProcesses.push({"name": key, "cmd": obj.data.procfile_structure[key], 'status': 1})
+        var statue = 0
+        if (obj.data.structure[key] > 0) {
+            statue = 1
+        }
+        appProcesses.push({"name": key, "cmd": obj.data.procfile_structure[key], 'status': statue})
     }
     console.log("js appProcesses value: ", appProcesses)
     return appProcesses.map(item => {

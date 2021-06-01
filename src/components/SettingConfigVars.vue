@@ -102,7 +102,6 @@
             const params = router.currentRoute.value.params
             const state = reactive({
                 showConfigVars: false,
-                configs: [],
                 dealtConfigs: [],
                 isCommit: false,
                 configVar: null,
@@ -115,7 +114,6 @@
                 getAppConfig(JSON.parse(currentCluster).name, params.id).then(res=>{
                     if (res.status == 200) {
                         state.dealtConfigs = dealAppConfig(res)
-                        state.configs = res.data.values
                         state.showConfigVars = true
                     }
                 })

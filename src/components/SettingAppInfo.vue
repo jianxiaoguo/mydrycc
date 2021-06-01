@@ -79,10 +79,10 @@
                             </div>
                         </div>
 
-                        <div class="w-100 flex mb2 items-center">
-                            <div class="w-20 hk-label mv1">Drycc git URL</div>
-                            <div><code>https://git.heroku.com/test-zmy.git</code></div>
-                        </div>
+<!--                        <div class="w-100 flex mb2 items-center">-->
+<!--                            <div class="w-20 hk-label mv1">Drycc git URL</div>-->
+<!--                            <div><code>https://git.heroku.com/test-zmy.git</code></div>-->
+<!--                        </div>-->
                     </div>
                 </div>
             </div>

@@ -6,7 +6,7 @@
                 <!---->    </div>
 
             <div class="mt2 f5 lh-copy dark-gray">
-                Transfer this app to your personal account or a team you are a member of. <a href="https://devcenter.heroku.com/articles/transferring-apps" class="hk-link" target="blank">Learn more</a>
+                Transfer this app to your personal account or a team you are a member of. <a href="https://www.drycc.cc/users/cli/" class="hk-link" target="blank">Learn more</a>
             </div>
 
             <!---->  </div>
