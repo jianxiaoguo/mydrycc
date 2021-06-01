@@ -89,7 +89,6 @@
             onMounted(async () => {
                 var currentCluster = localStorage.getItem('currentCluster')
                 const data = await getAPPList(JSON.parse(currentCluster).name)
-                console.log("vue getAPPList data: ", data)
                 state.apps = data.data && data.data.results ? dealAPPList(data) : []
             })
 

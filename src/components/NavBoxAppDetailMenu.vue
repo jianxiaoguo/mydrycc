@@ -17,7 +17,7 @@
                 </button>
                 <div class="undefined hk-dropdown--right z-5" :class="{'hide': !isMenuActived}">
                     <li>
-                        <a href="/apps/drycc-charts/logs" class="hk-dropdown-item ember-view">
+                        <a @click="goToLogs" href="#" class="hk-dropdown-item ember-view">
                             <svg style="height: 16px; width: 16px;" class="icon malibu-icon">
                                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#logs-16"></use>
                             </svg>
@@ -70,10 +70,15 @@
 
 <script>
     import { reactive, toRefs} from 'vue'
+    import { useRouter } from 'vue-router'
 
     export default {
         name: "NavBoxAppDetailMenu",
-        setup() {
+        props: {
+            appDetail: [Object, Function]
+        },
+        setup(props) {
+            const router = useRouter()
             const state = reactive({
                 isMenuActived: false,
             })
@@ -81,10 +86,13 @@
             const openOrCloseMenu = () => {
                 state.isMenuActived = !state.isMenuActived
             }
-
+            const goToLogs = () => {
+                router.push({ path: `/apps/${props.appDetail.id}/logs` })
+            }
             return {
                 ...toRefs(state),
                 openOrCloseMenu,
+                goToLogs
             }
         },
 

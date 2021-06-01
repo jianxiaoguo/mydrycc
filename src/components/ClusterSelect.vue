@@ -49,8 +49,6 @@
                 const token =await getCsrf()
                 localStorage.setItem('csrftoken', token.data.token)
                 const data = await getClusters()
-                console.log(data)
-                console.log(dealClusterData(data))
                 state.clusters = data ? dealClusterData(data) : []
                 if (state.currentCluster) {
                     store.dispatch('changeCurrentCluster', JSON.parse(state.currentCluster))

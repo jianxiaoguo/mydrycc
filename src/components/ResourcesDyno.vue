@@ -99,7 +99,6 @@
                         pro.status = 0
                     }
                 }
-                console.log(pro.status)
 
             }
 

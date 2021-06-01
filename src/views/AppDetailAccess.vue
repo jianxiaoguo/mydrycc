@@ -11,7 +11,7 @@
                 <cluster-select-v2 :app-detail="appDetail"/>
             </template>
             <template v-slot:create-new-app>
-                <nav-box-app-detail-menu />
+                <nav-box-app-detail-menu :app-detail="appDetail"/>
             </template>
         </nav-box>
         <div class="main-content">
@@ -99,9 +99,6 @@
             }
 
             onMounted(async () => {
-                console.log("getAppDetail params")
-                console.log(params)
-                console.log(params.id)
                 var currentCluster = localStorage.getItem('currentCluster')
                 const data = await getAppDetail(JSON.parse(currentCluster).name, params.id)
                 state.appDetail = data.data ? dealAppDetail(data) : null

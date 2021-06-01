@@ -91,8 +91,6 @@
             })
 
             const createNewApp = () => {
-                console.log(state.selectedClusterId)
-                console.log(state.appName)
                 createApp(state.selectedClusterId, state.appName).then(data=>{
                     if (data.status == 200) {
                         Toast('OK')

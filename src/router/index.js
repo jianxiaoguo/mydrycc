@@ -8,6 +8,7 @@ import AppDetailDeploy from "../views/AppDetailDeploy.vue";
 import AppDetailMetrics from "../views/AppDetailMetrics.vue";
 import AppDetailResources from "../views/AppDetailResources.vue";
 import AppDetailSettings from "../views/AppDetailSettings.vue";
+import AppDetailLogs from "../views/AppDetailLogs.vue";
 import AccountSetting from "../views/AccountSetting.vue";
 import AccountFunding from "../views/AccountFunding.vue";
 import ExpenseBill from "../views/ExpenseBill.vue";
@@ -73,6 +74,11 @@ const routes = [
         path: '/apps/:id/settings',
         name: 'AppDetailSettings',
         component: AppDetailSettings
+    },
+    {
+        path: '/apps/:id/logs',
+        name: 'AppDetailLogs',
+        component: AppDetailLogs
     },
     {
         path: '/account',

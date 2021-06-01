@@ -79,7 +79,6 @@
                 // var currentCluster = store.getters.getCurrentCluster
                 var currentCluster = localStorage.getItem('currentCluster')
                 var data =  await getAppProcesses(JSON.parse(currentCluster).name, "py3django3")
-                console.log("vue getAppProcesses data: ", data);
                 state.processes = dealAppProcesses(data)
             })
 

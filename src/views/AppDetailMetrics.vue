@@ -6,7 +6,7 @@
                 <cluster-select-v2 :app-detail="appDetail"/>
             </template>
             <template v-slot:create-new-app>
-                <nav-box-app-detail-menu />
+                <nav-box-app-detail-menu :app-detail="appDetail"/>
             </template>
         </nav-box>
         <div class="main-content">
@@ -134,7 +134,6 @@
 
             const openShowProcessTypes = () => {
                 state.showProcessTypes = !state.showProcessTypes
-                console.log(state.showProcessTypes)
             }
 
 

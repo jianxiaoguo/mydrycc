@@ -145,7 +145,6 @@
                 } else {
                     Toast.fail("This key already exists.")
                 }
-                console.log("addConfig ", state.dealtConfigs)
                 state.newKey = null
                 state.newValue = null
                 state.isCommit = true
