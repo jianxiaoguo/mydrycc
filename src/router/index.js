@@ -11,6 +11,7 @@ import AppDetailSettings from "../views/AppDetailSettings.vue";
 import AppDetailLogs from "../views/AppDetailLogs.vue";
 import AccountSetting from "../views/AccountSetting.vue";
 import AccountFunding from "../views/AccountFunding.vue";
+import AccountNotifications from "../views/AccountNotifications.vue"
 import ExpenseBill from "../views/ExpenseBill.vue";
 import ExpenseBillDetail from "../views/ExpenseBillDetail.vue";
 
@@ -91,14 +92,14 @@ const routes = [
         component: AccountFunding
     },
     {
-        path: '/expense-bills',
-        name: 'ExpenseBill',
-        component: ExpenseBill
-    },
-    {
         path: '/expense-bills/details',
         name: 'ExpenseBillDetail',
         component: ExpenseBillDetail
+    },
+    {
+        path: '/notifications',
+        name: 'AccountNotifications',
+        component: AccountNotifications
     }
 ]
 

@@ -22,9 +22,6 @@
                         <th class="pl1 pr1 pv2 bb b--light-gray b" colspan="2">
                             Collaborators
                         </th>
-<!--                        <th class="pv2 pr1 bb b&#45;&#45;light-gray b">-->
-<!--                            Role-->
-<!--                        </th>-->
                         <th class="pv2 bb b--light-gray b tr" style="width:138px;">
                             <button class="hk-button--secondary" @click="showEdit(null)">Add collaborator</button>
                         </th>
@@ -37,7 +34,7 @@
 <!--                                </span>-->
 <!--                            </td>-->
                             <td class="w-40 bb b--light-silver pv2 pr1">{{access.username}}</td>
-<!--                            <td class="bb b&#45;&#45;light-silver pv2 pr1">{{access.role}}</td>-->
+                            <td class="bb b--light-silver pv2 pr1"></td>
 
                             <td class="bb b--light-silver tc ph2">
                                 <button @click="showEdit(access)" v-if="access.role!=='owner'" class="bg-transparent hk-focus-ring--blue:focus cursor-hand br1 ba0 b--none pa--1 mr3" title="Edit" type="button">

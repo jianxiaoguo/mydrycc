@@ -14,3 +14,17 @@ export function dealUser(obj) {
 export function postLogout() {
     return axios.post(`/disconnect/drycc/`)
 }
+
+export function getMessages() {
+    return axios.get(`/messages/`)
+}
+
+export function dealMessages(res) {
+    return res.data.results.map(item => {
+        return {
+            body: item.body,
+            sender: item.sender,
+            created: item.created,
+        }
+    })
+}

@@ -1,21 +1,20 @@
 <template>
   <nav-bar />
+  <div class="main-panel bg-lightest-silver relative">
+    <nav-box>
+      <template v-slot:nav-cluster>
+        <a href="/account" class="link near-black active ember-view">Application Logs</a>
+      </template>
+      <template v-slot:create-new-app>
+      </template>
+    </nav-box>
+  </div>
+
   <div class="build-view limit-width">
     <div class="flex justify-between">
-
-      <div class="page-breadcrumb">
-        Application Logs
-      </div><div id="ember838" class="actions-button formation-filter-drop-down btn-group ember-view">  <button class="drop-down__toggle btn btn-default pr1" aria-expanded="false" type="button" data-ember-action="" data-ember-action-840="840">
-      All Processes
-
-      <svg style="height: 16px; width: 16px;" id="malibu-icon-svg-ember841" class="icon malibu-icon  fill-gray" data-test-icon-name="caret-16" data-test-target="malibu-icon" aria-hidden="true" role="img">
-        <!---->  <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#caret-16"></use>
-      </svg>
-
-    </button>
-
-      <!----></div>  </div>
-
+      <div id="ember838" class="actions-button formation-filter-drop-down btn-group ember-view">
+      </div>
+    </div>
     <div id="ember842" class="build-stream build-stream-full ember-view"><div class="build-stream-output">
       <!---->
       <template v-for="log in logs">
