@@ -136,6 +136,7 @@
                        hasKey = true
                     }
                 })
+                debugger
                 if (!hasKey){
                     state.dealtConfigs.push({
                       'name': state.newKey,

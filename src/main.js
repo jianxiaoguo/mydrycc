@@ -3,8 +3,9 @@ import router from './router'
 import { createApp } from 'vue'
 import store from './store'
 import VueApexCharts from "vue3-apexcharts";
-
+import { Toast } from 'vant';
 import { i18n, setLang, getUAgentLang } from './lang'
+import 'vant/lib/index.css';
 
 
 /**
@@ -51,4 +52,5 @@ app.use(router)
 app.use(i18n)
 app.use(store)
 app.use(VueApexCharts)
+app.use(Toast);
 app.mount('#app')
