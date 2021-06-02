@@ -41,9 +41,9 @@ import { dealProductCostList, getProductCostList } from "../services/cost";
             })
 
             onMounted(async () => {
-                const data =  await getProductCostList()
+                const res =  await getProductCostList()
 
-                state.costList = data ? dealProductCostList(data) : []
+                state.costList = res ? dealProductCostList(res) : []
 
             })
 

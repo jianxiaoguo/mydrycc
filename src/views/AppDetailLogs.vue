@@ -65,8 +65,8 @@ export default {
     }
     onMounted(async () => {
       var currentCluster = localStorage.getItem('currentCluster')
-      const data = await getApplogs(JSON.parse(currentCluster).name, params.id)
-      state.appLogs = data.data ? dealApplogs(data) : []
+      const res = await getApplogs(JSON.parse(currentCluster).name, params.id)
+      state.appLogs = res.data ? dealApplogs(res) : []
     })
 
     return {

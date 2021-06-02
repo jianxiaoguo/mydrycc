@@ -39,7 +39,7 @@ export function getAppProcesses(clusterName, appId) {
 
 export function dealAppProcesses(obj) {
     var appProcesses = []
-    for (var key in obj.data.procfile_structure) {
+    for (let key in obj.data.procfile_structure) {
         var statue = 0
         if (obj.data.structure[key] > 0) {
             statue = 1
@@ -57,7 +57,7 @@ export function dealAppProcesses(obj) {
 }
 
 export function getAppProcessTypes(clusterName, appId) {
-    return get(`/clusters/${clusterName}/apps/${appId}/`, {})
+    return axios.get(`/clusters/${clusterName}/apps/${appId}/`)
     // return [
     //     {'name': 'web'}, {'name': 'celery'}, {'name': 'cbeat'}, {'name': 'cron'}, {'name': 'sync1'}, {'name': 'sync2'}
     // ]
@@ -65,7 +65,7 @@ export function getAppProcessTypes(clusterName, appId) {
 
 export function dealProcessTypes(obj) {
     var appProcessTypes = []
-    for (var i in obj.data.procfile_structure) {
+    for (let i in obj.data.procfile_structure) {
         appProcessTypes.push({"name": i})
     }
     console.log("js appProcessTypes value: ", appProcessTypes)

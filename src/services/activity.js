@@ -1,7 +1,7 @@
 import axios from "../utils/axios";
 
-export function getCollaboratorActivities(clusterName, appId) {
-    return axios.get(`/clusters/${clusterName}/apps/${appId}/releases/count/`)
+export function getCollaboratorActivities(clusterName, appId, params='') {
+    return axios.get(`/clusters/${clusterName}/apps/${appId}/releases/count/` + '?' + params)
     // return [
     //     {'username': 'hanlucen', 'count': 23},
     //     {'username': 'lijianguo', 'count': 36},
@@ -17,8 +17,8 @@ export function dealCollaboratorActivities(obj) {
     })
 }
 
-export function getAppActivities(clusterName, appId) {
-    return axios.get(`/clusters/${clusterName}/apps/${appId}/releases/`)
+export function getAppActivities(clusterName, appId, params='') {
+    return axios.get(`/clusters/${clusterName}/apps/${appId}/releases/` + '?' + params)
     // return [
     //     {'content': 'Enable Logplex1', 'username': 'lijianguo', 'v': 'v14', 'created_time': 1606799772},
     //     {'content': 'Initial release2', 'username': 'hanlucen', 'v': 'v13', 'created_time': 1606793792},

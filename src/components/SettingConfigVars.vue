@@ -161,11 +161,11 @@
                     newConfigs[item.name] = item.value
                 })
                 var currentCluster = localStorage.getItem('currentCluster')
-                postAppConfigs(JSON.parse(currentCluster).name, params.id, newConfigs).then(data=>{
-                    if (data.status == 200) {
+                postAppConfigs(JSON.parse(currentCluster).name, params.id, newConfigs).then(res=>{
+                    if (res.status == 200) {
                         Toast("OK")
-                    } else if (data.status == 409){
-                        Toast(data.data)
+                    } else if (res.status == 409){
+                        Toast(res.data)
                     }
                 })
             }

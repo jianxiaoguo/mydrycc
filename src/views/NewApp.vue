@@ -91,8 +91,8 @@
             })
 
             const createNewApp = () => {
-                createApp(state.selectedClusterId, state.appName).then(data=>{
-                    if (data.status == 200) {
+                createApp(state.selectedClusterId, state.appName).then(res=>{
+                    if (res.status == 200) {
                         Toast('OK')
                     }
                 })
@@ -100,8 +100,8 @@
 
             onMounted(async () => {
 
-                const  data = await getClusters()
-                state.clusters = data ? dealClusterData(data) : []
+                const res = await getClusters()
+                state.clusters = res ? dealClusterData(res) : []
                 state.selectedClusterId = state.clusters[0].name
             })
 

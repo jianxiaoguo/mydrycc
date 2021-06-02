@@ -83,15 +83,15 @@
                 context.emit('closeEdit')
             }
             const addAppDomain = () => {
-                addAppDomains(JSON.parse(currentCluster).name, params.id, state.domain).then(data=>{
-                    if (data.status == 201) {
+                addAppDomains(JSON.parse(currentCluster).name, params.id, state.domain).then(res=>{
+                    if (res.status == 201) {
                         Toast("OK")
                     }
                 })
             }
             const deleteAppDomain = () => {
-                deleteAppDomains(JSON.parse(currentCluster).name, params.id, state.domain).then(data=>{
-                    if (data.status == 204) {
+                deleteAppDomains(JSON.parse(currentCluster).name, params.id, state.domain).then(res=>{
+                    if (res.status == 204) {
                         Toast("OK")
                     }
                 })

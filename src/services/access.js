@@ -1,7 +1,7 @@
 import axios from "../utils/axios";
 
-export function getAppAccesses(clusterName, appId) {
-    return axios.get(`/clusters/${clusterName}/apps/${appId}/perms/`)
+export function getAppAccesses(clusterName, appId, params='') {
+    return axios.get(`/clusters/${clusterName}/apps/${appId}/perms/` + '?' + params)
     // return [
     //     {'username': 'hanlucen', 'role': 'owner'},
     //     {'username': 'lijianguo', 'role': 'collaborator'}

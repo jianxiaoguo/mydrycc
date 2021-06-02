@@ -48,8 +48,8 @@
             onMounted(async () => {
                 const token =await getCsrf()
                 localStorage.setItem('csrftoken', token.data.token)
-                const data = await getClusters()
-                state.clusters = data ? dealClusterData(data) : []
+                const res = await getClusters()
+                state.clusters = res ? dealClusterData(res) : []
                 if (state.currentCluster) {
                     store.dispatch('changeCurrentCluster', JSON.parse(state.currentCluster))
                 } else {

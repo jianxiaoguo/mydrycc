@@ -78,8 +78,8 @@
             onMounted(async () => {
                 // var currentCluster = store.getters.getCurrentCluster
                 var currentCluster = localStorage.getItem('currentCluster')
-                var data =  await getAppProcesses(JSON.parse(currentCluster).name, "py3django3")
-                state.processes = dealAppProcesses(data)
+                var res =  await getAppProcesses(JSON.parse(currentCluster).name, "py3django3")
+                state.processes = dealAppProcesses(res)
             })
 
             return {

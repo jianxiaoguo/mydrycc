@@ -97,6 +97,11 @@ const routes = [
         component: ExpenseBillDetail
     },
     {
+        path: '/expense-bills',
+        name: 'ExpenseBill',
+        component: ExpenseBill
+    },
+    {
         path: '/notifications',
         name: 'AccountNotifications',
         component: AccountNotifications

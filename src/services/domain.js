@@ -1,7 +1,7 @@
 import axios from "../utils/axios";
 
-export function getAppDomains(clusterName, appId) {
-    return axios.get(`/clusters/${clusterName}/apps/${appId}/domains/`)
+export function getAppDomains(clusterName, appId, params='') {
+    return axios.get(`/clusters/${clusterName}/apps/${appId}/domains/` + '?' + params)
 }``
 
 export function dealAppDomains(obj) {

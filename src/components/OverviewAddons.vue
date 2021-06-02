@@ -81,9 +81,9 @@
 
             onMounted(async () => {
                 var currentCluster = localStorage.getItem('currentCluster')
-                const data =  await getAppAddons(JSON.parse(currentCluster).name, params.id)
+                const res =  await getAppAddons(JSON.parse(currentCluster).name, params.id)
 
-                state.addons = dealAppAddons(data)
+                state.addons = dealAppAddons(res)
             })
 
             return {

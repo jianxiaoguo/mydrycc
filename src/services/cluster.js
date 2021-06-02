@@ -1,8 +1,8 @@
 import axios from '../utils/axios'
 
 
-export function getClusters() {
-    return axios.get('/clusters')
+export function getClusters(params='') {
+    return axios.get('/clusters' + '?' + params)
 }
 export function getCsrf() {
     return axios.get('/auth/csrf/')

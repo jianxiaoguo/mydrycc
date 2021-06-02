@@ -61,7 +61,7 @@
                             balance
                         </th>
                     </tr>
-                    <template v-for="funding in fundingList">
+                    <template v-for="funding in fundingList[cPage-1]">
                         <tr class="ember-view">
 <!--                            <td class="bb b&#45;&#45;light-silver pa2 dtc w&#45;&#45;28">-->
 <!--                                <span style="width: 28px; height: 28px" class="gravatar-icon br-100 ember-view">-->
@@ -85,7 +85,7 @@
                         </tr>
                     </template>
                 </table>
-                <div class="limit-width bg-white mt4">
+                <div :style="{visibility: isHiddenPagination ? 'hidden':'visible' }" class="limit-width bg-white mt4">
                     <pagination :cPage="cPage" :tPage="tPage" :hasNext="hasNextPage" @updatePage="updatePage"/>
                 </div>
 
@@ -103,7 +103,6 @@
     import {dealAccountFundingList, getAccountFundingList} from "../services/funding";
     import Pagination from "../components/Pagination.vue";
     import MonthPicker from "../components/MonthPicker.vue";
-    import {dealExpenseBillList, getExpenseBillList} from "../services/expense-bills";
 
 
     export default {
@@ -123,12 +122,16 @@
                 cPage: 1,
                 tPage: 2,
                 hasNextPage: true,
+                isHiddenPagination: false,
                 cYear: date.getFullYear(),
                 cMonth: date.getMonth() + 1,
                 sYear: date.getFullYear(),
                 sMonth: date.getMonth() + 1
             })
-
+            const perPageNum = 15
+            const totalPageNum = 30
+            var count = 0
+            var reqNext = ''
             const changeMonth = (y, m) => {
                 state.sYear = y
                 state.sMonth = m
@@ -139,13 +142,25 @@
             const updatePage = (n) => {
 
                 console.log(n)
-                state.cPage = n
-                state.tPage = Math.min(30, n+1)
-                if (state.tPage>=30){
-                    state.hasNextPage = false
+                if (n < 1) {
+                    return;
                 }
-                else{
-                    state.hasNextPage = true
+                state.cPage = n
+                if ((state.tPage < totalPageNum) && (n * perPageNum < count)){
+                    state.tPage = Math.min(totalPageNum, n+1)
+                    state.hasNextPage=true
+                }else {
+                    state.hasNextPage=false
+                }
+                if (reqNext && (state.cPage + 2 > state.apps.length)) {
+                    getAccountFundingList(null,null, reqNext.split('?')[1]).then(res=>{
+                        reqNext = res.data.next
+                        count = res.data.count
+                        let appdatas = res.data && res.data.results ? dealAccountFundingList(res) : []
+                        for (let j = 0; j < appdatas.length; j += perPageNum){
+                            state.apps.push(appdatas.slice(j, j + perPageNum))
+                        }
+                    })
                 }
             }
 
@@ -158,13 +173,32 @@
             }
             const selectChanged = (selected) => {
                 const trade_type = selected.target.value;
-                getAccountFundingList(trade_type).then(data=>{
-                    state.fundingList = data && data.status == 200 ? dealAccountFundingList(data) : []
+                getAccountFundingList(trade_type).then(res=>{
+                    state.fundingList = []
+                    let fundingdatas = res && res.status == 200 ? dealAccountFundingList(res) : []
+                    for (let j = 0; j < fundingdatas.length; j += perPageNum){
+                        state.fundingList.push(fundingdatas.slice(j, j + perPageNum))
+                    }
+                    if(count > (2 * perPageNum)){
+                        state.hasNextPage=true
+                    }
+                    if(count < perPageNum){
+                        state.isHiddenPagination = true
+                    }
                 })
             }
             onMounted(async () => {
-                const data = await getAccountFundingList()
-                state.fundingList = data ? dealAccountFundingList(data) : []
+                const res = await getAccountFundingList()
+                var fundingdatas = res ? dealAccountFundingList(res) : []
+                for (let j = 0; j < fundingdatas.length; j += perPageNum){
+                    state.fundingList.push(fundingdatas.slice(j, j + perPageNum))
+                }
+                if(count > (2 * perPageNum)){
+                    state.hasNextPage=true
+                }
+                if(count < perPageNum){
+                    state.isHiddenPagination = true
+                }
             })
 
             return {

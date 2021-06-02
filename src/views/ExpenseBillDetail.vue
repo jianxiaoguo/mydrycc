@@ -60,7 +60,7 @@
                             cost
                         </th>
                     </tr>
-                    <template v-for="bill in bills">
+                    <template v-for="bill in bills[cPage-1]">
                         <tr class="ember-view">
                             <td class="bb b--light-silver pv2 pr1 gray">{{bill.period}}</td>
                             <td class="bb b--light-silver pv2 pr1 gray">{{bill.appName}}</td>
@@ -75,7 +75,7 @@
                         </tr>
                     </template>
                 </table>
-                <div class="limit-width bg-white mt4">
+                <div :style="{visibility: isHiddenPagination ? 'hidden':'visible' }" class="limit-width bg-white mt4">
                     <pagination :cPage="cPage" :tPage="tPage" :hasNext="hasNextPage" @updatePage="updatePage"/>
                 </div>
 
@@ -112,29 +112,43 @@
                 cPage: 1,
                 tPage: 2,
                 hasNextPage: true,
+                isHiddenPagination: false,
                 cYear: date.getFullYear(),
                 cMonth: date.getMonth() + 1,
                 sYear: date.getFullYear(),
                 sMonth: date.getMonth() + 1
             })
-
+            const perPageNum = 15
+            const totalPageNum = 30
+            var count = 0
+            var reqNext = ''
             const changeMonth = (y, m) => {
                 state.sYear = y
                 state.sMonth = m
                 console.log(state.sYear, state.sMonth)
             }
 
-
             const updatePage = (n) => {
-
                 console.log(n)
-                state.cPage = n
-                state.tPage = Math.min(30, n+1)
-                if (state.tPage>=30){
-                    state.hasNextPage = false
+                if (n < 1) {
+                    return;
                 }
-                else{
-                    state.hasNextPage = true
+                state.cPage = n
+                if ((state.tPage < totalPageNum) && (n * perPageNum < count)){
+                    state.tPage = Math.min(totalPageNum, n+1)
+                    state.hasNextPage=true
+                }else {
+                    state.hasNextPage=false
+                }
+                if (reqNext && (state.cPage + 2 > state.bills.length)) {
+                    getExpenseBillList(null,null, reqNext.split('?')[1]).then(res=>{
+                        reqNext = res.data.next
+                        count = res.data.count
+                        let billdatas = res.data && res.data.results ? dealExpenseBillList(res) : []
+                        for (let j = 0; j < billdatas.length; j += perPageNum){
+                            state.bills.push(billdatas.slice(j, j + perPageNum))
+                        }
+                    })
                 }
             }
 
@@ -147,15 +161,35 @@
             }
             const selectChanged = (selected) => {
                 const resource_type = selected.target.value;
-                getExpenseBillList(resource_type).then(data=>{
-                    state.bills = data && data.status == 200 ? dealExpenseBillList(data) : []
+                state.bills = []
+                getExpenseBillList(resource_type).then(res=>{
+                    let billdatas = res.data && res.data.results ? dealExpenseBillList(res) : []
+                    for (let j = 0; j < billdatas.length; j += perPageNum){
+                       state.bills.push(billdatas.slice(j, j + perPageNum))
+                    }
+                    if(count > (2 * perPageNum)){
+                        state.hasNextPage=true
+                    }
+                    if(count < perPageNum){
+                        state.isHiddenPagination = true
+                    }
                 })
-
             }
             onMounted(async () => {
+                const res = await getExpenseBillList()
+                reqNext = res.data.next
+                count = res.data.count
+                var billdatas = res ? dealExpenseBillList(res) : []
+                for (let j = 0; j < billdatas.length; j += perPageNum){
+                    state.bills.push(billdatas.slice(j, j + perPageNum))
+                }
+                if(count > (2 * perPageNum)){
+                    state.hasNextPage=true
+                }
+                if(count < perPageNum){
+                    state.isHiddenPagination = true
+                }
 
-                const data = await getExpenseBillList()
-                state.bills = data ? dealExpenseBillList(data) : []
             })
 
 

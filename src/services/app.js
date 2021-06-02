@@ -1,7 +1,7 @@
 import axios from "../utils/axios";
 
-export function getAPPList(clusterName) {
-    return axios.get(`/clusters/${clusterName}/apps/`)
+export function getAPPList(clusterName, params='limit=45&offset=0') {
+    return axios.get(`/clusters/${clusterName}/apps/` + '?' + params)
 
     // return [
     //     {"name": "zmy1", "lang":"python", "base_image": "heroku-18", "id": "1"},

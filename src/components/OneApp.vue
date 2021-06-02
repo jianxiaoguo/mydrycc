@@ -25,11 +25,11 @@
                     </a>
                 </li>
                 <li><span class="gray db-l dn">•</span></li>
-                <li class="mh1 db-l dn">
-                    <a href="/apps/zmy/settings" class="link dark-gray ember-view">
-                        Europe
-                    </a>
-                </li>
+<!--                <li class="mh1 db-l dn">-->
+<!--                    <a href="/apps/zmy/settings" class="link dark-gray ember-view">-->
+<!--                        Europe-->
+<!--                    </a>-->
+<!--                </li>-->
 
                 <li class="ml2 flex items-center">
                     <button class="nudge-up--1 cursor-pointer b--0 bg-transparent b--transparent pa1 ember-view">

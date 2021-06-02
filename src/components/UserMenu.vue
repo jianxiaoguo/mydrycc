@@ -63,15 +63,15 @@ export default {
                 }
             })
             const logout = () => {
-                postLogout().then(data=>{
-                    if (data.status == 200) {
+                postLogout().then(res=>{
+                    if (res.status == 200) {
                         router.push({ path: '/'})
                     }
                 })
             }
             onMounted(async () => {
-                const data = await getUser()
-                state.user = dealUser(data)
+                const res = await getUser()
+                state.user = dealUser(res)
             })
 
             return {

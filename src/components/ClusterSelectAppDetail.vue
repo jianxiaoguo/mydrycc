@@ -72,8 +72,8 @@
 
             onMounted(async () => {
 
-                const  data = await getClusters()
-                state.clusters = data ? dealClusterData(data) : []
+                const  res = await getClusters()
+                state.clusters = res ? dealClusterData(res) : []
                 if (state.currentCluster && state.currentCluster != "undefined") {
                     store.dispatch('changeCurrentCluster', JSON.parse(state.currentCluster))
                 } else {

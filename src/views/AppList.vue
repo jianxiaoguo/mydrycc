@@ -25,16 +25,13 @@
                     <input placeholder="Filter apps" class="hk-search-input focus-z-1" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" size="32">
                 </div>
             </div>
-
-
             <div class="app-list hk-hide-bb-last-row">
-                <div class="apps-list-item flex flex-column flex-auto b--light-silver bg-white pv2 ph4 bb hover-bg-near-white ember-view" v-for="item in apps">
+                <div class="apps-list-item flex flex-column flex-auto b--light-silver bg-white pv2 ph4 bb hover-bg-near-white ember-view" v-for="item in apps[cPage-1]">
                     <one-app v-bind="item"/>
                 </div>
-                <div class="limit-width bg-white mt4">
+                <div :style="{visibility: isHiddenPagination ? 'hidden':'visible' }" class="limit-width bg-white mt4">
                     <pagination :cPage="cPage" :tPage="tPage" :hasNext="hasNextPage" @updatePage="updatePage"/>
                 </div>
-                <!--此标签和page互斥-->
                 <div class="bg-white pv3 bt justify-center flex ember-view"></div>
             </div>
         </div>
@@ -47,9 +44,9 @@
     import ClusterSelect from "../components/ClusterSelect.vue";
     import OneApp from "../components/OneApp.vue";
     import Pagination from "../components/Pagination.vue";
-    import { reactive, toRefs, onMounted , computed} from 'vue'
+    import { reactive, toRefs, onMounted } from 'vue'
     import { getAPPList, dealAPPList } from "../services/app";
-    import { useRoute, useRouter } from 'vue-router'
+    import { useRouter } from 'vue-router'
 
     export default {
         name: "AppList",
@@ -66,30 +63,57 @@
                 apps: [],
                 cPage: 1,
                 tPage: 2,
-                hasNextPage: true
+                hasNextPage: false,
+                isHiddenPagination: false,
             })
-
+            const perPageNum = 15
+            const totalPageNum = 30
+            var count = 0
+            var reqNext = ''
             const goToNewApp = () => {
                 router.push({ path: '/new-app'})
             }
 
             const updatePage = (n) => {
-
-                console.log(n)
-                state.cPage = n
-                state.tPage = Math.min(30, n+1)
-                if (state.tPage>=30){
-                    state.hasNextPage = false
+                if (n < 1) {
+                    return;
                 }
-                else{
-                    state.hasNextPage = true
+                state.cPage = n
+                if ((state.tPage < totalPageNum) && (n * perPageNum < count)){
+                    state.tPage = Math.min(totalPageNum, n+1)
+                    state.hasNextPage=true
+                }else {
+                    state.hasNextPage=false
+                }
+                // 显示当前页后的两个页码，提前掉两页接口取数据
+                if (reqNext && (state.cPage + 2 > state.apps.length)) {
+                    var currentCluster = localStorage.getItem('currentCluster')
+                    getAPPList(JSON.parse(currentCluster).name, reqNext.split('?')[1]).then(res=>{
+                        reqNext = res.data.next
+                        count = res.data.count
+                        var appdatas = res.data && res.data.results ? dealAPPList(res) : []
+                        for (let j = 0; j < appdatas.length; j += perPageNum){
+                          state.apps.push(appdatas.slice(j, j + perPageNum))
+                        }
+                    })
                 }
             }
 
             onMounted(async () => {
                 var currentCluster = localStorage.getItem('currentCluster')
-                const data = await getAPPList(JSON.parse(currentCluster).name)
-                state.apps = data.data && data.data.results ? dealAPPList(data) : []
+                const res = await getAPPList(JSON.parse(currentCluster).name)
+                reqNext = res.data.next
+                count = res.data.count
+                var appdatas = res.data && res.data.results ? dealAPPList(res) : []
+                for (let j = 0; j < appdatas.length; j += perPageNum){
+                    state.apps.push(appdatas.slice(j, j + perPageNum))
+                }
+                if(count > (2 * perPageNum)){
+                    state.hasNextPage=true
+                }
+                if(count < perPageNum){
+                    state.isHiddenPagination = true
+                }
             })
 
             return {

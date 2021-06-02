@@ -46,8 +46,8 @@
              })
 
             onMounted(async () => {
-                const data = await getUser()
-                state.user = dealUser(data)
+                const res = await getUser()
+                state.user = dealUser(res)
             })
             return {
                 ...toRefs(state),

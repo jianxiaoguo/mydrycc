@@ -106,8 +106,8 @@
                 var currentCluster = localStorage.getItem('currentCluster')
                 // const data = await getAppDetail(JSON.parse(currentCluster).name, params.id)
                 // state.appDetail = data.data ? dealAppDetail(data) : null
-                const domains = await getAppDomains(JSON.parse(currentCluster).name, params.id)
-                state.domains = domains ? dealAppDomains(domains) : null
+                const res = await getAppDomains(JSON.parse(currentCluster).name, params.id)
+                state.domains = res ? dealAppDomains(res) : null
             })
 
             return {

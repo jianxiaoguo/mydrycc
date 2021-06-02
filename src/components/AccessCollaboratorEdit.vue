@@ -84,15 +84,15 @@
                 context.emit('closeEdit')
             }
             const addPerm = () => {
-                addAppAccesses(JSON.parse(currentCluster).name, params.id, state.username).then(data=>{
-                    if (data.status == 201) {
+                addAppAccesses(JSON.parse(currentCluster).name, params.id, state.username).then(res=>{
+                    if (res.status == 201) {
                         Toast("OK")
                     }
                 })
             }
             const deletePerm = () => {
-                deleteAppAccesses(JSON.parse(currentCluster).name, params.id, state.username).then(data=>{
-                    if (data.status == 204) {
+                deleteAppAccesses(JSON.parse(currentCluster).name, params.id, state.username).then(res=>{
+                    if (res.status == 204) {
                         Toast("OK")
                     }
                 })

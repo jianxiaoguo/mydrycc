@@ -64,11 +64,11 @@
               isVisible: "hidden"
             })
             onMounted(async () => {
-                const data = await getMessages()
-                if (!data.data){
+                const res = await getMessages()
+                if (!res.data){
                   state.isVisible = "none"
                 }
-                state.messages = data.data ? dealMessages(data) : []
+                state.messages = res.data ? dealMessages(res) : []
             })
             return {
                 ...toRefs(state),

@@ -112,8 +112,8 @@
                 state.rollBackVersion = v
                 state.isShowRollBack = true
                 var currentCluster = localStorage.getItem('currentCluster')
-                postAppActivitieRollback(JSON.parse(currentCluster).name, params.id, v).then(data=>{
-                if (data.status == 201){
+                postAppActivitieRollback(JSON.parse(currentCluster).name, params.id, v).then(res=>{
+                if (res.status == 201){
                     Toast("OK")
                 }
               })

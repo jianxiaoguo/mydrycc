@@ -1,12 +1,12 @@
 import axios from "../utils/axios";
 
-export function getAppConfig(clusterName, appId) {
-    return axios.get(`/clusters/${clusterName}/apps/${appId}/config/`)
+export function getAppConfig(clusterName, appId, params='') {
+    return axios.get(`/clusters/${clusterName}/apps/${appId}/config/` + '?' + params)
 }
 
 export function dealAppConfig(obj) {
     var appConfigs = []
-    for (var key in obj.data.values) {
+    for (let key in obj.data.values) {
         appConfigs.push({"name": key, "value": obj.data.values[key]})
     }
     console.log("js appConfigs value: ", appConfigs)

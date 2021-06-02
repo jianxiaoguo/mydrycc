@@ -15,8 +15,8 @@ export function postLogout() {
     return axios.post(`/disconnect/drycc/`)
 }
 
-export function getMessages() {
-    return axios.get(`/messages/`)
+export function getMessages(params='') {
+    return axios.get(`/messages/` + '?' + params)
 }
 
 export function dealMessages(res) {

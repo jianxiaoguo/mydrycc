@@ -68,9 +68,9 @@ import { dealAppCostList, getAppCostList } from "../services/cost";
             }
 
             onMounted(async () => {
-                const data =  await getAppCostList()
+                const res =  await getAppCostList()
 
-                state.costList = data ? dealAppCostList(data) : []
+                state.costList = res ? dealAppCostList(res) : []
 
                 for (let index in state.costList) {
                     index = parseInt(index)
