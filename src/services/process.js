@@ -69,5 +69,5 @@ export function dealProcessTypes(obj) {
         appProcessTypes.push({"name": i})
     }
     console.log("js appProcessTypes value: ", appProcessTypes)
-    return procfile_structures
+    return appProcessTypes
 }

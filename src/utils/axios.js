@@ -1,6 +1,5 @@
 import axios from 'axios'
-import router from '../router'
-
+import { Toast } from 'vant'
 
 // 环境的切换
 axios.defaults.baseURL = process.env.NODE_ENV == 'development' ? '//d.uucin.com' : '//d.uucin.com'

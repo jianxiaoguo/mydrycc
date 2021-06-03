@@ -37,9 +37,9 @@
                             </div>
                             <div class="ember-view">
                                 <div class="metrics__main__charts metrics__chart-sorting is-vertical">
-                                    <metric-memory />
-                                    <metric-network />
-                                    <metric-cpu />
+                                    <metric-memory :metricMemory="metricMemory"/>
+                                    <metric-network :metricNetworks="metricNetworks"/>
+                                    <metric-cpu :metricCpus="metricCpus"/>
                                 </div>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
 
 <script>
     import { useRouter } from 'vue-router'
-    import { reactive, toRefs, onMounted , computed} from 'vue'
+    import { reactive, toRefs, onMounted, onBeforeMount, onUpdated } from 'vue'
     import NavBar from "../components/NavBar.vue";
     import NavBox from "../components/NavBox.vue";
     import ClusterSelect from "../components/ClusterSelectAppDetail.vue";
@@ -62,7 +62,8 @@
     import MetricNetwork from "../components/MetricNetwork.vue";
     import MetricCpu from "../components/MetricCpu.vue";
     import { getAppDetail, dealAppDetail } from "../services/app";
-    // import { getAppProcessTypes } from "../services/process";
+    import { dealProcessTypes } from "../services/process";
+    import { getMetric, dealMetricCpus, dealMetricMemory, dealMetricNetworks } from "../services/metric";
 
     export default {
         name: "AppDetailMetrics",
@@ -83,41 +84,56 @@
                 appDetail: Object,
                 processTypes: [],
                 showProcessTypes: false,
-                currentType: null
+                currentType: Object,
+                metricCpus : [],
+                metricMemory : [],
+                metricNetworks : []
             })
-            var currentCluster = localStorage.getItem('currentCluster')
-            const data = getAppDetail(JSON.parse(currentCluster).name, params.id)
-            state.appDetail = data.data ? dealAppDetail(data) : null
-
-            // const processData =  getAppProcessTypes(JSON.parse(currentCluster).name, params.id)
-
-            state.processTypes = dealProcessTypes(data)
-
-            if (state.processTypes.length > 0) {
-                if (!params.processType) {
+            const currentCluster = localStorage.getItem('currentCluster')
+            const fetchMetric = () =>{
+                getMetric(JSON.parse(currentCluster).name, params.id, state.currentType.name).then(res=>{
+                  state.metricCpus = res.data ? dealMetricCpus(res) : []
+                  state.metricMemory = res.data ? dealMetricMemory(res) : []
+                  state.metricNetworks = res.data ? dealMetricNetworks(res) : []
+                })
+            }
+            onBeforeMount( () => {
+              getAppDetail(JSON.parse(currentCluster).name, params.id).then(res => {
+                state.appDetail = res.data ? dealAppDetail(res) : null
+                // const processData =  getAppProcessTypes(JSON.parse(currentCluster).name, params.id)
+                state.processTypes = res.data ? dealProcessTypes(res) : []
+                if (state.processTypes.length > 0) {
+                  if (!params.processType) {
                     state.currentType = state.processTypes[0]
-                    router.push({ path: `/apps/${params.id}/metrics/processes/${state.currentType.name}` })
-                } else {
-                    const l = state.processTypes.filter(item =>{
-                        if(item.name.includes(params.processType)){
-                            return item
-                        }
+                    router.push({path: `/apps/${params.id}/metrics/processes/${state.currentType.name}`})
+                  } else {
+                    const l = state.processTypes.filter(item => {
+                      if (item.name.includes(params.processType)) {
+                        return item
+                      }
                     })
                     console.log(l)
                     if (l.length > 0) {
-                        state.currentType = l[0]
+                      state.currentType = l[0]
                     } else {
-                        state.currentType = state.processTypes[0]
+                      state.currentType = state.processTypes[0]
                     }
+                  }
                 }
-            }
+                console.log("onBeforeMount")
+                fetchMetric()
 
+              })
+            })
             const goToOtherProcessType = (pt) => {
                 router.push({ path: `/apps/${params.id}/metrics/processes/${pt.name}` })
                 state.currentType = pt
                 state.showProcessTypes = false
+                fetchMetric()
             }
-
+            // onBeforeMount(() => {
+            //   console.log('onBeforeMount!')
+            // })
             onMounted( async () => {
                 document.addEventListener('click', function (e) {
                     const d = document.getElementById('process-picker')

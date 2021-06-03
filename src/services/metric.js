@@ -1,3 +1,20 @@
+import axios from "../utils/axios";
+
+export function getMetric(clusterName, appId, containerType){
+    var url = `/clusters/${clusterName}/apps/${appId}/metrics/${containerType}/`
+    return axios.get(url)
+}
+
+export function dealMetricCpus(res){
+    return res.data.cpus
+}
+export function dealMetricMemory(res){
+    return res.data.memory
+}
+export function dealMetricNetworks(res){
+    return res.data.networks
+}
+
 export function getResponseTimeMetrics() {
     return [
         {'time': 1606179600000, duration: 34},
