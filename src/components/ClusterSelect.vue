@@ -42,6 +42,7 @@
 
             const changeCluster = (cluster) => {
                 localStorage.setItem('currentCluster', JSON.stringify(cluster))
+                location.reload()
             }
 
 
@@ -53,8 +54,8 @@
                 if (state.currentCluster) {
                     store.dispatch('changeCurrentCluster', JSON.parse(state.currentCluster))
                 } else {
-                    store.dispatch('changeCurrentCluster', dealClusterData(data)[0])
-                    localStorage.setItem('currentCluster', JSON.stringify(dealClusterData(data)[0]))
+                    store.dispatch('changeCurrentCluster', dealClusterData(res)[0])
+                    localStorage.setItem('currentCluster', JSON.stringify(dealClusterData(res)[0]))
                 }
             })
             return {

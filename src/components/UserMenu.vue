@@ -63,6 +63,7 @@ export default {
                 }
             })
             const logout = () => {
+                localStorage.clear()
                 postLogout().then(res=>{
                     if (res.status == 200) {
                         router.push({ path: '/'})
