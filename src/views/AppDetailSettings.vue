@@ -65,9 +65,11 @@
             })
 
             onMounted(async () => {
-                var currentCluster = localStorage.getItem('currentCluster')
-                const res = await getAppDetail(JSON.parse(currentCluster).name, params.id)
-                state.appDetail = res.data ? dealAppDetail(res) : null
+                let app = localStorage.getItem('currentApp')
+                state.appDetail = app ? JSON.parse(localStorage.getItem('currentApp')) : null
+                // var currentCluster = localStorage.getItem('currentCluster')
+                // const res = await getAppDetail(JSON.parse(currentCluster).name, params.id)
+                // state.appDetail = res.data ? dealAppDetail(res) : null
             })
 
             return {

@@ -99,9 +99,10 @@
             }
 
             onMounted(async () => {
-
-                const res = await getClusters()
-                state.clusters = res ? dealClusterData(res) : []
+                let cluster = localStorage.getItem('clusters')
+                state.clusters = cluster ? JSON.parse(localStorage.getItem('clusters')) : []
+                // const res = await getClusters()
+                // state.clusters = res ? dealClusterData(res) : []
                 state.selectedClusterId = state.clusters[0].name
             })
 

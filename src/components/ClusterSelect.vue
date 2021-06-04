@@ -23,7 +23,8 @@
 
 <script>
     import { reactive, toRefs, onMounted , computed} from 'vue'
-    import {getClusters, dealClusterData,getCsrf} from "../services/cluster";
+    import {getClusters, dealClusterData} from "../services/cluster";
+    import {getCsrf} from "../services/user";
     import { useStore } from 'vuex'
 
     export default {

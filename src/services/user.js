@@ -11,6 +11,10 @@ export function dealUser(obj) {
     }
 }
 
+export function getCsrf() {
+    return axios.get('/auth/csrf/')
+}
+
 export function postLogout() {
     return axios.post(`/disconnect/drycc/`)
 }

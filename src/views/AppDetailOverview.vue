@@ -32,7 +32,7 @@
 
 <script>
     import { useRoute, useRouter } from 'vue-router'
-    import { reactive, toRefs, onMounted } from 'vue'
+    import { reactive, toRefs, onBeforeMount, onMounted } from 'vue'
     import NavBar from "../components/NavBar.vue";
     import NavBox from "../components/NavBox.vue";
     import ClusterSelect from "../components/ClusterSelectAppDetail.vue";
@@ -68,12 +68,19 @@
             const state = reactive({
                 appDetail: Object,
             })
-
-            onMounted(async () => {
-                // var currentCluster = store.getters.getCurrentCluster
-                var currentCluster = localStorage.getItem('currentCluster')
+            onBeforeMount(async  () => {
+                let currentCluster = localStorage.getItem('currentCluster')
                 const res = await getAppDetail(JSON.parse(currentCluster).name, params.id)
-                state.appDetail = res ? dealAppDetail(res) : null
+                state.appDetail = res.data ? dealAppDetail(res) : null
+                localStorage.setItem('currentApp', JSON.stringify(state.appDetail))
+            })
+            onMounted(async () => {
+                // let app = localStorage.getItem('currentApp')
+                // state.appDetail = app ? JSON.parse(localStorage.getItem('currentApp')) : null
+                // var currentCluster = store.getters.getCurrentCluster
+                // var currentCluster = localStorage.getItem('currentCluster')
+                // const res = await getAppDetail(JSON.parse(currentCluster).name, params.id)
+                // state.appDetail = res ? dealAppDetail(res) : null
             })
             return {
                 ...toRefs(state)

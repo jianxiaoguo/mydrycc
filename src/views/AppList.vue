@@ -47,6 +47,9 @@
     import { reactive, toRefs, onMounted } from 'vue'
     import { getAPPList, dealAPPList } from "../services/app";
     import { useRouter } from 'vue-router'
+    import { dealClusterData, getClusters } from "../services/cluster";
+    import { getCsrf } from "../services/user";
+    import { useStore } from "vuex";
 
     export default {
         name: "AppList",
@@ -58,18 +61,21 @@
             'pagination': Pagination
         },
         setup() {
+            const store = useStore()
             const router = useRouter()
             const state = reactive({
+                clusters:[],
                 apps: [],
                 cPage: 1,
                 tPage: 2,
                 hasNextPage: false,
                 isHiddenPagination: false,
             })
+            let currentCluster = null
             const perPageNum = 15
             const totalPageNum = 30
-            var count = 0
-            var reqNext = ''
+            let count = 0
+            let reqNext = ''
             const goToNewApp = () => {
                 router.push({ path: '/new-app'})
             }
@@ -98,10 +104,31 @@
                     })
                 }
             }
+            const localStorageInit = () => {
+                if (state.clusters != []){
+                    localStorage.setItem('clusters', JSON.stringify(state.clusters))
+                }
+
+                store.dispatch('changeCurrentCluster', state.clusters[0])
+                let cluster = currentCluster ? currentCluster : state.clusters[0]
+                localStorage.setItem('currentCluster', JSON.stringify(cluster))
+
+                getCsrf().then(res=>{
+                    localStorage.setItem('csrftoken', res.data.token)
+                })
+            }
 
             onMounted(async () => {
-                var currentCluster = localStorage.getItem('currentCluster')
-                const res = await getAPPList(JSON.parse(currentCluster).name)
+                var localCluster = localStorage.getItem('currentCluster')
+                let res = await getClusters()
+                state.clusters = res ? dealClusterData(res) : []
+                if(localCluster){
+                    currentCluster = JSON.parse(localCluster)
+                }
+                else{
+                    currentCluster = state.clusters[0]
+                }
+                res = await getAPPList(currentCluster.name)
                 reqNext = res.data.next
                 count = res.data.count
                 var appdatas = res.data && res.data.results ? dealAPPList(res) : []
@@ -114,6 +141,7 @@
                 if(count < perPageNum){
                     state.isHiddenPagination = true
                 }
+                localStorageInit()
             })
 
             return {

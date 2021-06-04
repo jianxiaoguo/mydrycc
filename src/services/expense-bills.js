@@ -10,7 +10,7 @@ export function getExpenseBillList(resource_type=null, section=null, params='lim
         url += `&section=${section}`
     }
     if(params){
-        url += params
+        url = url + '&' + params
     }
     return axios.get(url)
     // return [

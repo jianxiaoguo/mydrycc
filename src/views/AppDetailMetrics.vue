@@ -131,9 +131,6 @@
                 state.showProcessTypes = false
                 fetchMetric()
             }
-            // onBeforeMount(() => {
-            //   console.log('onBeforeMount!')
-            // })
             onMounted( async () => {
                 document.addEventListener('click', function (e) {
                     const d = document.getElementById('process-picker')
