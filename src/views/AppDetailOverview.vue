@@ -38,7 +38,7 @@
     import ClusterSelect from "../components/ClusterSelectAppDetail.vue";
     import NavBoxAppDetailMenu from "../components/NavBoxAppDetailMenu.vue"
     import MainNav from "../components/MainNav.vue";
-    import OverviewMetrics from "../components/OverviewMetrics.vue";
+    // import OverviewMetrics from "../components/OverviewMetrics.vue";
     import OverviewAddons from "../components/OverviewAddons.vue";
     import OverviewFormation from "../components/OverviewFormation.vue";
     import OverviewCollaboratorActivity from "../components/OverviewCollaboratorActivity.vue";
@@ -54,7 +54,7 @@
             'cluster-select-v2': ClusterSelect,
             'nav-box-app-detail-menu': NavBoxAppDetailMenu,
             'main-nav': MainNav,
-            'overview-metrics': OverviewMetrics,
+            // 'overview-metrics': OverviewMetrics,
             'overview-addons': OverviewAddons,
             'overview-formation': OverviewFormation,
             'overview-collaborator-activity': OverviewCollaboratorActivity,

@@ -17,7 +17,7 @@ export function dealCollaboratorActivities(obj) {
     })
 }
 
-export function getAppActivities(clusterName, appId, params='') {
+export function getAppActivities(clusterName, appId, params='limit=15') {
     return axios.get(`/clusters/${clusterName}/apps/${appId}/releases/` + '?' + params)
     // return [
     //     {'content': 'Enable Logplex1', 'username': 'lijianguo', 'v': 'v14', 'created_time': 1606799772},

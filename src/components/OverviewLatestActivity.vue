@@ -1,6 +1,6 @@
 <template>
     <div class="flex-ns items-center limit-width pv2">
-        <div class="flex dark-gray mr2">Latest activity</div>
+        <div class="flex dark-gray mr2">Latest activity (last 15 activities)</div>
         <div class="flex-auto"></div>
         <a @click="goToActivity" class="flex items-center hk-link no-underline f6 mv1 mv0-ns ember-view">
             <span class="underline">All Activity</span>
