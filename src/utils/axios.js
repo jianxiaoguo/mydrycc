@@ -45,9 +45,18 @@ axios.interceptors.response.use(
             // 登录过期对用户进行提示
             // 清除本地token和清空vuex中token对象
             // 跳转登录页面
-          // case 403:
-          //   window.location.replace("http://d.uucin.com/login/drycc/");
-          //   break;
+          case 403:
+              console.log("error.response.data.detail: ", error.response.data.detail)
+              if(error.response.data.detail.indexOf('Authentication credentials were not provided.') >= 0){
+                  window.location.replace("http://d.uucin.com/login/drycc/");
+                  break;
+              }else {
+                  console.log({
+                      message: error.response.data.message,
+                      duration: 1500,
+                      forbidClick: true
+                  });
+              }
 
             // 404请求不存在
           case 404:

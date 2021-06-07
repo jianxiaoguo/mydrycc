@@ -31,11 +31,12 @@
         <li class="glostick__menu__listitem">
             <a class="glostick__menu__item glostick__menu__item--notifications" href="/notifications">Notifications</a>
         </li>
-
+        <li :style="{display: isHiddenAdmin ? 'none': 'block' }" class="glostick__menu__listitem">
+          <a :href="adminUrl" class="glostick__menu__item glostick__menu__item--signout" @click="admin">Admin</a>
+        </li>
         <li class="glostick__menu__listitem">
             <a class="glostick__menu__item glostick__menu__item--signout" @click="logout">Sign out</a>
         </li>
-
     </ul>
 </template>
 
@@ -60,7 +61,10 @@ export default {
                 user :{
                     username: null,
                     email: null,
-                }
+                    is_superuser: null
+                },
+                isHiddenAdmin: true,
+                adminUrl: ''
             })
             const logout = () => {
                 localStorage.clear()
@@ -73,6 +77,10 @@ export default {
             onMounted(async () => {
                 const res = await getUser()
                 state.user = dealUser(res)
+                if (state.user.is_superuser){
+                    state.isHiddenAdmin = false
+                }
+                state.adminUrl = process.env.NODE_ENV == 'development' ? 'http://d.uucin.com/admin/' : 'http://d.uucin.com/admin/'
             })
 
             return {
