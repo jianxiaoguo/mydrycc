@@ -1,6 +1,6 @@
 import axios from "../utils/axios";
 
-export function getAPPList(clusterName, params='limit=45&offset=0') {
+export function getAPPList(clusterName, params = 'limit=45&offset=0') {
     return axios.get(`/clusters/${clusterName}/apps/` + '?' + params)
 
     // return [
@@ -23,7 +23,6 @@ export function dealAPPList(obj) {
 }
 
 
-
 export function getAppDetail(clusterName, appId) {
     return axios.get(`/clusters/${clusterName}/apps/${appId}/`)
 
@@ -33,9 +32,9 @@ export function getAppDetail(clusterName, appId) {
 export function dealAppDetail(obj) {
     return {
         id: obj.data.id,
-        name: obj.data.id,
-        // lang: data.lang,
-        // baseImage: data.base_image
+        owner: obj.data.owner,
+        created: obj.data.created,
+        updated: obj.data.updated
     }
 }
 

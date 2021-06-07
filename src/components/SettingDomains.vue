@@ -26,7 +26,7 @@
                     <div class="flex-auto gray">
                         Your app can be found at
                         <template v-for="domain in domains">
-                            <a :href="domain" target="_blank" class="hk-link">{{ domain.domain }}/</a>
+                            <a :href="domain.domain" target="_blank" class="hk-link">{{ domain.domain }}/</a>
                         </template>
                     </div>
 

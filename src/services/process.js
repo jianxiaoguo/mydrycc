@@ -71,3 +71,51 @@ export function dealProcessTypes(obj) {
     console.log("js appProcessTypes value: ", appProcessTypes)
     return appProcessTypes
 }
+
+export function getPsList(clusterName, appId){
+    return axios.get(`/clusters/${clusterName}/apps/${appId}/pods/`)
+}
+
+export function dealPsList(obj) {
+    var  processes = obj.data.results
+    var pts = []
+
+    for (let index in processes) {
+        let exists = false
+        // Is processtype for process already exists, append to it.
+        for (let i in pts) {
+            if (pts[i].type == processes[index].type) {
+                exists = true
+                if (processes[index].name != "") {
+                    pts[i]['podsList'].push(pts[i].podsList, processes[index])
+                }
+                break
+            }
+        }
+        // Is processtype for process doesn't exist, create a new one
+        if (!exists) {
+            let p = []
+            let status = "started"
+            if (processes[index].state == "stopped" && processes[index].replicas != "0") {
+                status = "stopped"
+            }
+            if (processes[index].name == "") {
+                p = []
+            }
+            pts.push({
+                type:     processes[index].type,
+                podsList: p,
+                replicas: processes[index].replicas,
+                status:   status,
+            })
+        }
+    }
+
+    // Sort the pods alphabetically by name.
+    for (let i in pts) {
+        pts[i].podsList.sort()
+    }
+    // Sort ProcessTypes alphabetically by process name
+    pts.sort()
+    return pts
+}

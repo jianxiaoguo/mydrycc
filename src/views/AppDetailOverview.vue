@@ -14,7 +14,8 @@
             <div id="overview-page">
                 <div class="overview-content">
                     <div class="limit-width">
-                        <overview-metrics :app-detail="appDetail"/>
+<!--                        <overview-metrics :app-detail="appDetail"/>-->
+                        <overview-appinfo :app-detail="appDetail"/>
                         <overview-addons :app-detail="appDetail"/>
                         <overview-formation :app-detail="appDetail"/>
                         <overview-collaborator-activity :app-detail="appDetail" />
@@ -39,6 +40,7 @@
     import NavBoxAppDetailMenu from "../components/NavBoxAppDetailMenu.vue"
     import MainNav from "../components/MainNav.vue";
     // import OverviewMetrics from "../components/OverviewMetrics.vue";
+    import OverviewAppInfo from "../components/OverviewAppInfo.vue";
     import OverviewAddons from "../components/OverviewAddons.vue";
     import OverviewFormation from "../components/OverviewFormation.vue";
     import OverviewCollaboratorActivity from "../components/OverviewCollaboratorActivity.vue";
@@ -55,6 +57,7 @@
             'nav-box-app-detail-menu': NavBoxAppDetailMenu,
             'main-nav': MainNav,
             // 'overview-metrics': OverviewMetrics,
+            'overview-appinfo': OverviewAppInfo,
             'overview-addons': OverviewAddons,
             'overview-formation': OverviewFormation,
             'overview-collaborator-activity': OverviewCollaboratorActivity,
