@@ -2,7 +2,7 @@ import axios from "../utils/axios";
 
 export function getExpenseBillList(resource_type=null, section=null, params='limit=45&offset=0') {
     var url = `/bills/?`
-    var section=`2021-05-17%2006:01:46,2021-05-30%2006:01:48`
+    // var section=`2021-05-17%2006:01:46,2021-05-30%2006:01:48`
     if (resource_type && resource_type != 0) {
         url += `resource_type=${resource_type}`
     }

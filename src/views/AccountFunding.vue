@@ -99,7 +99,7 @@
     import NavBar from "../components/NavBar.vue";
     import NavBox from "../components/NavBox.vue";
     import { useRouter } from 'vue-router'
-    import { reactive, toRefs, onMounted , computed} from 'vue'
+    import { reactive, toRefs, onMounted } from 'vue'
     import {dealAccountFundingList, getAccountFundingList} from "../services/funding";
     import Pagination from "../components/Pagination.vue";
     import MonthPicker from "../components/MonthPicker.vue";
@@ -136,6 +136,27 @@
                 state.sYear = y
                 state.sMonth = m
                 console.log(state.sYear, state.sMonth)
+                let start =  new Date(state.sYear, state.sMonth-1, 1).getTime() / 1000
+                let day = new Date(state.sYear, state.sMonth, 0).getDate()
+                let stop =  new Date(state.sYear, state.sMonth-1, day).getTime() / 1000
+                let section = start + ',' + stop
+                console.log('vue section: ', section)
+                let trade_type = state.selected;
+                getAccountFundingList(trade_type, section).then(res=>{
+                    state.fundingList = []
+                    reqNext = res.data.next
+                    count = res.data.count
+                    let fundingdatas = res && res.status == 200 ? dealAccountFundingList(res) : []
+                    for (let j = 0; j < fundingdatas.length; j += perPageNum){
+                        state.fundingList.push(fundingdatas.slice(j, j + perPageNum))
+                    }
+                    if(count > (2 * perPageNum)){
+                        state.hasNextPage=true
+                    }
+                    if(count < perPageNum){
+                        state.isHiddenPagination = true
+                    }
+                })
             }
 
 
@@ -171,10 +192,19 @@
             const goToAccountFunding = () => {
                 router.push({ path: `/account/funding` })
             }
+
             const selectChanged = (selected) => {
-                const trade_type = selected.target.value;
-                getAccountFundingList(trade_type).then(res=>{
+                let start =  new Date(state.sYear, state.sMonth-1, 1).getTime() / 1000
+                let day = new Date(state.sYear, state.sMonth, 0).getDate()
+                let stop =  new Date(state.sYear, state.sMonth-1, day).getTime() / 1000
+                let section = start + ',' + stop
+                console.log('vue section: ', section)
+                let trade_type = selected.target.value;
+                state.selected = selected.target.value
+                getAccountFundingList(trade_type, section).then(res=>{
                     state.fundingList = []
+                    reqNext = res.data.next
+                    count = res.data.count
                     let fundingdatas = res && res.status == 200 ? dealAccountFundingList(res) : []
                     for (let j = 0; j < fundingdatas.length; j += perPageNum){
                         state.fundingList.push(fundingdatas.slice(j, j + perPageNum))
@@ -187,14 +217,22 @@
                     }
                 })
             }
+
             onMounted(async () => {
-                const res = await getAccountFundingList()
+                let start =  new Date(state.sYear, state.sMonth-1, 1).getTime() / 1000
+                let day = new Date(state.sYear, state.sMonth, 0).getDate()
+                let stop =  new Date(state.sYear, state.sMonth-1, day).getTime() / 1000
+                let section = start + ',' + stop
+                console.log('vue section: ', section)
+                const res = await getAccountFundingList(null, section)
+                reqNext = res.data.next
+                count = res.data.count
                 var fundingdatas = res ? dealAccountFundingList(res) : []
                 for (let j = 0; j < fundingdatas.length; j += perPageNum){
                     state.fundingList.push(fundingdatas.slice(j, j + perPageNum))
                 }
                 if(count > (2 * perPageNum)){
-                    state.hasNextPage=true
+                    state.hasNextPage = true
                 }
                 if(count < perPageNum){
                     state.isHiddenPagination = true

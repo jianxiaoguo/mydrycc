@@ -3,7 +3,7 @@ import axios from "../utils/axios";
 export function getAccountFundingList(trade_type=null, section=null, params='limit=45&offset=0') {
     var url = `/fundings/?`
     // var section=`2021-05-17%2006:01:46,2021-05-30%2006:01:48`
-    var section = null
+    // var section = null
     if (trade_type && trade_type != 0) {
         url += `trade_type=${trade_type}`
     }

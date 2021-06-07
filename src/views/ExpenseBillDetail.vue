@@ -126,6 +126,27 @@
                 state.sYear = y
                 state.sMonth = m
                 console.log(state.sYear, state.sMonth)
+                const resource_type = selected.target.value;
+                let start =  new Date(state.sYear, state.sMonth-1, 1).getTime() / 1000
+                let day = new Date(state.sYear, state.sMonth, 0).getDate()
+                let stop =  new Date(state.sYear, state.sMonth-1, day).getTime() / 1000
+                let section = start + ',' + stop
+                console.log('vue section: ', section)
+                state.bills = []
+                getExpenseBillList(resource_type, section).then(res=>{
+                    reqNext = res.data.next
+                    count = res.data.count
+                    let billdatas = res.data && res.data.results ? dealExpenseBillList(res) : []
+                    for (let j = 0; j < billdatas.length; j += perPageNum){
+                        state.bills.push(billdatas.slice(j, j + perPageNum))
+                    }
+                    if(count > (2 * perPageNum)){
+                        state.hasNextPage=true
+                    }
+                    if(count < perPageNum){
+                        state.isHiddenPagination = true
+                    }
+                })
             }
 
             const updatePage = (n) => {
@@ -161,8 +182,15 @@
             }
             const selectChanged = (selected) => {
                 const resource_type = selected.target.value;
+                let start =  new Date(state.sYear, state.sMonth-1, 1).getTime() / 1000
+                let day = new Date(state.sYear, state.sMonth, 0).getDate()
+                let stop =  new Date(state.sYear, state.sMonth-1, day).getTime() / 1000
+                let section = start + ',' + stop
+                console.log('vue section: ', section)
                 state.bills = []
-                getExpenseBillList(resource_type).then(res=>{
+                getExpenseBillList(resource_type, section).then(res=>{
+                    reqNext = res.data.next
+                    count = res.data.count
                     let billdatas = res.data && res.data.results ? dealExpenseBillList(res) : []
                     for (let j = 0; j < billdatas.length; j += perPageNum){
                        state.bills.push(billdatas.slice(j, j + perPageNum))
@@ -176,7 +204,12 @@
                 })
             }
             onMounted(async () => {
-                const res = await getExpenseBillList()
+                let start =  new Date(state.sYear, state.sMonth-1, 1).getTime() / 1000
+                let day = new Date(state.sYear, state.sMonth, 0).getDate()
+                let stop =  new Date(state.sYear, state.sMonth-1, day).getTime() / 1000
+                let section = start + ',' + stop
+                console.log('vue section: ', section)
+                const res = await getExpenseBillList(null, section)
                 reqNext = res.data.next
                 count = res.data.count
                 var billdatas = res ? dealExpenseBillList(res) : []
