@@ -85,7 +85,7 @@
                         </tr>
                     </template>
                 </table>
-                <div :style="{visibility: isHiddenPagination ? 'hidden':'visible' }" class="limit-width bg-white mt4">
+                <div :style="{display: isHiddenPagination ? 'none':'block' }" class="limit-width bg-white mt4">
                     <pagination :cPage="cPage" :tPage="tPage" :hasNext="hasNextPage" @updatePage="updatePage"/>
                 </div>
 

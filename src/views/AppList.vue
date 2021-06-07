@@ -29,7 +29,7 @@
                 <div class="apps-list-item flex flex-column flex-auto b--light-silver bg-white pv2 ph4 bb hover-bg-near-white ember-view" v-for="item in apps[cPage-1]">
                     <one-app v-bind="item"/>
                 </div>
-                <div :style="{visibility: isHiddenPagination ? 'hidden':'visible' }" class="limit-width bg-white mt4">
+                <div :style="{display: isHiddenPagination ? 'none':'block' }" class="limit-width bg-white mt4">
                     <pagination :cPage="cPage" :tPage="tPage" :hasNext="hasNextPage" @updatePage="updatePage"/>
                 </div>
                 <div class="bg-white pv3 bt justify-center flex ember-view"></div>
