@@ -45,14 +45,20 @@
                             Period
                         </th>
                         <th class="pv2 pr1 bb b--light-gray b">
+                          Cluster
+                        </th>
+                        <th class="pv2 pr1 bb b--light-gray b">
                             App
+                        </th>
+                        <th class="pv2 pr1 bb b--light-gray b">
+                          ContainerType
                         </th>
                         <th class="pv2 pr1 bb b--light-gray b">
                             Product
                         </th>
-                        <th class="pv2 pr1 bb b--light-gray b">
-                            Product Detail
-                        </th>
+<!--                        <th class="pv2 pr1 bb b&#45;&#45;light-gray b">-->
+<!--                            Product Detail-->
+<!--                        </th>-->
                         <th class="pv2 pr1 bb b--light-gray b">
                             Cost time
                         </th>
@@ -63,9 +69,11 @@
                     <template v-for="bill in bills[cPage-1]">
                         <tr class="ember-view">
                             <td class="bb b--light-silver pv2 pr1 gray">{{bill.period}}</td>
+                            <td class="bb b--light-silver pv2 pr1 gray">{{bill.appCluser}}</td>
                             <td class="bb b--light-silver pv2 pr1 gray">{{bill.appName}}</td>
+                            <td class="bb b--light-silver pv2 pr1 gray">{{bill.appContainer}}</td>
                             <td class="bb b--light-silver pv2 pr1 gray">{{bill.productName}}</td>
-                            <td class="bb b--light-silver pv2 pr1 gray">{{bill.productDetail}}</td>
+<!--                            <td class="bb b&#45;&#45;light-silver pv2 pr1 gray">{{bill.productDetail}}</td>-->
 <!--                            <td class="bb b&#45;&#45;light-silver pv2 pr1 gray">{{bill.start.format('yyyy-MM-dd hh:mm:ss')}} ~ {{bill.end.format('yyyy-MM-dd hh:mm:ss')}}</td>-->
                             <td class="bb b--light-silver pv2 pr1 gray">{{bill.start}} ~ {{bill.end}}</td>
 <!--                            <td class="bb b&#45;&#45;light-silver pv2 pr1 gray">{{bill.cost===0?0.00:bill.cost/100.0}}</td>-->
@@ -111,7 +119,7 @@
                 selected: 0,
                 cPage: 1,
                 tPage: 2,
-                hasNextPage: true,
+                hasNextPage: false,
                 isHiddenPagination: false,
                 cYear: date.getFullYear(),
                 cMonth: date.getMonth() + 1,
@@ -126,7 +134,7 @@
                 state.sYear = y
                 state.sMonth = m
                 console.log(state.sYear, state.sMonth)
-                const resource_type = selected.target.value;
+                const resource_type = state.selected
                 let start =  new Date(state.sYear, state.sMonth-1, 1).getTime() / 1000
                 let day = new Date(state.sYear, state.sMonth, 0).getDate()
                 let stop =  new Date(state.sYear, state.sMonth-1, day).getTime() / 1000
@@ -182,6 +190,7 @@
             }
             const selectChanged = (selected) => {
                 const resource_type = selected.target.value;
+                state.selected = selected.target.value
                 let start =  new Date(state.sYear, state.sMonth-1, 1).getTime() / 1000
                 let day = new Date(state.sYear, state.sMonth, 0).getDate()
                 let stop =  new Date(state.sYear, state.sMonth-1, day).getTime() / 1000

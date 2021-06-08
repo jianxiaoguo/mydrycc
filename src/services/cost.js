@@ -1,7 +1,14 @@
 import axios from "../utils/axios";
 
-export function getAppCostList() {
-    return axios.get(`/bills_by_app/`)
+export function getAppCostList(section=null, params) {
+    var url = `/bills_by_app/`
+    if(section){
+        url = url + '?' + section
+    }
+    if(params){
+        url = url + '?' + params
+    }
+    return axios.get(url)
     // return [
     //     {'username': 'hanlucen', 'period': '2021-01', 'cost': 11021, 'app': {'app_id': '1', 'name': 'zmy1'}},
     //     {'username': 'hanlucen', 'period': '2021-01', 'cost': 1024, 'app': {'app_id': '1', 'name': 'zmy2'}},
@@ -16,8 +23,9 @@ export function getAppCostList() {
 export function dealAppCostList(obj) {
     return obj.data.results.map(item => {
         return {
+            'clusterName': item.cluster_name,
             'appName': item.app_id,
-            // 'period': item.period,
+            'period': item.created,
             'cost': item.sum_total_price
         }
     })
@@ -25,8 +33,12 @@ export function dealAppCostList(obj) {
 
 
 
-export function getProductCostList() {
-    return axios.get(`/bills_by_product/`)
+export function getProductCostList(section=null) {
+    var url = `/bills_by_product/`
+    if(section){
+        url = url + '?' + section
+    }
+    return axios.get(url)
     // return [
     //     {'username': 'hanlucen', 'period': '2021-01', 'cost': 5512, 'product': {'name': 'cpu', 'detail': 'xxxx'}},
     //     {'username': 'hanlucen', 'period': '2021-01', 'cost': 221122, 'product': {'name': 'memory', 'detail': 'xxxx'}},
@@ -36,22 +48,28 @@ export function getProductCostList() {
 }
 
 export function dealProductCostList(obj) {
+    var resource_types = {1:'Cpu',2:'Memory',3:'Volume',4:'Network'}
     return obj.data.results.map(item => {
+        var resource_type = resource_types[item.resource_type]
         return {
-            'productName': item.resource_type,
+            'productName': resource_type,
             // 'productDetail': item.product.detail,
-            // 'period': item.period,
+            'period': item.created,
             'cost': item.sum_total_price
         }
     })
 }
 
 
-export function getProductCostStatistic() {
-    return axios.get(`/bills_by_product/`)
-    return [
-        {'username': 'hanlucen', 'role': 'owner'},
-        {'username': 'lijianguo', 'role': 'collaborator'}
-    ]
+export function getProductCostStatistic(section=null) {
+    var url = `/bills_by_product/`
+    if(section){
+        url = url + '?' + section
+    }
+    return axios.get(url)
+    // return [
+    //     {'username': 'hanlucen', 'role': 'owner'},
+    //     {'username': 'lijianguo', 'role': 'collaborator'}
+    // ]
 
 }

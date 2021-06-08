@@ -32,6 +32,7 @@ export function getAppDetail(clusterName, appId) {
 export function dealAppDetail(obj) {
     return {
         id: obj.data.id,
+        name: obj.data.id,
         owner: obj.data.owner,
         created: obj.data.created,
         updated: obj.data.updated

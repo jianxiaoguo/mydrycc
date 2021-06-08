@@ -9,9 +9,9 @@
                 <th class="pv2 pr1 bb b--light-gray b">
                     Product
                 </th>
-                <th class="pv2 pr1 bb b--light-gray b">
-                    Product Detail
-                </th>
+<!--                <th class="pv2 pr1 bb b&#45;&#45;light-gray b">-->
+<!--                    Product Detail-->
+<!--                </th>-->
                 <th class="pv2 pr1 bb b--light-gray b">
                     Cost
                 </th>
@@ -20,7 +20,7 @@
                 <tr class="ember-view">
                     <td class="bb b--light-silver pv2 pl1 gray">{{cost.period}}</td>
                     <td class="bb b--light-silver pv2 pl1 gray">{{cost.productName}}</td>
-                    <td class="bb b--light-silver pv2 pl1 gray">{{cost.productDetail}}</td>
+<!--                    <td class="bb b&#45;&#45;light-silver pv2 pl1 gray">{{cost.productDetail}}</td>-->
 <!--                    <td class="bb b&#45;&#45;light-silver pv2 pl1 gray">{{cost.cost/100.0}}</td>-->
                     <td class="bb b--light-silver pv2 pl1 gray">{{cost.cost}}</td>
                 </tr>
@@ -31,7 +31,8 @@
 
 <script>
 import { dealProductCostList, getProductCostList } from "../services/cost";
-    import { reactive, toRefs, onMounted} from 'vue'
+import { reactive, toRefs, onMounted} from 'vue'
+import {dealExpenseBillList, getExpenseBillList} from "../services/expense-bills";
 
     export default {
         name: "ExpenseBIllProductCost",

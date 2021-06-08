@@ -67,16 +67,23 @@ export default {
                 adminUrl: ''
             })
             const logout = () => {
-                localStorage.clear()
                 postLogout().then(res=>{
-                    if (res.status == 200) {
+                    if (res.status == 302) {
                         router.push({ path: '/'})
                     }
                 })
+                location.reload(true)
             }
             onMounted(async () => {
-                const res = await getUser()
-                state.user = dealUser(res)
+                var currentUser = sessionStorage.getItem('user')
+                if (currentUser){
+                    state.user = JSON.parse(currentUser)
+                }else {
+                    const res = await getUser()
+                    state.user = dealUser(res)
+                    sessionStorage.setItem('user', JSON.stringify(state.user))
+                }
+
                 if (state.user.is_superuser){
                     state.isHiddenAdmin = false
                 }

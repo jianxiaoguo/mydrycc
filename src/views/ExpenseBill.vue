@@ -29,24 +29,32 @@
             <div class="w-100 flex limit-width">
                 <month-picker :cYear="cYear" :cMonth="cMonth" :sYear="sYear" :sMonth="sMonth" @changeMonth="changeMonth"/>
                 <div class="ml6">
+                  <span class="f3 purple b">Cluster:</span>
+                  <select class="hk-select b--purple ml2 purple">
+                    <option class="purple">------</option>
+                    <option class="purple">cluster 1</option>
+                    <option class="purple">cluster 2</option></select>
+                </div>
+                <div class="ml6">
                     <span class="f3 purple b">App:</span>
                     <select class="hk-select b--purple ml2 purple">
+                        <option class="purple">-------</option>
                         <option class="purple">Lorem ipsum</option>
                         <option class="purple">Dolor ist sda ssqawa aasaqgvaaa 66y1</option></select>
                 </div>
             </div>
-            <div class="w-100 ma2 limit-width flex" style="height: 400px">
-                <div class="w-60 ma2 flex-column">
-                    <expense-bill-cost-trend />
-                </div>
-                <div class="w-40 ma2 flex-column">
-                    <expense-bill-product-cost-distribution />
-                </div>
-            </div>
+<!--            <div class="w-100 ma2 limit-width flex" style="height: 400px">-->
+<!--                <div class="w-60 ma2 flex-column">-->
+<!--                    <expense-bill-cost-trend />-->
+<!--                </div>-->
+<!--                <div class="w-40 ma2 flex-column">-->
+<!--                    <expense-bill-product-cost-distribution />-->
+<!--                </div>-->
+<!--            </div>-->
 
             <div class="w-100 mt4 ml2 mb2 mr2 limit-width">
                 <div class="w-100 ma2 flex-column">
-                    <expense-bill-total-cost />
+                    <expense-bill-total-cost :sYear="sYear" :sMonth="sMonth"/>
                 </div>
             </div>
 
@@ -64,12 +72,12 @@
     import NavBar from "../components/NavBar.vue";
     import NavBox from "../components/NavBox.vue";
     import MonthPicker from "../components/MonthPicker.vue";
-    import ExpenseBillCostTrend from "../components/ExpenseBillCostTrend.vue";
-    import ExpenseBillProductCostDistribution from "../components/ExpenseBillProductCostDistribution.vue";
+    // import ExpenseBillCostTrend from "../components/ExpenseBillCostTrend.vue";
+    // import ExpenseBillProductCostDistribution from "../components/ExpenseBillProductCostDistribution.vue";
     import ExpenseBillTotalCost from "../components/ExpenseBillTotalCost.vue";
     import ExpenseBIllProductCost from "../components/ExpenseBIllProductCost.vue";
     import { useRouter } from 'vue-router'
-    import { reactive, toRefs, onMounted , computed} from 'vue'
+    import { reactive, toRefs, onMounted, computed} from 'vue'
 
     export default {
         name: "ExpenseBill",
@@ -77,8 +85,8 @@
             'nav-bar': NavBar,
             'nav-box': NavBox,
             'month-picker': MonthPicker,
-            'expense-bill-cost-trend': ExpenseBillCostTrend,
-            'expense-bill-product-cost-distribution': ExpenseBillProductCostDistribution,
+            // 'expense-bill-cost-trend': ExpenseBillCostTrend,
+            // 'expense-bill-product-cost-distribution': ExpenseBillProductCostDistribution,
             'expense-bill-total-cost': ExpenseBillTotalCost,
             'expense-bill-product-cost': ExpenseBIllProductCost
         },

@@ -8,7 +8,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/json'
 
 axios.interceptors.request.use(
     (config)=>{
-        let token = localStorage.getItem('csrftoken')
+        let token = sessionStorage.getItem('csrftoken')
         if(token){
             config.headers['X-CSRFToken'] = token;
         }

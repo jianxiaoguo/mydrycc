@@ -24,14 +24,16 @@ export function getExpenseBillList(resource_type=null, section=null, params='lim
 }
 
 export function dealExpenseBillList(obj) {
+    var resource_types = {1:'Cpu',2:'Memory',3:'Volume',4:'Network'}
     return obj.data.results.map(item => {
-        var resource_types = {1:'Cpu',2:'Memory',3:'Volume',4:'Network'}
         var resource_type = resource_types[item.resource_type]
         return {
             'period': item.created,
+            'appCluser': item.cluster,
             'appName': item.app_id,
+            'appContainer': eval('(' + item.resource_info + ')').container_type,
             'productName': resource_type,
-            'productDetail': resource_type,
+            // 'productDetail': resource_type,
             'cost': item.total_price,
             'start': item.start_time,
             'end': item.end_time,

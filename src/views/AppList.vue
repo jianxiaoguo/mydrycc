@@ -114,7 +114,7 @@
                 localStorage.setItem('currentCluster', JSON.stringify(cluster))
 
                 getCsrf().then(res=>{
-                    localStorage.setItem('csrftoken', res.data.token)
+                    sessionStorage.setItem('csrftoken', res.data.token)
                 })
             }
 
