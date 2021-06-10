@@ -61,12 +61,12 @@
         setup() {
             const state = reactive({
               messages: [],
-              isVisible: "hidden"
+              isHiddenPagination: false
             })
             onMounted(async () => {
                 const res = await getMessages()
-                if (!res.data){
-                  state.isVisible = "none"
+                if (res.data){
+                  state.isHiddenPagination = true
                 }
                 state.messages = res.data ? dealMessages(res) : []
             })

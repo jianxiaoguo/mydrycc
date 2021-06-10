@@ -135,9 +135,9 @@
                 document.addEventListener('click', function (e) {
                     const d = document.getElementById('process-picker')
                     // 下面这句代码是获取 点击的区域是否包含你的菜单，如果包含，说明点击的是菜单以外，不包含则为菜单以内
-                    if (!d.contains(e.target)) {
-                        state.showProcessTypes = false
-                    }
+                    // if (!d.contains(e.target)) {
+                    //     state.showProcessTypes = false
+                    // }
                 })
                 document.addEventListener('click', function (e) {
                     // state.showProcessTypes = true
