@@ -119,7 +119,6 @@
             }
 
             onMounted(async () => {
-                debugger
                 var localCluster = localStorage.getItem('currentCluster')
                 if(localCluster){
                     currentCluster = JSON.parse(localCluster)

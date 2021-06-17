@@ -10,7 +10,17 @@
             </template>
         </nav-box>
         <div class="main-content">
-            <main-nav @click="openShowProcessTypes" :is-metrics-active="true" :app-detail="appDetail"/>
+          <main-nav @click="openShowProcessTypes" :is-metrics-active="true" :app-detail="appDetail"/>
+          <div class="ember-view" v-if="processTypes.length <= 0">
+            <div class="mb5 ember-view" style="padding: 0px 320px;">
+              <div class="f3 dark-gray lh-title mv1 ember-view"> This app has no process types yet </div>
+              <div class="f5 gray lh-copy ember-view">
+                Add a Procfile to your app in order to define its process types.
+                <a href="https://devcenter.heroku.com/articles/procfile" class="hk-link" target="_blank">Learn more</a>
+              </div>
+            </div>
+          </div>
+          <div v-if="processTypes.length > 0">
             <div class="limit-width">
                 <div class="flex flex-column metrics__charts-container">
                     <div id="process-picker" class="relative dib mb2">
@@ -47,6 +57,7 @@
                 </div>
             </div>
         </div>
+      </div>
     </div>
 </template>
 
@@ -62,7 +73,7 @@
     import MetricNetwork from "../components/MetricNetwork.vue";
     import MetricCpu from "../components/MetricCpu.vue";
     import { getAppDetail, dealAppDetail } from "../services/app";
-    import { dealProcessTypes } from "../services/process";
+    import { getAppProcessTypes, dealProcessTypes } from "../services/process";
     import { getMetric, dealMetricCpus, dealMetricMemory, dealMetricNetworks } from "../services/metric";
 
     export default {
@@ -97,11 +108,13 @@
                   state.metricNetworks = res.data ? dealMetricNetworks(res) : []
                 })
             }
-            onBeforeMount( () => {
+            onBeforeMount( async () => {
+              let app = localStorage.getItem('currentApp')
+              state.appDetail = app ? JSON.parse(localStorage.getItem('currentApp')) : null
+              let res = await getAppProcessTypes(JSON.parse(currentCluster).name, params.id)
+              state.processTypes = res.data ? dealProcessTypes(res) : []
               getAppDetail(JSON.parse(currentCluster).name, params.id).then(res => {
-                state.appDetail = res.data ? dealAppDetail(res) : null
-                // const processData =  getAppProcessTypes(JSON.parse(currentCluster).name, params.id)
-                state.processTypes = res.data ? dealProcessTypes(res) : []
+                // state.appDetail = res.data ? dealAppDetail(res) : null
                 if (state.processTypes.length > 0) {
                   if (!params.processType) {
                     state.currentType = state.processTypes[0]
@@ -119,10 +132,9 @@
                       state.currentType = state.processTypes[0]
                     }
                   }
+                  fetchMetric()
                 }
                 console.log("onBeforeMount")
-                fetchMetric()
-
               })
             })
             const goToOtherProcessType = (pt) => {
