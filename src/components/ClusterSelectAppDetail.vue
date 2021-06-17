@@ -7,7 +7,8 @@
                 <span class="dib pv--1">
                     <svg style="height: 26px; width: 26px;" class="icon malibu-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" ><path d="M639 337v560H99V337h540m50-50H49v660h640V287zM189 177v59h50v-9h540v560h-42v50h92V177H189zM309 77v50h590v560h-22v50h72V77H309z" fill="#79589F"></path></svg>
                 </span>
-                <span class="ml2 dn inline-flex-l">{{$store.state.currentCluster.name}}</span>
+                <span class="ml2 dn inline-flex-l">{{currentCluster.name}}</span>
+<!--                <span class="ml2 dn inline-flex-l">{{$store.state.currentCluster.name}}</span>-->
             </a>
             <button @click="openOrCloseMenu" id="menu-select-group-2" class="context-toggle hk-no-link-style flex items-center bn bg-transparent br2 pv1 ph--3 hover-bg-gray-10 nudge-left--2 nr--2">
                 <span class="h2" id="menu-select-group-2">
@@ -44,66 +45,8 @@
 </template>
 
 <script>
-    import { reactive, toRefs, onMounted , computed} from 'vue'
-    import {getClusters, dealClusterData} from "../services/cluster";
-    import { useStore } from 'vuex'
-
-    export default {
-        name: "ClusterSelect",
-        props: {
-            appDetail: [Object, Function]
-        },
-        setup() {
-            const store = useStore()
-            const state = reactive({
-                isMenuActived: false,
-                clusters: [],
-                currentCluster: localStorage.getItem('currentCluster'),
-            })
-
-            const openOrCloseMenu = () => {
-                state.isMenuActived = !state.isMenuActived
-            }
-
-            const changeCluster = (cluster) => {
-                localStorage.setItem('currentCluster', JSON.stringify(cluster))
-            }
-
-
-            onMounted(async () => {
-                var localCluster = localStorage.getItem('currentCluster')
-                if(localCluster){
-                    state.currentCluster = JSON.parse(localCluster)
-                }else {
-                    const  res = await getClusters()
-                    state.clusters = res ? dealClusterData(res) : []
-                    if (state.currentCluster && state.currentCluster != "undefined") {
-                      store.dispatch('changeCurrentCluster', JSON.parse(state.currentCluster))
-                    } else {
-                      store.dispatch('changeCurrentCluster', dealClusterData(data)[0])
-                      localStorage.setItem('currentCluster', JSON.stringify(dealClusterData(data)[0]))
-                    }
-                }
-            })
-
-            return {
-                ...toRefs(state),
-                openOrCloseMenu,
-                changeCluster
-            }
-        },
-
-        mounted() {
-            let _this = this
-            document.addEventListener('click', function (e) {
-                // 下面这句代码是获取 点击的区域是否包含你的菜单，如果包含，说明点击的是菜单以外，不包含则为菜单以内
-                if (e.target.id !== 'menu-select-group-2') {
-                    _this.isMenuActived = false
-                }
-
-            })
-        }
-    }
+import ClusterSelectAppDetail from "./ClusterSelectAppDetail"
+export default ClusterSelectAppDetail
 </script>
 
 <style scoped>

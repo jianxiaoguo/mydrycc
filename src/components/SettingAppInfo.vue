@@ -91,12 +91,8 @@
 </template>
 
 <script>
-    export default {
-        name: "SettingAppInfo",
-        props: {
-            appDetail: [Object, Function]
-        },
-    }
+import SettingAppInfo from "./SettingAppInfo"
+export default SettingAppInfo
 </script>
 
 <style scoped>

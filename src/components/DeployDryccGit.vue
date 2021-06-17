@@ -64,9 +64,8 @@ $ git push drycc master</pre>
 </template>
 
 <script>
-    export default {
-        name: "DeployDryccGit"
-    }
+import DeployDryccGit from "./DeployDryccGit"
+export default DeployDryccGit
 </script>
 
 <style scoped>

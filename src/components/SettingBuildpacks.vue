@@ -35,9 +35,8 @@
 </template>
 
 <script>
-    export default {
-        name: "SettingBuildpacks"
-    }
+import SettingBuildpacks from "./SettingBuildpacks"
+export default SettingBuildpacks
 </script>
 
 <style scoped>

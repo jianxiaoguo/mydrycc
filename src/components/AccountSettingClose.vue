@@ -20,9 +20,8 @@
 </template>
 
 <script>
-    export default {
-        name: "AccountSettingClose"
-    }
+import AccountSettingClose from "./AccountSettingClose"
+export default AccountSettingClose
 </script>
 
 <style scoped>

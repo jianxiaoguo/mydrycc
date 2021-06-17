@@ -33,9 +33,8 @@
 </template>
 
 <script>
-    export default {
-        name: "DeployDryccImage"
-    }
+import DeployDryccImage from "./DeployDryccImage"
+export default DeployDryccImage
 </script>
 
 <style scoped>

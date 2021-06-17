@@ -14,9 +14,8 @@
 </template>
 
 <script>
-    export default {
-        name: "NavBox"
-    }
+import NavBox from "./NavBox"
+export default NavBox
 </script>
 
 <style scoped>

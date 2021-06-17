@@ -37,9 +37,8 @@
 </template>
 
 <script>
-    export default {
-        name: "SettingMaintenanceMode"
-    }
+import SettingMaintenanceMode from "./SettingMaintenanceMode"
+export default SettingMaintenanceMode
 </script>
 
 <style scoped>
