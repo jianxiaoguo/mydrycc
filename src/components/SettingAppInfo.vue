@@ -48,9 +48,9 @@
 
                         <div class="w-100 flex mb2 items-center">
                             <div class="w-20 hk-label mv1">Stack</div>
-                            <div class="w-80 flex items-center">
-                                {{appDetail.baseImage}}
-                            </div>
+<!--                            <div class="w-80 flex items-center">-->
+<!--                                {{appDetail.baseImage}}-->
+<!--                            </div>-->
                         </div>
 
 <!--                        <div class="w-100 flex mb2 items-top">-->

@@ -50,6 +50,7 @@
             onMounted(async () => {
                 const token =await getCsrf()
                 sessionStorage.setItem('csrftoken', token.data.token)
+                debugger
                 const res = await getClusters()
                 state.clusters = res ? dealClusterData(res) : []
                 if (state.currentCluster) {

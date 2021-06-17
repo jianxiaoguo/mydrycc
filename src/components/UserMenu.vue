@@ -2,7 +2,7 @@
 <template>
     <a class="glostick__menu-icon glostick__menu-icon--account" @click="openOrCloseMenu">
         <div class="glostick__user__avatar--container">
-            <img class="glostick__user__avatar" src="https://gravatar.com/avatar/02a485fa5edb11e2b5ca38e18622eacd?s=96&amp;d=https://www.herokucdn.com/images/ninja-avatar-96x96.png" id="menu-account">
+            <img class="glostick__user__avatar" src="https://gravatar.com/avatar/02a485fa5edb11e2b5ca38e18622eacd?s=96&amp;d=/src/assets/style/ninja-avatar-96x96.png" id="menu-account">
         </div>
         <div class="glostick__user__notification "></div>
     </a>
@@ -10,7 +10,7 @@
         <li class="glostick__menu__listitem">
             <a class="glostick__menu__item glostick__menu__item--account-details" href="/account">
                 <div class="glostick__user__avatar--container">
-                    <img class="glostick__account-details__avatar" src="https://gravatar.com/avatar/02a485fa5edb11e2b5ca38e18622eacd?s=96&amp;d=https://www.herokucdn.com/images/ninja-avatar-96x96.png" >
+                    <img class="glostick__account-details__avatar" src="https://gravatar.com/avatar/02a485fa5edb11e2b5ca38e18622eacd?s=96&amp;d=/src/assets/style/ninja-avatar-96x96.png" >
                 </div>
                 <div class="glostick__account-details__name">
                   {{user.username}}
@@ -68,6 +68,7 @@ export default {
             })
             const logout = () => {
                 postLogout().then(res=>{
+                    localStorage.clear()
                     if (res.status == 302) {
                         router.push({ path: '/'})
                     }

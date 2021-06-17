@@ -71,14 +71,18 @@
 
 
             onMounted(async () => {
-
-                const  res = await getClusters()
-                state.clusters = res ? dealClusterData(res) : []
-                if (state.currentCluster && state.currentCluster != "undefined") {
-                    store.dispatch('changeCurrentCluster', JSON.parse(state.currentCluster))
-                } else {
-                    store.dispatch('changeCurrentCluster', dealClusterData(data)[0])
-                    localStorage.setItem('currentCluster', JSON.stringify(dealClusterData(data)[0]))
+                var localCluster = localStorage.getItem('currentCluster')
+                if(localCluster){
+                    state.currentCluster = JSON.parse(localCluster)
+                }else {
+                    const  res = await getClusters()
+                    state.clusters = res ? dealClusterData(res) : []
+                    if (state.currentCluster && state.currentCluster != "undefined") {
+                      store.dispatch('changeCurrentCluster', JSON.parse(state.currentCluster))
+                    } else {
+                      store.dispatch('changeCurrentCluster', dealClusterData(data)[0])
+                      localStorage.setItem('currentCluster', JSON.stringify(dealClusterData(data)[0]))
+                    }
                 }
             })
 

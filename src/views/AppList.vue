@@ -119,16 +119,17 @@
             }
 
             onMounted(async () => {
+                debugger
                 var localCluster = localStorage.getItem('currentCluster')
-                let res = await getClusters()
-                state.clusters = res ? dealClusterData(res) : []
                 if(localCluster){
                     currentCluster = JSON.parse(localCluster)
                 }
                 else{
+                    let res = await getClusters()
+                    state.clusters = res ? dealClusterData(res) : []
                     currentCluster = state.clusters[0]
                 }
-                res = await getAPPList(currentCluster.name)
+                let res = await getAPPList(currentCluster.name)
                 reqNext = res.data.next
                 count = res.data.count
                 var appdatas = res.data && res.data.results ? dealAPPList(res) : []

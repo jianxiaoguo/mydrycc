@@ -1479,15 +1479,15 @@ a.btn {
 }
 
 @font-face {
-    font-family:'benton-sans';font-weight:200;font-style:normal;src:url("https://www.herokucdn.com/fonts/bentonsans-book.eot");src:url("https://www.herokucdn.com/fonts/bentonsans-book.eot?#iefix") format("embedded-opentype"),url("https://www.herokucdn.com/fonts/bentonsans-book.woff") format("woff"),url("https://www.herokucdn.com/fonts/bentonsans-book.ttf") format("truetype"),url("https://www.herokucdn.com/fonts/bentonsans-book.svg#benton-sans") format("svg")
+    font-family:'benton-sans';font-weight:200;font-style:normal;src:url("/src/assets/style/bentonsans-book.eot");src:url("/src/assets/style/bentonsans-book.eot?#iefix") format("embedded-opentype"),url("https://www.herokucdn.com/fonts/bentonsans-book.woff") format("woff"),url("/src/assets/style/bentonsans-book.ttf") format("truetype"),url("/src/assets/style/bentonsans-book.svg#benton-sans") format("svg")
 }
 
 @font-face {
-    font-family:'benton-sans';font-weight:normal;font-style:normal;src:url("https://www.herokucdn.com/fonts/bentonsans-regular.eot");src:url("https://www.herokucdn.com/fonts/bentonsans-regular.eot?#iefix") format("embedded-opentype"),url("https://www.herokucdn.com/fonts/bentonsans-regular.woff") format("woff"),url("https://www.herokucdn.com/fonts/bentonsans-regular.ttf") format("truetype"),url("https://www.herokucdn.com/fonts/bentonsans-regular.svg#benton-sans") format("svg")
+    font-family:'benton-sans';font-weight:normal;font-style:normal;src:url("/src/assets/style/bentonsans-regular.eot");src:url("/src/assets/style/bentonsans-regular.eot?#iefix") format("embedded-opentype"),url("/src/assets/style/bentonsans-regular.woff") format("woff"),url("/src/assets/style/bentonsans-regular.ttf") format("truetype"),url("/src/assets/style/bentonsans-regular.svg#benton-sans") format("svg")
 }
 
 @font-face {
-    font-family:'benton-sans';font-weight:bold;font-style:normal;src:url("https://www.herokucdn.com/fonts/bentonsans-medium.eot");src:url("https://www.herokucdn.com/fonts/bentonsans-medium.eot?#iefix") format("embedded-opentype"),url("https://www.herokucdn.com/fonts/bentonsans-medium.woff") format("woff"),url("https://www.herokucdn.com/fonts/bentonsans-medium.ttf") format("truetype"),url("https://www.herokucdn.com/fonts/bentonsans-medium.svg#benton-sans") format("svg")
+    font-family:'benton-sans';font-weight:bold;font-style:normal;src:url("/src/assets/style/bentonsans-medium.eot");src:url("/src/assets/style/bentonsans-medium.eot?#iefix") format("embedded-opentype"),url("/src/assets/style/bentonsans-medium.woff") format("woff"),url("/src/assets/style/bentonsans-medium.ttf") format("truetype"),url("/src/assets/style/bentonsans-medium.svg#benton-sans") format("svg")
 }
 
 h4,.h4 {

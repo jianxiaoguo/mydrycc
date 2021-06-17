@@ -20,9 +20,9 @@
                 </li>
                 <li><span class="gray db-l dn">•</span></li>
                 <li class="mh1 items-center flex-l dn">
-                    <a href="/apps/zmy/settings" class="link dark-gray ember-view">
-                        {{baseImage}}
-                    </a>
+<!--                    <a href="/apps/zmy/settings" class="link dark-gray ember-view">-->
+<!--                        {{baseImage}}-->
+<!--                    </a>-->
                 </li>
                 <li><span class="gray db-l dn">•</span></li>
 <!--                <li class="mh1 db-l dn">-->

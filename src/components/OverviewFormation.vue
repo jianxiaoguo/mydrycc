@@ -66,6 +66,7 @@
         },
         setup(props) {
             const router = useRouter()
+            const params = router.currentRoute.value.params
             const store = useStore()
             const state = reactive({
                 processes: []
@@ -78,7 +79,7 @@
             onMounted(async () => {
                 // var currentCluster = store.getters.getCurrentCluster
                 var currentCluster = localStorage.getItem('currentCluster')
-                var res =  await getAppProcesses(JSON.parse(currentCluster).name, "py3django3")
+                var res =  await getAppProcesses(JSON.parse(currentCluster).name, params.id)
                 state.processes = dealAppProcesses(res)
             })
 
