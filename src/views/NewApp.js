@@ -22,7 +22,7 @@ export default {
         const createNewApp = () => {
             createApp(state.selectedClusterId, state.appName).then(res=>{
                 if (res.status == 200) {
-                    Toast('OK')
+                    Toast.success('OK')
                 }
             })
         }

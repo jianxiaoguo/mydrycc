@@ -56,7 +56,7 @@ export default {
             var currentCluster = localStorage.getItem('currentCluster')
             postAppActivitieRollback(JSON.parse(currentCluster).name, params.id, v).then(res=>{
                 if (res.status == 201){
-                    Toast("OK")
+                    Toast.success("OK")
                 }
             })
         }

@@ -27,14 +27,16 @@ export default {
         const addAppDomain = () => {
             addAppDomains(JSON.parse(currentCluster).name, params.id, state.domain).then(res=>{
                 if (res.status == 201) {
-                    Toast("OK")
+                    Toast.success("OK")
+                    context.emit('closeEdit')
                 }
             })
         }
         const deleteAppDomain = () => {
             deleteAppDomains(JSON.parse(currentCluster).name, params.id, state.domain).then(res=>{
                 if (res.status == 204) {
-                    Toast("OK")
+                    Toast.success("OK")
+                    context.emit('closeEdit')
                 }
             })
         }

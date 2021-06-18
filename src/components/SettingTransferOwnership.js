@@ -15,9 +15,9 @@ export default {
             var currentCluster = localStorage.getItem('currentCluster')
             updateApp(JSON.parse(currentCluster).name, params.id, state.username).then(res => {
                 if (res.status == 200) {
-                    Toast("OK")
+                    Toast.success("OK")
                 } else {
-                    Toast(res.data)
+                    Toast.fail(res.data)
                 }
             })
         }
