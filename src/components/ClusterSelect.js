@@ -1,4 +1,4 @@
-import { reactive, toRefs, onMounted , computed} from 'vue'
+import { reactive, toRefs, onBeforeMount, onMounted , computed} from 'vue'
 import {getClusters, dealClusterData} from "../services/cluster";
 import {getCsrf} from "../services/user";
 import { useStore } from 'vuex'
@@ -23,16 +23,20 @@ export default {
         }
 
 
-        onMounted(async () => {
+        onBeforeMount(async () => {
             const token =await getCsrf()
             sessionStorage.setItem('csrftoken', token.data.token)
-            const res = await getClusters()
-            state.clusters = res ? dealClusterData(res) : []
+
             if (state.currentCluster) {
                 store.dispatch('changeCurrentCluster', state.currentCluster)
-            } else if(state.clusters.length > 0) {
-                store.dispatch('changeCurrentCluster', dealClusterData(res)[0])
-                localStorage.setItem('currentCluster', JSON.stringify(dealClusterData(res)[0]))
+            } else {
+                const res = await getClusters()
+                state.clusters = res ? dealClusterData(res) : []
+                if(state.clusters.length > 0){
+                    store.dispatch('changeCurrentCluster', state.clusters[0])
+                    localStorage.setItem('currentCluster', JSON.stringify(state.clusters[0]))
+                    state.currentCluster = state.clusters[0]
+                }
             }
         })
         return {

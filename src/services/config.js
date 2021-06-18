@@ -22,5 +22,8 @@ export function dealAppConfig(obj) {
 }
 
 export function postAppConfigs(clusterName, appId, params) {
-    return axios.post(`/clusters/${clusterName}/apps/${appId}/config/`, params)
+    let configs = {
+        values: params
+    }
+    return axios.post(`/clusters/${clusterName}/apps/${appId}/config/`, configs)
 }

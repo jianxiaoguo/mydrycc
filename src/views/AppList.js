@@ -3,7 +3,7 @@ import NavBox from "../components/NavBox.vue";
 import ClusterSelect from "../components/ClusterSelect.vue";
 import OneApp from "../components/OneApp.vue";
 import Pagination from "../components/Pagination.vue";
-import { reactive, toRefs, onMounted } from 'vue'
+import {reactive, toRefs, onMounted, onBeforeMount} from 'vue'
 import { getAPPList, dealAPPList } from "../services/app";
 import { useRouter } from 'vue-router'
 import { dealClusterData, getClusters } from "../services/cluster";
@@ -71,8 +71,10 @@ export default {
             let cluster
             if (currentCluster){
                 cluster = currentCluster
-            }else if(state.clusters.length > 0){
-                cluster = state.clusters[0]
+            }else {
+                if(state.clusters.length > 0){
+                    cluster = state.clusters[0]
+                }
             }
             localStorage.setItem('currentCluster', JSON.stringify(cluster))
 
@@ -81,7 +83,7 @@ export default {
             })
         }
 
-        onMounted(async () => {
+        onBeforeMount(async () => {
             var localCluster = localStorage.getItem('currentCluster')
             if(localCluster){
                 currentCluster = JSON.parse(localCluster)
