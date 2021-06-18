@@ -41,7 +41,9 @@ export default {
             let currentCluster = localStorage.getItem('currentCluster')
             const res = await getAppDetail(JSON.parse(currentCluster).name, params.id)
             state.appDetail = res.data ? dealAppDetail(res) : null
-            localStorage.setItem('currentApp', JSON.stringify(state.appDetail))
+            if(state.appDetail){
+                localStorage.setItem('currentApp', JSON.stringify(state.appDetail))
+            }
         })
         onMounted(async () => {
             // let app = localStorage.getItem('currentApp')

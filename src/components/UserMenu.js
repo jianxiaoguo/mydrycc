@@ -39,7 +39,9 @@ export default {
             }else {
                 const res = await getUser()
                 state.user = dealUser(res)
-                sessionStorage.setItem('user', JSON.stringify(state.user))
+                if (state.user){
+                    sessionStorage.setItem('user', JSON.stringify(state.user))
+                }
             }
 
             if (state.user.is_superuser){

@@ -29,8 +29,8 @@ export default {
             const res = await getClusters()
             state.clusters = res ? dealClusterData(res) : []
             if (state.currentCluster) {
-                store.dispatch('changeCurrentCluster', JSON.parse(state.currentCluster))
-            } else {
+                store.dispatch('changeCurrentCluster', state.currentCluster)
+            } else if(state.clusters.length > 0) {
                 store.dispatch('changeCurrentCluster', dealClusterData(res)[0])
                 localStorage.setItem('currentCluster', JSON.stringify(dealClusterData(res)[0]))
             }

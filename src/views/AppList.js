@@ -64,12 +64,16 @@ export default {
             }
         }
         const localStorageInit = () => {
-            if (state.clusters && state.clusters != []){
+            if (state.clusters.length > 0){
                 localStorage.setItem('clusters', JSON.stringify(state.clusters))
+                store.dispatch('changeCurrentCluster', state.clusters[0])
             }
-
-            store.dispatch('changeCurrentCluster', state.clusters[0])
-            let cluster = currentCluster ? currentCluster : state.clusters[0]
+            let cluster
+            if (currentCluster){
+                cluster = currentCluster
+            }else if(state.clusters.length > 0){
+                cluster = state.clusters[0]
+            }
             localStorage.setItem('currentCluster', JSON.stringify(cluster))
 
             getCsrf().then(res=>{
@@ -85,20 +89,24 @@ export default {
             else{
                 let res = await getClusters()
                 state.clusters = res ? dealClusterData(res) : []
-                currentCluster = state.clusters[0]
+                if(state.clusters.length > 0){
+                    currentCluster = state.clusters[0]
+                }
             }
-            let res = await getAPPList(currentCluster.name)
-            reqNext = res.data.next
-            count = res.data.count
-            var appdatas = res.data && res.data.results ? dealAPPList(res) : []
-            for (let j = 0; j < appdatas.length; j += perPageNum){
-                state.apps.push(appdatas.slice(j, j + perPageNum))
-            }
-            if(count > (2 * perPageNum)){
-                state.hasNextPage=true
-            }
-            if(count > perPageNum){
-                state.isHiddenPagination = false
+            if(currentCluster){
+                let res = await getAPPList(currentCluster.name)
+                reqNext = res.data.next
+                count = res.data.count
+                var appdatas = res.data && res.data.results ? dealAPPList(res) : []
+                for (let j = 0; j < appdatas.length; j += perPageNum){
+                    state.apps.push(appdatas.slice(j, j + perPageNum))
+                }
+                if(count > (2 * perPageNum)){
+                    state.hasNextPage=true
+                }
+                if(count > perPageNum){
+                    state.isHiddenPagination = false
+                }
             }
             localStorageInit()
         })
