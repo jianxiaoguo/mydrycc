@@ -60,11 +60,20 @@ axios.interceptors.response.use(
 
             // 404请求不存在
           case 404:
-            Toast({
-              message: '网络请求不存在',
-              duration: 1500,
-              forbidClick: true
-            });
+            console.log('error.response: ', error.response)
+              if(error.response.data){
+                  Toast({
+                      message: error.response.data.replace("\"","").replace("\"",""),
+                      duration: 1500,
+                      forbidClick: true
+                  });
+              }else {
+                  Toast({
+                      message: '网络请求不存在',
+                      duration: 1500,
+                      forbidClick: true
+                  });
+              }
             break;
             // 其他错误，直接抛出错误提示
           default:

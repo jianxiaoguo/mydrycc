@@ -34,7 +34,7 @@ export default {
         const totalPageNum = 30
         var count = 0
         var reqNext = ''
-        const changeMonth = (y, m) => {
+        const changeMonth = async (y, m) => {
             state.sYear = y
             state.sMonth = m
             console.log(state.sYear, state.sMonth)
@@ -44,25 +44,24 @@ export default {
             let section = start + ',' + stop
             console.log('vue section: ', section)
             let trade_type = state.selected;
-            getAccountFundingList(trade_type, section).then(res=>{
-                state.fundingList = []
-                reqNext = res.data.next
-                count = res.data.count
-                let fundingdatas = res && res.status == 200 ? dealAccountFundingList(res) : []
-                for (let j = 0; j < fundingdatas.length; j += perPageNum){
-                    state.fundingList.push(fundingdatas.slice(j, j + perPageNum))
-                }
-                if(count > (2 * perPageNum)){
-                    state.hasNextPage=true
-                }
-                if(count < perPageNum){
-                    state.isHiddenPagination = true
-                }
-            })
+            let res = await getAccountFundingList(trade_type, section)
+            state.fundingList = []
+            reqNext = res.data.next
+            count = res.data.count
+            let fundingdatas = res && res.status == 200 ? dealAccountFundingList(res) : []
+            for (let j = 0; j < fundingdatas.length; j += perPageNum){
+                state.fundingList.push(fundingdatas.slice(j, j + perPageNum))
+            }
+            if(count > (2 * perPageNum)){
+                state.hasNextPage=true
+            }
+            if(count < perPageNum){
+                state.isHiddenPagination = true
+            }
         }
 
 
-        const updatePage = (n) => {
+        const updatePage = async (n) => {
 
             console.log(n)
             if (n < 1) {
@@ -76,14 +75,13 @@ export default {
                 state.hasNextPage=false
             }
             if (reqNext && (state.cPage + 2 > state.apps.length)) {
-                getAccountFundingList(null,null, reqNext.split('?')[1]).then(res=>{
-                    reqNext = res.data.next
-                    count = res.data.count
-                    let appdatas = res.data && res.data.results ? dealAccountFundingList(res) : []
-                    for (let j = 0; j < appdatas.length; j += perPageNum){
-                        state.apps.push(appdatas.slice(j, j + perPageNum))
-                    }
-                })
+                let res = await getAccountFundingList(null,null, reqNext.split('?')[1])
+                reqNext = res.data.next
+                count = res.data.count
+                let appdatas = res.data && res.data.results ? dealAccountFundingList(res) : []
+                for (let j = 0; j < appdatas.length; j += perPageNum){
+                    state.apps.push(appdatas.slice(j, j + perPageNum))
+                }
             }
         }
 
@@ -95,7 +93,7 @@ export default {
             router.push({ path: `/account/funding` })
         }
 
-        const selectChanged = (selected) => {
+        const selectChanged = async (selected) => {
             let start =  new Date(state.sYear, state.sMonth-1, 1).getTime() / 1000
             let day = new Date(state.sYear, state.sMonth, 0).getDate()
             let stop =  new Date(state.sYear, state.sMonth-1, day).getTime() / 1000
@@ -103,21 +101,20 @@ export default {
             console.log('vue section: ', section)
             let trade_type = selected.target.value;
             state.selected = selected.target.value
-            getAccountFundingList(trade_type, section).then(res=>{
-                state.fundingList = []
-                reqNext = res.data.next
-                count = res.data.count
-                let fundingdatas = res && res.status == 200 ? dealAccountFundingList(res) : []
-                for (let j = 0; j < fundingdatas.length; j += perPageNum){
-                    state.fundingList.push(fundingdatas.slice(j, j + perPageNum))
-                }
-                if(count > (2 * perPageNum)){
-                    state.hasNextPage=true
-                }
-                if(count < perPageNum){
-                    state.isHiddenPagination = true
-                }
-            })
+            let res = await  getAccountFundingList(trade_type, section)
+            state.fundingList = []
+            reqNext = res.data.next
+            count = res.data.count
+            let fundingdatas = res && res.status == 200 ? dealAccountFundingList(res) : []
+            for (let j = 0; j < fundingdatas.length; j += perPageNum){
+                state.fundingList.push(fundingdatas.slice(j, j + perPageNum))
+            }
+            if(count > (2 * perPageNum)){
+                state.hasNextPage=true
+            }
+            if(count < perPageNum){
+                state.isHiddenPagination = true
+            }
         }
 
         onMounted(async () => {
