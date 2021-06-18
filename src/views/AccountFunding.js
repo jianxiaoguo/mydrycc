@@ -24,7 +24,7 @@ export default {
             cPage: 1,
             tPage: 2,
             hasNextPage: true,
-            isHiddenPagination: false,
+            isHiddenPagination: true,
             cYear: date.getFullYear(),
             cMonth: date.getMonth() + 1,
             sYear: date.getFullYear(),
@@ -55,8 +55,8 @@ export default {
             if(count > (2 * perPageNum)){
                 state.hasNextPage=true
             }
-            if(count < perPageNum){
-                state.isHiddenPagination = true
+            if(count > perPageNum){
+                state.isHiddenPagination = false
             }
         }
 
@@ -112,8 +112,8 @@ export default {
             if(count > (2 * perPageNum)){
                 state.hasNextPage=true
             }
-            if(count < perPageNum){
-                state.isHiddenPagination = true
+            if(count > perPageNum){
+                state.isHiddenPagination = false
             }
         }
 
@@ -133,8 +133,8 @@ export default {
             if(count > (2 * perPageNum)){
                 state.hasNextPage = true
             }
-            if(count < perPageNum){
-                state.isHiddenPagination = true
+            if(count > perPageNum){
+                state.isHiddenPagination = false
             }
         })
 

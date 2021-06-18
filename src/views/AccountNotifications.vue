@@ -17,7 +17,7 @@
     </div>
   <div class="main-panel bg-lightest-silver relative">
     <div class="main-content">
-      <div :style="{display: isHiddenPagination ? 'none':'block' }"  class="list-group notification-list limit-width">
+      <div :style="{display: isHidden ? 'none':'block' }"  class="list-group notification-list limit-width">
         <p> You have no notifications at this time. </p>
       </div>
 

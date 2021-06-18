@@ -28,7 +28,7 @@ export default {
             cPage: 1,
             tPage: 2,
             hasNextPage: false,
-            isHiddenPagination: false,
+            isHiddenPagination: true,
         })
         let currentCluster = null
         const perPageNum = 15
@@ -97,8 +97,8 @@ export default {
             if(count > (2 * perPageNum)){
                 state.hasNextPage=true
             }
-            if(count < perPageNum){
-                state.isHiddenPagination = true
+            if(count > perPageNum){
+                state.isHiddenPagination = false
             }
             localStorageInit()
         })
