@@ -28,7 +28,7 @@ export default {
             addAppDomains(JSON.parse(currentCluster).name, params.id, state.domain).then(res=>{
                 if (res.status == 201) {
                     Toast.success("OK")
-                    context.emit('closeEdit')
+                    context.emit('closeDelete', { hasDomainDeleted: true })
                 }
             })
         }
